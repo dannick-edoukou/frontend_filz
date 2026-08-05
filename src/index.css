@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..900&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+/* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
+
+:root {
+  font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  color: #1b231f;
+  background: #f6f3eb;
+  font-synthesis: none;
+
+  /* Design tokens — "le guichet" */
+  --color-pine: #12332d;
+  --color-paper: #f6f3eb;
+  --color-sand: #eee9dc;
+  --color-line: #e2dccc;
+  --color-gold: #d09a33;
+  --color-text-primary: #1b231f;
+  --color-text-secondary: #5f6b64;
+  --color-text-muted: #90998f;
+  --color-border: #e2dccc;
+  --color-success: #287044;
+  --color-error: #c05337;
+  --color-warning: #9a6e1d;
+  --color-info: #216a9b;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .print-poster,
+  .print-poster * {
+    visibility: visible;
+  }
+
+  .print-poster {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    min-height: 100vh;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    display: grid;
+    place-content: center;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+* { box-sizing: border-box; }
+html { background: #f6f3eb; }
+body { margin: 0; min-width: 320px; background: #f6f3eb; -webkit-font-smoothing: antialiased; }
+button, input, select, textarea { font: inherit; }
+button { -webkit-tap-highlight-color: transparent; }
+::selection { color: #0b2420; background: #e9c172; }
+
+/* Ticket perforation — signature du produit */
+.ticket-notch {
+  position: relative;
+}
+.ticket-notch::before,
+.ticket-notch::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 22px;
+  height: 22px;
+  background: #f6f3eb;
+  border: 2px solid #e2dccc;
+  border-radius: 9999px;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+.ticket-notch::before { left: -13px; border-right: 0; }
+.ticket-notch::after { right: -13px; border-left: 0; }
+
+@layer utilities {
+  .focus-ring { @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2; }
+  .input { @apply focus-ring h-11 w-full rounded-xl border border-line bg-white px-3 text-sm text-ink placeholder:text-ink-faint; }
+  .app-scrollbar::-webkit-scrollbar { width: 7px; height: 7px; }
+  .app-scrollbar::-webkit-scrollbar-thumb { background: #d8d1c0; border-radius: 999px; }
+
+  /* Mobile accessibility - minimum touch target 44x44px */
+  .touch-target { @apply min-h-[44px] min-w-[44px]; }
+  .touch-target-sm { @apply min-h-[40px] min-w-[40px]; }
+
+  /* Focus management for accessibility */
+  .focus-visible-only { @apply focus:outline-none focus-visible:outline-none; }
+  .focus-visible-ring { @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2; }
+}

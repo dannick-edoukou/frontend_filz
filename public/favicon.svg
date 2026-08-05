@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="16" fill="#12332D"/>
+  <rect x="10" y="8" width="44" height="48" rx="6" fill="#F6F3EB"/>
+  <circle cx="8" cy="20" r="3.5" fill="#F6F3EB" stroke="#12332D" stroke-width="2"/>
+  <circle cx="56" cy="20" r="3.5" fill="#F6F3EB" stroke="#12332D" stroke-width="2"/>
+  <circle cx="8" cy="44" r="3.5" fill="#F6F3EB" stroke="#12332D" stroke-width="2"/>
+  <circle cx="56" cy="44" r="3.5" fill="#F6F3EB" stroke="#12332D" stroke-width="2"/>
+  <path d="M10 30h44" stroke="#E2DCCC" stroke-width="2" stroke-dasharray="4 4"/>
+  <text x="32" y="46" font-family="Georgia, serif" font-size="26" font-weight="700" fill="#12332D" text-anchor="middle">F</text>
+</svg>
