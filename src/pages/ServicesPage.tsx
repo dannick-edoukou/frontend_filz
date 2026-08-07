@@ -393,7 +393,6 @@ export function ServicesPage() {
               </p>
             </div>
             
-            <div className="no-print mt-5 rounded-xl bg-[#f7f7f5] p-3 text-xs leading-5 text-[#596477] break-all">{activePublicUrl}</div>
             <div className="no-print mt-5 grid gap-2 sm:grid-cols-3">
               <Button onClick={copyPublicUrl} variant="secondary" icon={<HugeiconsIcon icon={Copy01Icon} size={16} />}>Copier</Button>
               <Button onClick={printQrPoster} variant="secondary" icon={<HugeiconsIcon icon={PrinterIcon} size={16} />}>Imprimer</Button>
