@@ -10,7 +10,19 @@ type InvoiceRow = {
   dateISO: string | null;
   amount: string;
   amountValue: number;
-  state: "paid" | "pending" | "open";
+  state: "paid" | "pending" | "failed";
+};
+
+type InvoiceRecord = {
+  id: string;
+  invoice_number: string;
+  amount: number;
+  currency: string;
+  status: "paid" | "pending" | "failed";
+  period_start: string | null;
+  period_end: string | null;
+  paid_at: string | null;
+  plan_name: string | null;
 };
 
 type SubscriptionResponse = {
@@ -30,51 +42,37 @@ function formatFRDate(d: Date): string {
   } ${d.getFullYear()}`;
 }
 
-function buildMockInvoices(planPrice: number, periodEnd: string | null): InvoiceRow[] {
-  const rows: InvoiceRow[] = [];
-  const today = new Date();
-  if (periodEnd) {
-    try {
-      const end = new Date(periodEnd);
-      const d1 = new Date(end);
-      d1.setDate(end.getDate());
-      rows.push({
-        id: `FAC-${d1.getFullYear()}-${(d1.getMonth() + 1).toString().padStart(2, "0")}${d1.getDate().toString().padStart(2, "0")}NEXT`,
-        date: `À partir du ${formatFRDate(d1)}`,
-        dateISO: d1.toISOString(),
-        amount: formatAmountFCFA(planPrice),
-        amountValue: planPrice,
-        state: "open",
-      });
-    } catch {
-      // ignore
-    }
-  }
-  for (let i = 1; i <= 2; i += 1) {
-    const d = new Date(today.getFullYear(), today.getMonth() - i, 14);
-    rows.push({
-      id: `FAC-${d.getFullYear()}-${(d.getMonth() + 1).toString().padStart(2, "0")}14`,
-      date: formatFRDate(d),
-      dateISO: d.toISOString(),
-      amount: formatAmountFCFA(planPrice),
-      amountValue: planPrice,
-      state: planPrice <= 0 ? "paid" : "paid",
-    });
-  }
-  return rows;
+function toRow(inv: InvoiceRecord): InvoiceRow {
+  const date = inv.paid_at || inv.period_end || null;
+  const d = date ? new Date(date) : null;
+  return {
+    id: inv.invoice_number,
+    date: d ? formatFRDate(d) : "—",
+    dateISO: d ? d.toISOString() : null,
+    amount: formatAmountFCFA(inv.amount),
+    amountValue: inv.amount,
+    state: inv.status,
+  };
 }
 
 export function InvoicesPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<SubscriptionResponse | null>(null);
+  const [invoices, setInvoices] = useState<InvoiceRow[]>([]);
 
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    api.get("/admin/subscription")
-      .then((res) => {
-        if (!cancelled) setData(res as SubscriptionResponse);
+    Promise.all([
+      api.get("/admin/subscription"),
+      api.get("/admin/invoices"),
+    ])
+      .then(([subRes, invRes]) => {
+        if (cancelled) return;
+        setData(subRes as SubscriptionResponse);
+        const list = (invRes as { invoices: InvoiceRecord[] }).invoices ?? [];
+        setInvoices(list.map(toRow));
       })
       .catch((err) => {
         if (!cancelled) setError(err.message || "Impossible de charger les informations.");
@@ -87,10 +85,6 @@ export function InvoicesPage() {
 
   const planPrice = data?.plan?.price_monthly ?? 0;
   const nextDate = data?.current_period_end ? new Date(data.current_period_end) : null;
-
-  const invoices = loading || !data
-    ? []
-    : buildMockInvoices(planPrice, data.current_period_end);
 
   return <>
     <PageHeader
@@ -149,7 +143,7 @@ export function InvoicesPage() {
                       ) : invoice.state === "pending" ? (
                         <span className="rounded-full bg-[#e9f5ff] px-2.5 py-1 text-[11px] font-bold text-[#216a9b]">En attente</span>
                       ) : (
-                        <span className="rounded-full bg-[#fff4e8] px-2.5 py-1 text-[11px] font-bold text-[#ae5317]">À venir</span>
+                        <span className="rounded-full bg-[#ffe9e7] px-2.5 py-1 text-[11px] font-bold text-[#c13d2e]">Échouée</span>
                       )}
                     </td>
                     <td className="px-5 py-4 text-right">

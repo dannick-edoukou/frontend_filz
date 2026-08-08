@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Add01Icon, Mail01Icon, MoreHorizontalIcon, UserGroupIcon } from "@hugeicons/core-free-icons";
+import { Add01Icon, CheckmarkCircle01Icon, Mail01Icon, MoreHorizontalIcon, UserGroupIcon } from "@hugeicons/core-free-icons";
 import { Button, PageHeader, StatusBadge } from "../components/ui/Ui";
 import { Page } from "../components/ui/Pagination";
+import { Modal } from "../components/ui/Modal";
 import { api } from "../utils/api";
 
 interface User {
@@ -20,6 +21,8 @@ export function TeamPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [inviteLink, setInviteLink] = useState("");
+  const [inviteSent, setInviteSent] = useState(false);
+  const [sentEmail, setSentEmail] = useState("");
   const [activeMenuId, setActiveMenuId] = useState<string | null>(null);
 
   // Form states
@@ -56,9 +59,12 @@ export function TeamPage() {
         const origin = window.location.origin;
         setInviteLink(`${origin}${res.invite_url}`);
       }
+      setSentEmail(email);
       setEmail("");
       setFullName("");
       setRole("staff");
+      setInvite(false);
+      setInviteSent(true);
       fetchUsers();
     } catch (err: any) {
       setError(err.message || "Erreur lors de l'invitation");
@@ -266,6 +272,19 @@ export function TeamPage() {
           )}
         </section>
       )}
+
+      <Modal isOpen={inviteSent} onClose={() => setInviteSent(false)} title="Invitation envoyée" size="sm">
+        <div className="flex flex-col items-center gap-4 pb-2 text-center">
+          <span className="grid h-16 w-16 place-items-center rounded-full bg-[#ebf6ee]">
+            <HugeiconsIcon icon={CheckmarkCircle01Icon} size={34} className="text-[#287044]" />
+          </span>
+          <p className="text-sm leading-6 text-[#596477]">
+            Un e-mail d’invitation a été envoyé à <strong>{sentEmail}</strong>. Le collaborateur
+            pourra rejoindre l’organisation dès qu’il aura créé son compte.
+          </p>
+          <Button className="mt-1 w-full" onClick={() => setInviteSent(false)}>Compris</Button>
+        </div>
+      </Modal>
     </>
   );
 }
