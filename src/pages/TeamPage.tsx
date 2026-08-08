@@ -56,8 +56,7 @@ export function TeamPage() {
         role,
       });
       if (res?.invite_url) {
-        const origin = window.location.origin;
-        setInviteLink(`${origin}${res.invite_url}`);
+        setInviteLink(res.invite_url);
       }
       setSentEmail(email);
       setEmail("");
