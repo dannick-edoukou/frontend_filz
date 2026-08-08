@@ -556,7 +556,7 @@ export function OverviewPage({ onNavigate }: { onNavigate: (screen: Screen) => v
                 sub={
                   avgWait > 20
                     ? "Ajoutez un guichet sur les services en pic ou ouvrez un second horaire."
-                    : "L’expérience visiteur est conforme aux standards Fila."
+                    : "L’expérience visiteur est conforme aux standards Filz."
                 }
                 tone={avgWait > 20 ? "orange" : "green"}
                 action={

@@ -87,9 +87,9 @@ export function SupportPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Support Fila"
+        eyebrow="Support Filz"
         title="Besoin d’un coup de main ?"
-        description="Échangez directement avec l’équipe Fila pour une question, un incident ou une personnalisation."
+        description="Échangez directement avec l’équipe Filz pour une question, un incident ou une personnalisation."
         action={
           <Button onClick={() => setIsCreating(true)} icon={<HugeiconsIcon icon={Message02Icon} size={18} />}>
             Nouveau ticket
@@ -173,7 +173,7 @@ export function SupportPage() {
                 {/* Reply if superadmin replied */}
                 {activeTicket.superadmin_reply && (
                   <article className="max-w-[78%]">
-                    <p className="mb-1.5 text-[11px] font-bold text-[#788292]">Support Fila · {formatDate(activeTicket.updated_at)}</p>
+                    <p className="mb-1.5 text-[11px] font-bold text-[#788292]">Support Filz · {formatDate(activeTicket.updated_at)}</p>
                     <div className="rounded-2xl p-4 text-sm leading-6 rounded-tl-sm bg-[#f3f4f2] text-[#4d5768]">
                       {activeTicket.superadmin_reply}
                     </div>

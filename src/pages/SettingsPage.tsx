@@ -276,7 +276,7 @@ export function SettingsPage() {
             </span>
             <div>
               <h2 className="font-bold">Votre profil</h2>
-              <p className="mt-0.5 text-xs text-[#788292]">Vos informations d’accès à Fila.</p>
+              <p className="mt-0.5 text-xs text-[#788292]">Vos informations d’accès à Filz.</p>
             </div>
           </div>
         </div>

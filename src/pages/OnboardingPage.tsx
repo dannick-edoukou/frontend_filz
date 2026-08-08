@@ -4,6 +4,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowRight01Icon, Building02Icon, CheckmarkCircle02Icon, QrCodeIcon } from "@hugeicons/core-free-icons";
 import { Button } from "../components/ui/Ui";
 import { api, getOrgSlug } from "../utils/api";
+import filzIcon from "../assets/filz_icon.png";
 
 const steps = ["Établissement", "Service", "QR public"];
 
@@ -95,8 +96,8 @@ export function OnboardingPage({ onComplete }: { onComplete: () => void }) {
       <div className="mx-auto max-w-3xl">
         <header className="flex items-center justify-between py-3">
           <div className="flex items-center gap-3">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-[#e87325] text-lg font-extrabold text-white">F</span>
-            <span className="font-extrabold tracking-[-.04em]">Fila</span>
+            <img src={filzIcon} alt="Filz" className="h-9 w-9 rounded-xl" />
+            <span className="font-extrabold tracking-[-.04em]">Filz</span>
           </div>
           <span className="text-xs font-semibold text-[#788292]">Configuration guidée dynamique</span>
         </header>

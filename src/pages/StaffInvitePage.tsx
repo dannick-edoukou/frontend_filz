@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { Building02Icon, CheckmarkCircle02Icon, UserGroupIcon } from "@hugeicons/core-free-icons";
+import { Building02Icon, CheckmarkCircle02Icon, LockPasswordIcon, UserGroupIcon } from "@hugeicons/core-free-icons";
 import { Button } from "../components/ui/Ui";
 import { api, getOrgSlug, setAuthToken, setRefreshToken, setUserRole } from "../utils/api";
+import filzIcon from "../assets/filz_icon.png";
 
 type InviteMeta = {
   organizationName: string;
@@ -19,7 +20,7 @@ const DEFAULT_META: InviteMeta = {
 };
 
 function deriveInviterRoleLabel(role?: string): string {
-  if (role === "superadmin") return "super-administrateur Fila";
+  if (role === "superadmin") return "super-administrateur Filz";
   if (role === "company_admin") return "administrateur";
   return "membre staff";
 }
@@ -96,46 +97,63 @@ export function StaffInvitePage({ onComplete, onDecline }: { onComplete: () => v
   };
 
   if (accepted) {
-    return <main className="grid min-h-screen place-items-center bg-[#f7f7f5] p-4">
-      <section className="w-full max-w-md rounded-[26px] border border-[#e4e4de] bg-white p-8 text-center shadow-[0_16px_60px_rgba(23,32,51,.07)]">
-        <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-[#ecf6ef] text-[#287044]">
+    return <main className="grid min-h-screen place-items-center bg-paper px-4 py-10">
+      <section className="w-full max-w-md overflow-hidden rounded-[28px] border border-line bg-white p-8 text-center shadow-ticket">
+        <img src={filzIcon} alt="Filz" className="mx-auto h-12 w-12 rounded-2xl" />
+        <span className="mx-auto mt-6 grid h-12 w-12 place-items-center rounded-full bg-pine-100 text-pine-900">
           <HugeiconsIcon icon={CheckmarkCircle02Icon} size={26} />
         </span>
-        <h1 className="mt-5 text-2xl font-bold tracking-[-.05em]">Invitation acceptée</h1>
-        <p className="mt-3 text-sm leading-6 text-[#687385]">
+        <h1 className="mt-5 font-display text-2xl font-semibold tracking-tight text-ink">Invitation acceptée</h1>
+        <p className="mt-3 text-sm leading-6 text-ink-soft">
           Votre accès staff à <strong>{meta.organizationName}</strong> est actif. Vous pourrez ouvrir la console de file dès votre connexion.
         </p>
-        <Button onClick={onComplete} className="mt-7 w-full">Accéder à Fila</Button>
+        <Button onClick={onComplete} className="mt-7 w-full">Accéder à Filz</Button>
       </section>
     </main>;
   }
 
-  return <main className="grid min-h-screen place-items-center bg-[#f7f7f5] p-4">
-    <section className="w-full max-w-md rounded-[26px] border border-[#e4e4de] bg-white p-8 shadow-[0_16px_60px_rgba(23,32,51,.07)]">
-      <div className="flex items-center justify-between">
-        <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#e87325] text-lg font-extrabold text-white">F</span>
-        <span className="text-xs font-bold text-[#788292]">Invitation Fila</span>
+  return <main className="grid min-h-screen place-items-center bg-paper px-4 py-10">
+    <section className="w-full max-w-md overflow-hidden rounded-[28px] border border-line bg-white shadow-ticket">
+      <div className="relative bg-pine-950 px-7 pb-10 pt-8 text-center">
+        <img src={filzIcon} alt="Filz" className="mx-auto h-12 w-12 rounded-2xl" />
+        <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight text-paper">Filz</h1>
+        <p className="mt-1.5 text-sm text-pine-100/70">Vous êtes invité(e) à rejoindre l’équipe.</p>
       </div>
-      <span className="mt-8 grid h-11 w-11 place-items-center rounded-xl bg-[#edf5fb] text-[#2871a2]">
-        <HugeiconsIcon icon={UserGroupIcon} size={22} />
-      </span>
-      <h1 className="mt-5 text-3xl font-bold tracking-[-.05em]">Vous êtes invité(e) chez {meta.organizationName}</h1>
-      <p className="mt-3 text-sm leading-6 text-[#687385]">
-        <strong>{meta.inviterName}</strong> vous invite en tant que <strong>{meta.inviterRoleLabel}</strong>
-        {meta.branchName ? <> pour l’établissement <strong>{meta.branchName}</strong></> : <> pour accéder à la console de gestion</>}.
-      </p>
-      <div className="mt-6 rounded-xl bg-[#f7f7f5] p-4">
-        <p className="flex items-center gap-2 text-xs font-bold text-[#596477]">
+      <div className="relative">
+        <div className="border-t-2 border-dashed border-line" />
+        <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 bg-white px-2.5 font-mono text-[9px] font-semibold uppercase tracking-[0.22em] text-ink-faint">Invitation</span>
+        <span className="absolute left-0 top-0 h-6 w-6 -translate-y-1/2 rounded-full border border-line bg-white" />
+        <span className="absolute right-0 top-0 h-6 w-6 -translate-y-1/2 rounded-full border border-line bg-white" />
+      </div>
+      <div className="px-7 pb-7 pt-7">
+        <div className="flex items-start gap-3">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-pine-100 text-pine-800">
+            <HugeiconsIcon icon={UserGroupIcon} size={20} />
+          </span>
+          <div>
+            <h2 className="font-display text-xl font-semibold tracking-tight text-ink">Rejoindre {meta.organizationName}</h2>
+            <p className="mt-1.5 text-sm leading-6 text-ink-soft">
+              <strong>{meta.inviterName}</strong> vous invite en tant que <strong>{meta.inviterRoleLabel}</strong>
+              {meta.branchName ? <> pour l’établissement <strong>{meta.branchName}</strong></> : <> pour accéder à la console de gestion</>}.
+            </p>
+          </div>
+        </div>
+        <div className="mt-5 flex items-center gap-2 rounded-xl bg-sand/60 px-4 py-3 text-xs font-bold text-ink-soft">
           <HugeiconsIcon icon={Building02Icon} size={16} />
           Accès : Console staff · Consultation générale
-        </p>
+        </div>
+        <label className="mt-6 block text-sm font-semibold text-ink">Créer votre mot de passe
+          <div className="relative mt-2">
+            <HugeiconsIcon className="pointer-events-none absolute left-3 top-3 text-ink-faint" icon={LockPasswordIcon} size={18} />
+            <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} minLength={8} placeholder="8 caractères minimum" className="input !pl-11" />
+          </div>
+        </label>
+        {error && <p className="mt-3 rounded-xl bg-clay-100 p-3 text-xs font-bold text-clay-700">{error}</p>}
+        <div className="mt-7 flex gap-3">
+          <Button onClick={acceptInvite} disabled={loading || !token || password.length < 8} className="flex-1">{loading ? "Activation…" : "Accepter l’invitation"}</Button>
+          <Button onClick={onDecline} variant="secondary" className="flex-1">Refuser</Button>
+        </div>
       </div>
-      <div className="mt-7 flex gap-3">
-        <Button onClick={acceptInvite} disabled={loading || !token || password.length < 8} className="flex-1">{loading ? "Activation…" : "Accepter"}</Button>
-        <Button onClick={onDecline} variant="secondary" className="flex-1">Refuser</Button>
-      </div>
-      <label className="mt-4 block text-sm font-semibold text-[#414b5d]">Créer votre mot de passe<input type="password" value={password} onChange={(event) => setPassword(event.target.value)} minLength={8} placeholder="8 caractères minimum" className="input mt-2" /></label>
-      {error && <p className="mt-3 rounded-xl bg-[#fff1ef] p-3 text-xs font-bold text-[#c13d2e]">{error}</p>}
     </section>
   </main>;
 }

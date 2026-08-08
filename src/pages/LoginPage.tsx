@@ -42,7 +42,7 @@ export function LoginPage({ onLogin, onSignup, onForgotPassword, onAdmin, onHome
           if (res.org_slug) {
             setOrgSlug(res.org_slug);
           }
-          showSuccess("Connexion réussie", "Bienvenue sur Fila");
+          showSuccess("Connexion réussie", "Bienvenue sur Filz");
           onLogin(payload.role);
         } else {
           throw new Error("Invalid session token payload");

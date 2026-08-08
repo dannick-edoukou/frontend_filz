@@ -277,7 +277,7 @@ export function SuperadminPage({ onNavigate }: {onNavigate: (screen: "admin-supp
   return (
     <>
       <PageHeader
-        eyebrow="Administration Fila"
+        eyebrow="Administration Filz"
         title="Vue plateforme"
         description="Surveillez les entreprises clientes, l’activité de la plateforme et les demandes nécessitant votre attention."
       />

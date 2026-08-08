@@ -259,7 +259,7 @@ export function AdminPlansPage() {
 
   return <>
     <PageHeader
-      eyebrow="Administration Fila"
+      eyebrow="Administration Filz"
       title="Plans & tarifs"
       description="Configurez les formules proposées aux entreprises et contrôlez leurs limites d’utilisation."
       action={<Button onClick={createPlan} icon={<HugeiconsIcon icon={Add01Icon} size={18} />}>Créer une formule</Button>}

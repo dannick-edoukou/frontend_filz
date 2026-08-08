@@ -30,7 +30,7 @@ export const supportTickets: SupportTicket[] = [
   updatedAt: "Aujourd’hui, 10:12",
   messages: [
   { id: "m1", sender: "company", author: "Aminata Koné", body: "Bonjour, nous ouvrons un point de consultation à Cocody. Pouvez-vous nous aider à l'ajouter ?", time: "Hier, 16:24" },
-  { id: "m2", sender: "support", author: "Équipe Fila", body: "Bonjour Aminata, bien sûr. Votre plan permet jusqu'à 3 établissements. Nous pouvons vous accompagner pour la mise en place.", time: "Aujourd’hui, 09:46" }]
+  { id: "m2", sender: "support", author: "Équipe Filz", body: "Bonjour Aminata, bien sûr. Votre plan permet jusqu'à 3 établissements. Nous pouvons vous accompagner pour la mise en place.", time: "Aujourd’hui, 09:46" }]
 
 },
 { id: "SUP-1798", subject: "Question sur la facturation", category: "Facturation", status: "resolved", updatedAt: "12 juin 2026", messages: [] }];

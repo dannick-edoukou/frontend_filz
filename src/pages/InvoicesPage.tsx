@@ -182,7 +182,7 @@ export function InvoicesPage() {
           <div className="flex gap-3">
             <HugeiconsIcon icon={InformationCircleIcon} size={19} className="shrink-0 text-[#c45b1a]" />
             <p className="text-xs leading-5 text-[#86572f]">
-              Si un paiement échoue, l’équipe Fila vous contacte avant toute suspension de l’accès public.
+              Si un paiement échoue, l’équipe Filz vous contacte avant toute suspension de l’accès public.
             </p>
           </div>
         </section>
