@@ -102,20 +102,20 @@ function PlanEditor({
 
   return (
     <article
-      className={`relative overflow-hidden rounded-2xl border bg-white p-5 ${highlighted ? "border-[#e87325] shadow-[0_10px_30px_rgba(232,115,37,.1)]" : "border-[#e5e5df]"}`}
+      className={`relative overflow-hidden rounded-2xl border bg-white p-5 ${highlighted ? "border-pine-500 shadow-[0_10px_30px_rgba(77,114,232,.15)]" : "border-line"}`}
     >
       {highlighted && (
-        <span className="absolute right-4 top-4 rounded-full bg-[#fff1e5] px-2.5 py-1 text-[10px] font-bold text-[#b94d10]">
+        <span className="absolute right-4 top-4 rounded-full bg-pine-50 px-2.5 py-1 text-[10px] font-bold text-pine-700">
           Plus choisi
         </span>
       )}
-      <label className="block text-xs font-bold uppercase tracking-[.13em] text-[#929aa7]">
+      <label className="block text-xs font-bold uppercase tracking-[.13em] text-ink-faint">
         Nom
         <input value={draft.name} onChange={(e) => update("name", e.target.value)} className="mt-2 input bg-white text-sm normal-case tracking-normal" />
       </label>
       <p className="mt-4 text-3xl font-bold tracking-[-.055em]">{formatPriceFCFA(Number(draft.price_monthly))}</p>
-      <p className="mt-1 text-xs text-[#788292]">par mois, hors taxes</p>
-      <p className="mt-5 rounded-xl bg-[#f7f7f5] px-3 py-2 text-xs font-bold text-[#596477]">
+      <p className="mt-1 text-xs text-ink-faint">par mois, hors taxes</p>
+      <p className="mt-5 rounded-xl bg-sand px-3 py-2 text-xs font-bold text-ink-soft">
         {plan.tenant_count} entreprise{plan.tenant_count > 1 ? "s" : ""} active{plan.tenant_count > 1 ? "s" : ""}
       </p>
 
@@ -123,7 +123,7 @@ function PlanEditor({
         <NumberField label="Prix mensuel" value={draft.price_monthly} onChange={(v) => update("price_monthly", v)} />
         <NumberField label="Établissements" value={draft.max_branches} onChange={(v) => update("max_branches", v)} />
         <NumberField label="Staff" value={draft.max_staff_users} onChange={(v) => update("max_staff_users", v)} />
-        <label className="col-span-2 block text-xs font-bold text-[#596477]">
+        <label className="col-span-2 block text-xs font-bold text-ink-soft">
           Entrées / mois
           <input type="number" min={1} value={draft.max_queue_entries_per_month} onChange={(e) => update("max_queue_entries_per_month", Number(e.target.value))} className="mt-1 input bg-white" />
         </label>
@@ -136,8 +136,8 @@ function PlanEditor({
 
       <ul className="mt-5 space-y-2">
         {buildLimits(draft).map((limit) => (
-          <li key={limit} className="flex items-center gap-2 text-xs text-[#4d5768]">
-            <HugeiconsIcon icon={CheckmarkCircle02Icon} size={16} className="text-[#2b8050]" />
+          <li key={limit} className="flex items-center gap-2 text-xs text-ink-soft">
+            <HugeiconsIcon icon={CheckmarkCircle02Icon} size={16} className="text-teal-700" />
             {limit}
           </li>
         ))}
@@ -155,13 +155,13 @@ function PlanEditor({
           aria-label="Supprimer"
         />
       </div>
-      {notice && <p className="mt-3 text-xs font-bold text-[#287044]">{notice}</p>}
+      {notice && <p className="mt-3 text-xs font-bold text-teal-700">{notice}</p>}
 
       {showDeleteConfirm && (
         <div className="absolute inset-0 z-10 grid place-items-center bg-white/90 backdrop-blur-sm rounded-2xl">
-          <div className="w-full max-w-[260px] rounded-xl border border-[#e5e5df] bg-white p-4 shadow-lg">
+          <div className="w-full max-w-[260px] rounded-xl border border-line bg-white p-4 shadow-lg">
             <p className="text-sm font-bold">Supprimer ce plan ?</p>
-            <p className="mt-2 text-xs text-[#788292]">
+            <p className="mt-2 text-xs text-ink-faint">
               {plan.tenant_count > 0 
                 ? "Impossible : des entreprises utilisent ce plan." 
                 : "Cette action est irréversible."}
@@ -192,7 +192,7 @@ function PlanEditor({
 
 function NumberField({ label, value, onChange }: { label: string; value: number; onChange: (value: number) => void }) {
   return (
-    <label className="block text-xs font-bold text-[#596477]">
+    <label className="block text-xs font-bold text-ink-soft">
       {label}
       <input type="number" min={0} value={value} onChange={(e) => onChange(Number(e.target.value))} className="mt-1 input bg-white" />
     </label>
@@ -201,9 +201,9 @@ function NumberField({ label, value, onChange }: { label: string; value: number;
 
 function Toggle({ label, checked, onChange }: { label: string; checked: boolean; onChange: (value: boolean) => void }) {
   return (
-    <label className="flex items-center justify-between gap-3 rounded-xl bg-[#f7f7f5] px-3 py-2 text-xs font-bold text-[#596477]">
+    <label className="flex items-center justify-between gap-3 rounded-xl bg-sand px-3 py-2 text-xs font-bold text-ink-soft">
       {label}
-      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="h-4 w-4 accent-[#e87325]" />
+      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} className="h-4 w-4 accent-pine-500" />
     </label>
   );
 }
@@ -265,19 +265,19 @@ export function AdminPlansPage() {
       action={<Button onClick={createPlan} icon={<HugeiconsIcon icon={Add01Icon} size={18} />}>Créer une formule</Button>}
     />
     {error && (
-      <div className="mb-4 rounded-xl border border-[#f0d8bd] bg-[#fffbf6] p-3 text-xs font-bold text-[#b94d10]">{error}</div>
+      <div className="mb-4 rounded-xl border border-pine-200 bg-pine-50 p-3 text-xs font-bold text-pine-700">{error}</div>
     )}
     <section className="grid gap-5 lg:grid-cols-3">
       {loading ? (
         <>
           {[0, 1, 2].map((i) => (
-            <article key={i} className="rounded-2xl border border-[#e5e5df] bg-white p-5 text-xs text-[#788292]">
+            <article key={i} className="rounded-2xl border border-line bg-white p-5 text-xs text-ink-faint">
               Chargement des plans…
             </article>
           ))}
         </>
       ) : plans.length === 0 ? (
-        <article className="col-span-3 rounded-2xl border border-[#e5e5df] bg-white p-6 text-sm text-[#596477]">
+        <article className="col-span-3 rounded-2xl border border-line bg-white p-6 text-sm text-ink-soft">
           Aucun plan disponible. Créez une première formule pour démarrer.
         </article>
       ) : (
@@ -293,9 +293,9 @@ export function AdminPlansPage() {
       )}
     </section>
     <section className="mt-5 grid gap-5 xl:grid-cols-[1.25fr_.75fr]">
-      <article className="rounded-2xl border border-[#e5e5df] bg-white p-5 sm:p-6">
+      <article className="rounded-2xl border border-line bg-white p-5 sm:p-6">
         <h2 className="font-bold">Règles de facturation</h2>
-        <div className="mt-5 divide-y divide-[#efefea] border-y border-[#efefea]">
+        <div className="mt-5 divide-y divide-line border-y border-line">
           {[
             { title: "Période de grâce", detail: "7 jours après un échec de paiement avant la restriction QR." },
             { title: "Mise à niveau", detail: "Appliquée immédiatement avec facturation au prorata." },
@@ -303,19 +303,19 @@ export function AdminPlansPage() {
           ].map((rule) => (
             <div key={rule.title} className="py-4">
               <p className="text-sm font-bold">{rule.title}</p>
-              <p className="mt-1 text-xs leading-5 text-[#788292]">{rule.detail}</p>
+              <p className="mt-1 text-xs leading-5 text-ink-faint">{rule.detail}</p>
             </div>
           ))}
         </div>
       </article>
-      <aside className="rounded-2xl border border-[#f0d8bd] bg-[#fffbf6] p-5">
-        <HugeiconsIcon icon={InformationCircleIcon} size={20} className="text-[#c45b1a]" />
-        <h2 className="mt-3 text-sm font-bold text-[#70320b]">Impact des changements</h2>
-        <p className="mt-2 text-xs leading-5 text-[#86572f]">
+      <aside className="rounded-2xl border border-pine-200 bg-pine-50 p-5">
+        <HugeiconsIcon icon={InformationCircleIcon} size={20} className="text-pine-700" />
+        <h2 className="mt-3 text-sm font-bold text-pine-800">Impact des changements</h2>
+        <p className="mt-2 text-xs leading-5 text-ink-soft">
           Les limites modifiées sont appliquées lors du prochain cycle, sauf décision manuelle du superadmin.
         </p>
         {notice && (
-          <p aria-live="polite" className="mt-4 rounded-lg bg-white px-3 py-2 text-xs font-bold text-[#287044]">
+          <p aria-live="polite" className="mt-4 rounded-lg bg-white px-3 py-2 text-xs font-bold text-teal-700">
             {notice}
           </p>
         )}

@@ -92,14 +92,14 @@ export function OnboardingPage({ onComplete }: { onComplete: () => void }) {
   };
 
   return (
-    <main className="min-h-screen bg-[#f7f7f5] p-4 sm:p-8">
+    <main className="min-h-screen bg-sand p-4 sm:p-8">
       <div className="mx-auto max-w-3xl">
         <header className="flex items-center justify-between py-3">
           <div className="flex items-center gap-3">
             <img src={filzIcon} alt="Filz" className="h-9 w-9 rounded-xl" />
             <span className="font-extrabold tracking-[-.04em]">Filz</span>
           </div>
-          <span className="text-xs font-semibold text-[#788292]">Configuration guidée dynamique</span>
+          <span className="text-xs font-semibold text-ink-faint">Configuration guidée dynamique</span>
         </header>
 
         <div className="mt-10">
@@ -107,28 +107,28 @@ export function OnboardingPage({ onComplete }: { onComplete: () => void }) {
             {steps.map((item, index) => (
               <Fragment key={item}>
                 <div className="flex items-center gap-2">
-                  <span className={`grid h-7 w-7 place-items-center rounded-full text-xs font-extrabold ${index <= step ? "bg-[#e87325] text-white" : "bg-[#e7e7e2] text-[#8a93a1]"}`}>
+                  <span className={`grid h-7 w-7 place-items-center rounded-full text-xs font-extrabold ${index <= step ? "bg-pine-500 text-white" : "bg-sand text-ink-faint"}`}>
                     {index < step ? <HugeiconsIcon icon={CheckmarkCircle02Icon} size={15} /> : index + 1}
                   </span>
-                  <span className={`hidden text-xs font-bold sm:block ${index <= step ? "text-[#253144]" : "text-[#949ca8]"}`}>{item}</span>
+                  <span className={`hidden text-xs font-bold sm:block ${index <= step ? "text-ink" : "text-ink-faint"}`}>{item}</span>
                 </div>
-                {index < steps.length - 1 && <span className={`h-px flex-1 ${index < step ? "bg-[#e87325]" : "bg-[#deded8]"}`} />}
+                {index < steps.length - 1 && <span className={`h-px flex-1 ${index < step ? "bg-pine-500" : "bg-sand"}`} />}
               </Fragment>
             ))}
           </div>
 
-          <section className="mt-8 rounded-[26px] border border-[#e4e4de] bg-white p-6 shadow-[0_12px_35px_rgba(23,32,51,.04)] sm:p-9">
+          <section className="mt-8 rounded-[26px] border border-line bg-white p-6 shadow-[0_12px_35px_rgba(23,32,51,.04)] sm:p-9">
             {error && <div className="p-3 mb-4 bg-red-50 text-red-700 text-xs rounded-xl border border-red-100">{error}</div>}
 
             {/* STEP 1: ÉTABLISSEMENT */}
             {step === 0 && (
               <div>
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#fff1e5] text-[#d6641b]">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-pine-50 text-pine-600">
                   <HugeiconsIcon icon={Building02Icon} size={23} />
                 </span>
-                <p className="mt-6 text-xs font-bold uppercase tracking-[.14em] text-[#c45b1a]">Étape 1 · Établissement</p>
+                <p className="mt-6 text-xs font-bold uppercase tracking-[.14em] text-pine-500">Étape 1 · Établissement</p>
                 <h1 className="mt-3 text-3xl font-bold tracking-[-.05em]">Où accueillez-vous vos visiteurs ?</h1>
-                <p className="mt-3 text-sm leading-6 text-[#687385]">Saisissez le nom et l'emplacement de votre premier point d'accueil.</p>
+                <p className="mt-3 text-sm leading-6 text-ink-soft">Saisissez le nom et l'emplacement de votre premier point d'accueil.</p>
                 
                 <div className="mt-7 grid gap-4 sm:grid-cols-2">
                   <label className="text-sm font-semibold">
@@ -155,12 +155,12 @@ export function OnboardingPage({ onComplete }: { onComplete: () => void }) {
             {/* STEP 2: SERVICE */}
             {step === 1 && (
               <div>
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-[#edf5fb] text-[#2871a2]">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-pine-50 text-pine-600">
                   <HugeiconsIcon icon={Building02Icon} size={23} />
                 </span>
-                <p className="mt-6 text-xs font-bold uppercase tracking-[.14em] text-[#c45b1a]">Étape 2 · Service</p>
+                <p className="mt-6 text-xs font-bold uppercase tracking-[.14em] text-pine-500">Étape 2 · Service</p>
                 <h1 className="mt-3 text-3xl font-bold tracking-[-.05em]">Quel premier service voulez-vous ouvrir ?</h1>
-                <p className="mt-3 text-sm leading-6 text-[#687385]">Définissez le nom du service et le temps moyen de prise en charge d'un client.</p>
+                <p className="mt-3 text-sm leading-6 text-ink-soft">Définissez le nom du service et le temps moyen de prise en charge d'un client.</p>
                 
                 <div className="mt-7 grid gap-4 sm:grid-cols-2">
                   <label className="text-sm font-semibold sm:col-span-2">
@@ -178,31 +178,31 @@ export function OnboardingPage({ onComplete }: { onComplete: () => void }) {
             {/* STEP 3: QR CODE PUBLIC GENERATE */}
             {step === 2 && (
               <div className="text-center">
-                <span className="mx-auto grid h-12 w-12 place-items-center rounded-xl bg-[#fff1e5] text-[#d6641b]">
+                <span className="mx-auto grid h-12 w-12 place-items-center rounded-xl bg-pine-50 text-pine-600">
                   <HugeiconsIcon icon={QrCodeIcon} size={24} />
                 </span>
-                <p className="mt-6 text-xs font-bold uppercase tracking-[.14em] text-[#c45b1a]">Étape 3 · QR Public Prêt</p>
+                <p className="mt-6 text-xs font-bold uppercase tracking-[.14em] text-pine-500">Étape 3 · QR Public Prêt</p>
                 <h1 className="mt-3 text-3xl font-bold tracking-[-.05em]">Votre QR code est généré et actif !</h1>
-                <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-[#687385]">
+                <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-ink-soft">
                   Les visiteurs scannent ce QR code pour rejoindre la file de <strong>{serviceName}</strong> à <strong>{branchName}</strong>.
                 </p>
 
                 {qrImageUrl && (
-                  <div className="mx-auto mt-6 flex justify-center bg-white p-3 border border-[#e5e5df] rounded-xl w-48 h-48 shadow-sm">
+                  <div className="mx-auto mt-6 flex justify-center bg-white p-3 border border-line rounded-xl w-48 h-48 shadow-sm">
                     <QRCode value={qrImageUrl} size={166} className="w-full h-full" />
                   </div>
                 )}
 
                 <div className="mt-4">
-                  <a href={`https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(qrImageUrl || "")}`} download={`${serviceName}-QR.png`} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-[#e87325] underline">
+                  <a href={`https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(qrImageUrl || "")}`} download={`${serviceName}-QR.png`} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-pine-500 underline">
                     Télécharger l'image du QR Code
                   </a>
                 </div>
               </div>
             )}
 
-            <div className="mt-9 flex items-center justify-between border-t border-[#ecece7] pt-5">
-              <button disabled={step === 0 || loading} onClick={() => setStep(step - 1)} className="focus-ring rounded-lg px-3 py-2 text-sm font-bold text-[#667085] disabled:opacity-0">
+            <div className="mt-9 flex items-center justify-between border-t border-line pt-5">
+              <button disabled={step === 0 || loading} onClick={() => setStep(step - 1)} className="focus-ring rounded-lg px-3 py-2 text-sm font-bold text-ink-soft disabled:opacity-0">
                 Retour
               </button>
               <Button onClick={handleNext} disabled={loading} icon={!loading && <HugeiconsIcon icon={ArrowRight01Icon} size={17} />}>

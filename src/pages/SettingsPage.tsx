@@ -174,44 +174,44 @@ export function SettingsPage() {
     />
     <div className="max-w-4xl space-y-5">
       {error && (
-        <div className="rounded-xl border border-[#f0d8bd] bg-[#fffbf6] p-3 text-xs font-bold text-[#b94d10]">
+        <div className="rounded-xl border border-pine-200 bg-pine-50 p-3 text-xs font-bold text-pine-700">
           {error}
         </div>
       )}
-      <section className="rounded-2xl border border-[#e5e5df] bg-white">
-        <div className="border-b border-[#ecece7] p-5">
+      <section className="rounded-2xl border border-line bg-white">
+        <div className="border-b border-line p-5">
           <div className="flex items-center gap-3">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-[#fff3e7] text-[#d6641b]">
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-pine-50 text-pine-600">
               <HugeiconsIcon icon={Building02Icon} size={19} />
             </span>
             <div>
               <h2 className="font-bold">Organisation</h2>
-              <p className="mt-0.5 text-xs text-[#788292]">Informations visibles par votre équipe.</p>
+              <p className="mt-0.5 text-xs text-ink-faint">Informations visibles par votre équipe.</p>
             </div>
           </div>
         </div>
         {loading ? (
-          <div className="p-5 text-xs text-[#788292]">Chargement…</div>
+          <div className="p-5 text-xs text-ink-faint">Chargement…</div>
         ) : (
           <form onSubmit={save} className="p-5">
             <div className="grid gap-4 sm:grid-cols-2">
-              <label className="text-sm font-semibold text-[#414b5d]">
+              <label className="text-sm font-semibold text-ink-soft">
                 Nom de l’organisation
                 <input
                   required
                   value={org?.name ?? ""}
                   onChange={(e) => setOrg((prev) => (prev ? { ...prev, name: e.target.value } : prev))}
-                  className="focus-ring mt-2 h-10 w-full rounded-xl border border-[#deded8] px-3 text-sm font-normal"
+                  className="focus-ring mt-2 h-10 w-full rounded-xl border border-line px-3 text-sm font-normal"
                 />
               </label>
-              <label className="text-sm font-semibold text-[#414b5d]">
+              <label className="text-sm font-semibold text-ink-soft">
                 Secteur d’activité
                 <select
                   value={org?.business_type ?? "generic"}
                   onChange={(e) =>
                     setOrg((prev) => (prev ? { ...prev, business_type: e.target.value as BusinessType } : prev))
                   }
-                  className="focus-ring mt-2 h-10 w-full rounded-xl border border-[#deded8] bg-white px-3 text-sm font-normal"
+                  className="focus-ring mt-2 h-10 w-full rounded-xl border border-line bg-white px-3 text-sm font-normal"
                 >
                   {BUSINESS_OPTIONS.map((opt) => (
                     <option key={opt.value} value={opt.value}>
@@ -220,44 +220,44 @@ export function SettingsPage() {
                   ))}
                 </select>
               </label>
-              <label className="text-sm font-semibold text-[#414b5d]">
+              <label className="text-sm font-semibold text-ink-soft">
                 E-mail de contact
                 <input
                   type="email"
                   value={org?.contact_email ?? ""}
                   onChange={(e) => setOrg((prev) => (prev ? { ...prev, contact_email: e.target.value } : prev))}
-                  className="focus-ring mt-2 h-10 w-full rounded-xl border border-[#deded8] px-3 text-sm font-normal"
+                  className="focus-ring mt-2 h-10 w-full rounded-xl border border-line px-3 text-sm font-normal"
                 />
               </label>
-              <label className="text-sm font-semibold text-[#414b5d]">
+              <label className="text-sm font-semibold text-ink-soft">
                 Téléphone
                 <input
                   value={org?.contact_phone ?? ""}
                   onChange={(e) => setOrg((prev) => (prev ? { ...prev, contact_phone: e.target.value } : prev))}
-                  className="focus-ring mt-2 h-10 w-full rounded-xl border border-[#deded8] px-3 text-sm font-normal"
+                  className="focus-ring mt-2 h-10 w-full rounded-xl border border-line px-3 text-sm font-normal"
                 />
               </label>
-              <label className="text-sm font-semibold text-[#414b5d]">
+              <label className="text-sm font-semibold text-ink-soft">
                 Logo URL
                 <input
                   value={org?.logo_url ?? ""}
                   onChange={(e) => setOrg((prev) => (prev ? { ...prev, logo_url: e.target.value } : prev))}
                   placeholder="https://..."
-                  className="focus-ring mt-2 h-10 w-full rounded-xl border border-[#deded8] px-3 text-sm font-normal"
+                  className="focus-ring mt-2 h-10 w-full rounded-xl border border-line px-3 text-sm font-normal"
                 />
               </label>
-              <label className="text-sm font-semibold text-[#414b5d]">
+              <label className="text-sm font-semibold text-ink-soft">
                 Couleur de marque
                 <input
                   type="color"
                   value={org?.brand_color ?? "#e87325"}
                   onChange={(e) => setOrg((prev) => (prev ? { ...prev, brand_color: e.target.value } : prev))}
-                  className="focus-ring mt-2 h-10 w-full rounded-xl border border-[#deded8] px-2"
+                  className="focus-ring mt-2 h-10 w-full rounded-xl border border-line px-2"
                 />
               </label>
             </div>
-            <div className="mt-6 flex items-center justify-between border-t border-[#efefea] pt-5">
-              <p aria-live="polite" className="text-xs font-semibold text-[#287044]">
+            <div className="mt-6 flex items-center justify-between border-t border-line pt-5">
+              <p aria-live="polite" className="text-xs font-semibold text-teal-700">
                 {saved && "Modifications enregistrées"}
               </p>
               <Button type="submit" disabled={saving}>
@@ -268,30 +268,30 @@ export function SettingsPage() {
         )}
       </section>
 
-      <section className="rounded-2xl border border-[#e5e5df] bg-white">
-        <div className="border-b border-[#ecece7] p-5">
+      <section className="rounded-2xl border border-line bg-white">
+        <div className="border-b border-line p-5">
           <div className="flex items-center gap-3">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-[#edf5fb] text-[#2871a2]">
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-pine-50 text-pine-600">
               <HugeiconsIcon icon={UserIcon} size={19} />
             </span>
             <div>
               <h2 className="font-bold">Votre profil</h2>
-              <p className="mt-0.5 text-xs text-[#788292]">Vos informations d’accès à Filz.</p>
+              <p className="mt-0.5 text-xs text-ink-faint">Vos informations d’accès à Filz.</p>
             </div>
           </div>
         </div>
         <div className="flex items-center justify-between p-5">
           {loading ? (
-            <p className="text-xs text-[#788292]">Chargement…</p>
+            <p className="text-xs text-ink-faint">Chargement…</p>
           ) : (
             <>
               <div className="flex items-center gap-3">
-                <span className="grid h-10 w-10 place-items-center rounded-full bg-[#173f3a] text-sm font-bold text-white">
+                <span className="grid h-10 w-10 place-items-center rounded-full bg-pine-950 text-sm font-bold text-white">
                   {initialsOf(user?.full_name ?? "")}
                 </span>
                 <div>
                   <p className="text-sm font-bold">{user?.full_name ?? "—"}</p>
-                  <p className="mt-1 text-xs text-[#788292]">
+                  <p className="mt-1 text-xs text-ink-faint">
                     <span className="font-mono">{user?.email ?? "—"}</span> · {roleLabel(user?.role ?? "")}
                   </p>
                 </div>
@@ -302,7 +302,7 @@ export function SettingsPage() {
                 </Button>
                 <Button
                   onClick={logout}
-                  className="!bg-[#a86a64] !text-white hover:!bg-[#8e5853]"
+                  className="!bg-clay-700 !text-white hover:!bg-clay-600"
                 >
                   Se déconnecter
                 </Button>
@@ -311,32 +311,32 @@ export function SettingsPage() {
           )}
         </div>
         {editingProfile && user && (
-          <form onSubmit={saveProfile} className="border-t border-[#ecece7] p-5">
+          <form onSubmit={saveProfile} className="border-t border-line p-5">
             <div className="grid gap-4 sm:grid-cols-2">
-              <label className="text-sm font-semibold text-[#414b5d]">
+              <label className="text-sm font-semibold text-ink-soft">
                 Nom complet
                 <input
                   required
                   value={profileName}
                   onChange={(e) => setProfileName(e.target.value)}
-                  className="focus-ring mt-2 h-10 w-full rounded-xl border border-[#deded8] px-3 text-sm font-normal"
+                  className="focus-ring mt-2 h-10 w-full rounded-xl border border-line px-3 text-sm font-normal"
                 />
               </label>
-              <label className="text-sm font-semibold text-[#414b5d]">
+              <label className="text-sm font-semibold text-ink-soft">
                 Adresse e-mail
                 <input
                   required
                   type="email"
                   value={profileEmail}
                   onChange={(e) => setProfileEmail(e.target.value)}
-                  className="focus-ring mt-2 h-10 w-full rounded-xl border border-[#deded8] px-3 text-sm font-normal"
+                  className="focus-ring mt-2 h-10 w-full rounded-xl border border-line px-3 text-sm font-normal"
                 />
               </label>
             </div>
-            <div className="mt-5 flex items-center justify-between gap-3 border-t border-[#efefea] pt-5">
+            <div className="mt-5 flex items-center justify-between gap-3 border-t border-line pt-5">
               <div>
-                <p className="text-xs font-semibold text-[#287044]">{saved && "Profil mis à jour"}</p>
-                <p className="mt-1 max-w-xs text-[11px] leading-5 text-[#788292]">
+                <p className="text-xs font-semibold text-teal-700">{saved && "Profil mis à jour"}</p>
+                <p className="mt-1 max-w-xs text-[11px] leading-5 text-ink-faint">
                   Zone sensible : une nouvelle adresse e-mail sera utilisée pour vos prochaines connexions.
                 </p>
               </div>
@@ -347,17 +347,17 @@ export function SettingsPage() {
             </div>
           </form>
         )}
-        <div className="border-t border-[#ecece7] p-5">
+        <div className="border-t border-line p-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-sm font-bold text-[#c13d2e]">Zone de danger</p>
-              <p className="mt-1 text-xs leading-5 text-[#788292]">
+              <p className="text-sm font-bold text-clay-500">Zone de danger</p>
+              <p className="mt-1 text-xs leading-5 text-ink-faint">
                 La suppression de votre compte est définitive : vous perdrez l'accès à cette espace.
               </p>
             </div>
             <Button
               onClick={deleteAccount}
-              className="!bg-[#fff1ef] !text-[#c13d2e] hover:!bg-[#ffe3df] !border !border-[#f0b9b2]"
+              className="!bg-clay-100 !text-clay-500 hover:!bg-clay-100 !border !border-clay-200"
             >
               Supprimer mon compte
             </Button>

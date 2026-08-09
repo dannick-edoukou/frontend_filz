@@ -132,7 +132,7 @@ export function QueuesPage({ onOpenTicket, onNavigate }: {onOpenTicket: (id: str
       <section className="rounded-2xl border border-line bg-white shadow-card">
         <div className="flex flex-col gap-3 border-b border-line p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
           <div className="flex gap-2 overflow-x-auto">
-            <button className="rounded-lg bg-pine-900 px-3 py-2 font-mono text-xs font-semibold text-paper">Toutes <span className="ml-1 opacity-70">{filtered.length}</span></button>
+            <button className="rounded-lg bg-pine-900 px-3 py-2 font-mono text-xs font-semibold text-white">Toutes <span className="ml-1 opacity-70">{filtered.length}</span></button>
           </div>
           <label className="relative block">
             <HugeiconsIcon icon={Search01Icon} size={17} className="absolute left-3 top-2.5 text-ink-faint" />
@@ -160,7 +160,7 @@ export function QueuesPage({ onOpenTicket, onNavigate }: {onOpenTicket: (id: str
               <tbody>
                 {filtered.map((entry) => (
                   <tr key={entry.id} className="border-t border-line text-sm">
-                    <td className="px-5 py-4 font-mono text-sm font-semibold text-pine-900">N°{entry.ticket_number}</td>
+                    <td className="px-5 py-4 font-mono text-sm font-semibold text-ink">N°{entry.ticket_number}</td>
                     <td className="px-4 py-4">
                       <p className="font-semibold text-ink">{entry.customer_name}</p>
                       <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-ink-faint">

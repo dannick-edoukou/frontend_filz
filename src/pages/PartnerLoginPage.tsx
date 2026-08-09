@@ -46,7 +46,7 @@ export function PartnerLoginPage({ onLogin, onHome }: { onLogin: () => void; onH
           <button
             type="button"
             onClick={onHome}
-            className="focus-ring absolute left-4 top-4 flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold text-pine-100/70 hover:bg-white/10 hover:text-paper"
+            className="focus-ring absolute left-4 top-4 flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold text-pine-100/70 hover:bg-white/10 hover:text-white"
           >
             ← Accueil
           </button>
@@ -55,7 +55,7 @@ export function PartnerLoginPage({ onLogin, onHome }: { onLogin: () => void; onH
             <HugeiconsIcon icon={HandshakeIcon} size={14} />
             Espace partenaire
           </span>
-          <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight text-paper">Connexion</h1>
+          <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight text-white">Connexion</h1>
           <p className="mt-1.5 text-sm text-pine-100/70">Suivez vos parrainages et vos commissions.</p>
         </div>
         <div className="relative">
@@ -79,7 +79,7 @@ export function PartnerLoginPage({ onLogin, onHome }: { onLogin: () => void; onH
               <input type="password" required value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Votre mot de passe" className="input !pl-11" />
             </div>
           </label>
-          <LoadingButton type="submit" isLoading={loading} loadingText="Connexion…" className="mt-1 w-full bg-pine-900 text-paper hover:bg-pine-950 shadow-[0_8px_18px_rgba(18,51,45,0.20)]" icon={!loading && <HugeiconsIcon icon={ArrowRight01Icon} size={17} />}>
+          <LoadingButton type="submit" isLoading={loading} loadingText="Connexion…" className="mt-1 w-full bg-pine-900 text-white hover:bg-pine-700 shadow-primary" icon={!loading && <HugeiconsIcon icon={ArrowRight01Icon} size={17} />}>
             Accéder à mon espace
           </LoadingButton>
           <p className="text-center text-[11px] leading-5 text-ink-faint">

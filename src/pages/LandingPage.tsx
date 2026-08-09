@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { ThemeToggle } from "../theme/ThemeProvider";
 import {
   Activity03Icon,
   ArrowRight01Icon,
@@ -124,23 +125,24 @@ export function LandingPage({
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
           <div className="flex shrink-0 items-center gap-2.5">
             <img src={filzIcon} alt="Filz" className="h-8 w-8 rounded-lg" />
-            <span className="font-display text-lg font-semibold tracking-tight text-pine-950">Filz</span>
+            <span className="font-display text-lg font-semibold tracking-tight text-ink">Filz</span>
           </div>
           <nav className="hidden items-center gap-5 xl:flex">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} onClick={closeMenu} className="text-sm font-semibold text-ink-soft transition-colors hover:text-pine-950">{link.label}</a>
+              <a key={link.href} href={link.href} onClick={closeMenu} className="text-sm font-semibold text-ink-soft transition-colors hover:text-ink">{link.label}</a>
             ))}
-            <button onClick={onPricing} className="focus-ring rounded text-sm font-semibold text-ink-soft transition-colors hover:text-pine-950">Tarifs</button>
-            <button onClick={onPartnerLogin} className="focus-ring rounded text-sm font-semibold text-ink-soft transition-colors hover:text-pine-950">Espace partenaire</button>
+            <button onClick={onPricing} className="focus-ring rounded text-sm font-semibold text-ink-soft transition-colors hover:text-ink">Tarifs</button>
+            <button onClick={onPartnerLogin} className="focus-ring rounded text-sm font-semibold text-ink-soft transition-colors hover:text-ink">Espace partenaire</button>
             <button onClick={onPartner} className="focus-ring rounded-full border border-gold-300 bg-gold-100 px-4 py-2 text-sm font-semibold text-gold-700 transition-colors hover:bg-gold-200">
               Devenir partenaire
             </button>
           </nav>
           <div className="flex shrink-0 items-center gap-3">
+            <ThemeToggle />
             <button onClick={onLogin} className="focus-ring hidden rounded-xl px-4 py-2 text-sm font-semibold text-ink-soft hover:bg-sand sm:block">Se connecter</button>
             <button
               onClick={onSignup}
-              className="focus-ring inline-flex touch-target items-center gap-2 rounded-xl bg-pine-900 px-4 text-sm font-semibold text-paper shadow-[0_8px_18px_rgba(18,51,45,0.20)] hover:bg-pine-950"
+              className="focus-ring inline-flex touch-target items-center gap-2 rounded-xl bg-pine-900 px-4 text-sm font-semibold text-white shadow-primary hover:bg-pine-700"
             >
               Créer un compte
               <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
@@ -159,11 +161,11 @@ export function LandingPage({
           <nav className="border-t border-line bg-paper px-4 py-3 sm:px-6 xl:hidden">
             <div className="mx-auto flex max-w-7xl flex-col gap-1">
               {navLinks.map((link) => (
-                <a key={link.href} href={link.href} onClick={closeMenu} className="rounded-lg px-2 py-2.5 text-sm font-semibold text-ink-soft transition-colors hover:bg-sand hover:text-pine-950">{link.label}</a>
+                <a key={link.href} href={link.href} onClick={closeMenu} className="rounded-lg px-2 py-2.5 text-sm font-semibold text-ink-soft transition-colors hover:bg-sand hover:text-ink">{link.label}</a>
               ))}
-              <button onClick={() => { onPricing(); closeMenu(); }} className="rounded-lg px-2 py-2.5 text-left text-sm font-semibold text-ink-soft transition-colors hover:bg-sand hover:text-pine-950">Tarifs</button>
-              <button onClick={() => { onPartnerLogin(); closeMenu(); }} className="rounded-lg px-2 py-2.5 text-left text-sm font-semibold text-ink-soft transition-colors hover:bg-sand hover:text-pine-950">Espace partenaire</button>
-              <button onClick={() => { onLogin(); closeMenu(); }} className="rounded-lg px-2 py-2.5 text-left text-sm font-semibold text-ink-soft transition-colors hover:bg-sand hover:text-pine-950">Se connecter</button>
+              <button onClick={() => { onPricing(); closeMenu(); }} className="rounded-lg px-2 py-2.5 text-left text-sm font-semibold text-ink-soft transition-colors hover:bg-sand hover:text-ink">Tarifs</button>
+              <button onClick={() => { onPartnerLogin(); closeMenu(); }} className="rounded-lg px-2 py-2.5 text-left text-sm font-semibold text-ink-soft transition-colors hover:bg-sand hover:text-ink">Espace partenaire</button>
+              <button onClick={() => { onLogin(); closeMenu(); }} className="rounded-lg px-2 py-2.5 text-left text-sm font-semibold text-ink-soft transition-colors hover:bg-sand hover:text-ink">Se connecter</button>
               <button
                 onClick={() => { onPartner(); closeMenu(); }}
                 className="focus-ring mt-2 inline-flex touch-target items-center justify-center gap-2 rounded-xl border border-gold-300 bg-gold-100 px-4 py-2.5 text-sm font-semibold text-gold-700 transition-colors hover:bg-gold-200"
@@ -175,7 +177,7 @@ export function LandingPage({
         )}
       </header>
 
-      <section className="relative overflow-hidden bg-pine-950 text-paper">
+      <section className="relative overflow-hidden bg-pine-950 text-white">
         <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-gold-500/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-pine-500/20 blur-3xl" />
         <div className="relative mx-auto grid max-w-5xl gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-[1.1fr_.9fr] lg:items-center">
@@ -196,14 +198,14 @@ export function LandingPage({
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <button
                 onClick={onSignup}
-                className="focus-ring inline-flex touch-target items-center justify-center gap-2 rounded-xl bg-gold-500 px-6 text-sm font-bold text-pine-950 shadow-[0_12px_28px_rgba(208,154,51,0.35)] hover:bg-gold-400"
+                className="focus-ring inline-flex touch-target items-center justify-center gap-2 rounded-xl bg-pine-500 px-6 text-sm font-bold text-white shadow-primary hover:bg-pine-700"
               >
                 Créer un compte gratuitement
                 <HugeiconsIcon icon={ArrowRight01Icon} size={17} />
               </button>
               <button
                 onClick={onLogin}
-                className="focus-ring inline-flex touch-target items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 text-sm font-semibold text-paper hover:bg-white/10"
+                className="focus-ring inline-flex touch-target items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 text-sm font-semibold text-white hover:bg-white/10"
               >
                 J'ai déjà un compte
               </button>
@@ -281,7 +283,7 @@ export function LandingPage({
         </div>
       </section>
 
-      <section id="solution" className="scroll-mt-24 bg-pine-950 text-paper">
+      <section id="solution" className="scroll-mt-24 bg-pine-950 text-white">
         <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
           <div className="mx-auto max-w-2xl text-center">
             <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-gold-300">
@@ -355,7 +357,7 @@ export function LandingPage({
         </div>
       </section>
 
-      <section className="bg-pine-950 text-paper">
+      <section className="bg-pine-950 text-white">
         <div className="mx-auto max-w-5xl px-4 py-16 text-center sm:px-6">
           <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-pine-100 text-pine-900">
             <HugeiconsIcon icon={CheckmarkCircle02Icon} size={24} />
@@ -368,7 +370,7 @@ export function LandingPage({
           </p>
           <button
             onClick={onSignup}
-            className="focus-ring mt-8 inline-flex touch-target items-center justify-center gap-2 rounded-xl bg-gold-500 px-6 text-sm font-bold text-pine-950 shadow-[0_12px_28px_rgba(208,154,51,0.35)] hover:bg-gold-400"
+            className="focus-ring mt-8 inline-flex touch-target items-center justify-center gap-2 rounded-xl bg-pine-500 px-6 text-sm font-bold text-white shadow-primary hover:bg-pine-700"
           >
             Commencer maintenant
             <HugeiconsIcon icon={ArrowRight01Icon} size={17} />
@@ -384,17 +386,17 @@ export function LandingPage({
           <div className="flex flex-col items-center gap-3 sm:items-start">
             <div className="flex items-center gap-2.5">
               <img src={filzIcon} alt="Filz" className="h-7 w-7 rounded-lg" />
-              <span className="font-display text-base font-semibold tracking-tight text-pine-950">Filz</span>
+              <span className="font-display text-base font-semibold tracking-tight text-ink">Filz</span>
             </div>
             <p className="font-mono text-[11px] text-ink-faint">Filz · le guichet qui n'attend pas</p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-xs font-semibold text-ink-soft transition-colors hover:text-pine-950">{link.label}</a>
+              <a key={link.href} href={link.href} className="text-xs font-semibold text-ink-soft transition-colors hover:text-ink">{link.label}</a>
             ))}
-            <button onClick={onPricing} className="focus-ring rounded text-xs font-semibold text-ink-soft transition-colors hover:text-pine-950">Tarifs</button>
-            <button onClick={onPartner} className="focus-ring rounded text-xs font-semibold text-ink-soft transition-colors hover:text-pine-950">Devenir partenaire</button>
-            <button onClick={onPartnerLogin} className="focus-ring rounded text-xs font-semibold text-ink-soft transition-colors hover:text-pine-950">Espace partenaire</button>
+            <button onClick={onPricing} className="focus-ring rounded text-xs font-semibold text-ink-soft transition-colors hover:text-ink">Tarifs</button>
+            <button onClick={onPartner} className="focus-ring rounded text-xs font-semibold text-ink-soft transition-colors hover:text-ink">Devenir partenaire</button>
+            <button onClick={onPartnerLogin} className="focus-ring rounded text-xs font-semibold text-ink-soft transition-colors hover:text-ink">Espace partenaire</button>
           </div>
           <div className="flex items-center gap-2 text-xs text-ink-faint">
             <HugeiconsIcon icon={Shield01Icon} size={14} />

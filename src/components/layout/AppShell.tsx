@@ -6,6 +6,7 @@ import { Screen } from "../../types";
 import { api, getUserRole, getOrgSlug } from "../../utils/api";
 import { Button } from "../ui/Ui";
 import { useToast } from "../ui/Toast";
+import { ThemeToggle } from "../../theme/ThemeProvider";
 import filzIcon from "../../assets/filz_icon.png";
 
 type NavItem = {id: Screen;label: string;icon: typeof DashboardSquare01Icon;roles?: "admin" | "staff";};
@@ -147,9 +148,9 @@ export function AppShell({ screen, onNavigate, children }: {screen: Screen;onNav
           className="focus-ring flex items-center gap-3 rounded-xl px-2 py-2 text-left"
         >
           <img src={filzIcon} alt="Filz" className="h-10 w-10 rounded-xl" />
-          <span className="font-display text-lg font-semibold tracking-tight text-paper">Filz</span>
+          <span className="font-display text-lg font-semibold tracking-tight text-white">Filz</span>
         </button>
-        <nav aria-label="Navigation principale" className="mt-9 space-y-1">
+        <nav aria-label="Navigation principale" className="app-scrollbar mt-9 flex-1 space-y-1 overflow-y-auto overscroll-contain">
           <p className="px-3 pb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-pine-100/50">
             Gestion
           </p>
@@ -161,8 +162,8 @@ export function AppShell({ screen, onNavigate, children }: {screen: Screen;onNav
                 onClick={() => navigate(item.id)}
                 className={`focus-ring flex w-full items-center gap-3 rounded-full px-3 py-2.5 text-left text-sm font-semibold transition-colors ${
                   isActive
-                    ? "bg-pine-800 text-gold-300"
-                    : "text-pine-100/80 hover:bg-white/5 hover:text-paper"
+                    ? "bg-pine-100 text-pine-900"
+                    : "text-pine-100/80 hover:bg-white/5 hover:text-white"
                 }`}
               >
                 <HugeiconsIcon icon={item.icon} size={19} strokeWidth={2} />
@@ -182,7 +183,7 @@ export function AppShell({ screen, onNavigate, children }: {screen: Screen;onNav
               <button
                 onClick={() => navigate("support")}
                 className={`focus-ring flex w-full items-center gap-3 rounded-full px-3 py-2.5 text-left text-sm font-semibold ${
-                  screen === "support" ? "bg-pine-800 text-gold-300" : "text-pine-100/80 hover:bg-white/5 hover:text-paper"
+                  screen === "support" ? "bg-pine-100 text-pine-900" : "text-pine-100/80 hover:bg-white/5 hover:text-white"
                 }`}
               >
                 <HugeiconsIcon icon={HeadphonesIcon} size={19} />
@@ -192,8 +193,8 @@ export function AppShell({ screen, onNavigate, children }: {screen: Screen;onNav
                 onClick={() => navigate("subscription")}
                 className={`focus-ring flex w-full items-center gap-3 rounded-full px-3 py-2.5 text-left text-sm font-semibold ${
                   screen === "subscription" || screen === "invoices"
-                    ? "bg-pine-800 text-gold-300"
-                    : "text-pine-100/80 hover:bg-white/5 hover:text-paper"
+                    ? "bg-pine-100 text-pine-900"
+                    : "text-pine-100/80 hover:bg-white/5 hover:text-white"
                 }`}
               >
                 <HugeiconsIcon icon={ShoppingBag01Icon} size={19} />
@@ -202,7 +203,7 @@ export function AppShell({ screen, onNavigate, children }: {screen: Screen;onNav
               <button
                 onClick={() => navigate("invoices")}
                 className={`focus-ring flex w-full items-center gap-3 rounded-full px-3 py-2.5 text-left text-sm font-semibold ${
-                  screen === "invoices" ? "bg-pine-800 text-gold-300" : "text-pine-100/80 hover:bg-white/5 hover:text-paper"
+                  screen === "invoices" ? "bg-pine-100 text-pine-900" : "text-pine-100/80 hover:bg-white/5 hover:text-white"
                 }`}
               >
                 <HugeiconsIcon icon={File02Icon} size={19} />
@@ -211,7 +212,7 @@ export function AppShell({ screen, onNavigate, children }: {screen: Screen;onNav
               <button
                 onClick={() => navigate("settings")}
                 className={`focus-ring flex w-full items-center gap-3 rounded-full px-3 py-2.5 text-left text-sm font-semibold ${
-                  screen === "settings" ? "bg-pine-800 text-gold-300" : "text-pine-100/80 hover:bg-white/5 hover:text-paper"
+                  screen === "settings" ? "bg-pine-100 text-pine-900" : "text-pine-100/80 hover:bg-white/5 hover:text-white"
                 }`}
               >
                 <HugeiconsIcon icon={Settings01Icon} size={19} />
@@ -236,7 +237,7 @@ export function AppShell({ screen, onNavigate, children }: {screen: Screen;onNav
             {initials}
           </span>
           <div className="min-w-0">
-            <p className="truncate text-xs font-bold text-paper">{displayName}</p>
+            <p className="truncate text-xs font-bold text-white">{displayName}</p>
             <p className="truncate text-[11px] text-pine-100/60">
               {displayRole}
               {displayOrg ? ` · ${displayOrg}` : ""}
@@ -260,12 +261,13 @@ export function AppShell({ screen, onNavigate, children }: {screen: Screen;onNav
             <span className="hidden text-xs font-semibold text-ink-soft sm:inline">
               Dernière synchro · à l’instant
             </span>
+            <ThemeToggle />
             <button
               onClick={() => setShowQrModal(true)}
               className="focus-ring flex items-center gap-2 rounded-lg border border-line bg-white px-3 py-2 text-xs font-bold text-ink hover:bg-paper"
             >
               <HugeiconsIcon icon={DashboardSquare01Icon} size={15} className="text-gold-600" />
-              Voir le QR public
+              <span className="hidden sm:inline">Voir le QR public</span>
             </button>
           </div>
         </header>
@@ -296,8 +298,8 @@ export function AppShell({ screen, onNavigate, children }: {screen: Screen;onNav
             </div>
 
             <div className="p-5">
-              <div className="mx-auto flex w-[260px] items-center justify-center rounded-2xl border border-line bg-white p-3">
-                <QRCode value={checkinUrl} size={240} fgColor="#12332D" />
+              <div className="mx-auto flex w-[260px] items-center justify-center rounded-2xl border border-line bg-[#ffffff] p-3">
+                <QRCode value={checkinUrl} size={240} fgColor="#16213A" />
               </div>
 
               <p className="mt-5 text-center text-xs leading-5 text-ink-soft">

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { ThemeToggle } from "../theme/ThemeProvider";
 import {
   ArrowRight01Icon,
   Building02Icon,
@@ -359,19 +360,20 @@ export function PartnerDashboard({ onLogout, onHome }: { onLogout: () => void; o
 
   return (
     <div className="min-h-screen bg-paper text-ink">
-      <header className="sticky top-0 z-20 border-b border-line bg-pine-950 text-paper">
+      <header className="sticky top-0 z-20 border-b border-line bg-pine-950 text-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
           <button onClick={onHome} className="focus-ring flex items-center gap-2.5 rounded-xl">
             <img src={filzIcon} alt="Filz" className="h-8 w-8 rounded-lg" />
             <span className="hidden font-display text-base font-semibold tracking-tight sm:block">Espace partenaire</span>
           </button>
           <div className="flex items-center gap-3">
+            <ThemeToggle tone="dark" />
             <button
               onClick={() => setChatOpen((v) => !v)}
-              className="focus-ring relative inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs font-semibold text-pine-100/80 transition-colors hover:bg-white/10 hover:text-paper"
+              className="focus-ring relative inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs font-semibold text-pine-100/80 transition-colors hover:bg-white/10 hover:text-white"
             >
               <HugeiconsIcon icon={BubbleChatIcon} size={15} />
-              Chat superadmin
+              <span className="hidden sm:inline">Chat superadmin</span>
               {unreadCount > 0 && (
                 <span className="absolute -right-1.5 -top-1.5 grid h-5 min-w-5 place-items-center rounded-full bg-gold-400 px-1 text-[10px] font-bold text-pine-950">
                   {unreadCount}
@@ -382,9 +384,9 @@ export function PartnerDashboard({ onLogout, onHome }: { onLogout: () => void; o
               <HugeiconsIcon icon={HandshakeIcon} size={14} />
               {partner?.full_name || (cachedInfo?.full_name as string) || "Partenaire"}
             </span>
-            <button onClick={logout} className="focus-ring inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs font-semibold text-pine-100/80 transition-colors hover:bg-white/10 hover:text-paper">
+            <button onClick={logout} className="focus-ring inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-3 py-2 text-xs font-semibold text-pine-100/80 transition-colors hover:bg-white/10 hover:text-white">
               <HugeiconsIcon icon={Logout01Icon} size={15} />
-              Déconnexion
+              <span className="hidden sm:inline">Déconnexion</span>
             </button>
           </div>
         </div>
@@ -430,7 +432,7 @@ export function PartnerDashboard({ onLogout, onHome }: { onLogout: () => void; o
                     </code>
                     <button
                       onClick={() => stats?.referral_url && copy(stats.referral_url, "link")}
-                      className="focus-ring inline-flex items-center justify-center gap-2 rounded-xl bg-pine-900 px-4 py-2.5 text-xs font-bold text-paper hover:bg-pine-950"
+                      className="focus-ring inline-flex items-center justify-center gap-2 rounded-xl bg-pine-900 px-4 py-2.5 text-xs font-bold text-white hover:bg-pine-700"
                     >
                       {copied === "link" ? <><HugeiconsIcon icon={CheckmarkCircle02Icon} size={15} /> Copié !</> : "Copier le lien"}
                     </button>
@@ -508,7 +510,7 @@ export function PartnerDashboard({ onLogout, onHome }: { onLogout: () => void; o
                   </select>
                 </label>
                 <div className="sm:col-span-2">
-                  <button onClick={submitReferral} disabled={referring} className="focus-ring inline-flex touch-target items-center gap-2 rounded-xl bg-pine-900 px-5 py-2.5 text-sm font-bold text-paper shadow-[0_8px_18px_rgba(18,51,45,0.20)] hover:bg-pine-950 disabled:cursor-not-allowed disabled:opacity-60">
+                  <button onClick={submitReferral} disabled={referring} className="focus-ring inline-flex touch-target items-center gap-2 rounded-xl bg-pine-900 px-5 py-2.5 text-sm font-bold text-white shadow-primary hover:bg-pine-700 disabled:cursor-not-allowed disabled:opacity-60">
                     {referring ? "Enregistrement…" : "Enregistrer l'entreprise"}
                     <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
                   </button>
@@ -606,7 +608,7 @@ export function PartnerDashboard({ onLogout, onHome }: { onLogout: () => void; o
                           <tr key={c.id} className="border-t border-line text-sm">
                             <td className="px-5 py-4 text-xs text-ink-soft">{fmtDate(c.period_start)} → {fmtDate(c.period_end)}</td>
                             <td className="px-3 py-4 font-semibold">{c.organization_name}</td>
-                            <td className="px-3 py-4 font-mono font-semibold text-pine-950">{fmtFCFA(c.amount)}</td>
+                            <td className="px-3 py-4 font-mono font-semibold text-ink">{fmtFCFA(c.amount)}</td>
                             <td className="px-5 py-4">
                               {c.status === "earned" ? <Badge tone="gold">Acquise</Badge> : c.status === "paid" ? <Badge tone="green">Versée</Badge> : <Badge tone="clay">Annulée</Badge>}
                             </td>
@@ -650,7 +652,7 @@ export function PartnerDashboard({ onLogout, onHome }: { onLogout: () => void; o
                         {payouts.map((p) => (
                           <tr key={p.id} className="border-t border-line text-sm">
                             <td className="px-5 py-4 text-xs text-ink-soft">{p.period_label}</td>
-                            <td className="px-3 py-4 font-mono font-semibold text-pine-950">{fmtFCFA(p.total_amount)}</td>
+                            <td className="px-3 py-4 font-mono font-semibold text-ink">{fmtFCFA(p.total_amount)}</td>
                             <td className="px-3 py-4 text-xs text-ink-soft">{p.method || "—"}</td>
                             <td className="px-5 py-4">
                               {p.status === "paid" ? <Badge tone="green">Payé</Badge> : <Badge tone="gold">En préparation</Badge>}
@@ -697,7 +699,7 @@ export function PartnerDashboard({ onLogout, onHome }: { onLogout: () => void; o
                   </select>
                 </label>
                 <div className="sm:col-span-2">
-                  <button onClick={saveSettings} disabled={savingSettings} className="focus-ring inline-flex touch-target items-center gap-2 rounded-xl bg-pine-900 px-5 py-2.5 text-sm font-bold text-paper shadow-[0_8px_18px_rgba(18,51,45,0.20)] hover:bg-pine-950 disabled:cursor-not-allowed disabled:opacity-60">
+                  <button onClick={saveSettings} disabled={savingSettings} className="focus-ring inline-flex touch-target items-center gap-2 rounded-xl bg-pine-900 px-5 py-2.5 text-sm font-bold text-white shadow-primary hover:bg-pine-700 disabled:cursor-not-allowed disabled:opacity-60">
                     {savingSettings ? "Enregistrement…" : "Enregistrer mes réglages"}
                     <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
                   </button>
@@ -732,7 +734,7 @@ export function PartnerDashboard({ onLogout, onHome }: { onLogout: () => void; o
             <button
               onClick={() => setChatOpen(false)}
               aria-label="Fermer le chat"
-              className="focus-ring grid h-9 w-9 shrink-0 place-items-center rounded-xl text-pine-100/80 transition-colors hover:bg-white/10 hover:text-paper"
+              className="focus-ring grid h-9 w-9 shrink-0 place-items-center rounded-xl text-pine-100/80 transition-colors hover:bg-white/10 hover:text-white"
             >
               ✕
             </button>
@@ -746,7 +748,7 @@ export function PartnerDashboard({ onLogout, onHome }: { onLogout: () => void; o
                   <div
                     className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-6 shadow-card ${
                       m.sender === "partner"
-                        ? "rounded-br-sm bg-pine-900 text-paper"
+                        ? "rounded-br-sm bg-pine-900 text-white"
                         : "rounded-bl-sm border border-line bg-white text-ink"
                     }`}
                   >
@@ -773,7 +775,7 @@ export function PartnerDashboard({ onLogout, onHome }: { onLogout: () => void; o
               placeholder="Écrivez votre message…"
               className="input flex-1 resize-none"
             />
-            <button onClick={sendChatMessage} disabled={sendingMessage || !chatDraft.trim()} className="focus-ring inline-flex touch-target items-center gap-2 rounded-xl bg-pine-900 px-4 py-2.5 text-sm font-bold text-paper hover:bg-pine-950 disabled:cursor-not-allowed disabled:opacity-60">
+            <button onClick={sendChatMessage} disabled={sendingMessage || !chatDraft.trim()} className="focus-ring inline-flex touch-target items-center gap-2 rounded-xl bg-pine-900 px-4 py-2.5 text-sm font-bold text-white hover:bg-pine-700 disabled:cursor-not-allowed disabled:opacity-60">
               {sendingMessage ? "Envoi…" : "Envoyer"}
               <HugeiconsIcon icon={ArrowRight01Icon} size={15} />
             </button>

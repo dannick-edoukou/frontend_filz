@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { ThemeToggle } from "../theme/ThemeProvider";
 import {
   ArrowRight01Icon,
   CheckmarkCircle02Icon,
@@ -74,18 +75,19 @@ export function PricingPage({
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
           <button onClick={onHome} className="focus-ring flex items-center gap-2.5 rounded-xl">
             <img src={filzIcon} alt="Filz" className="h-8 w-8 rounded-lg" />
-            <span className="font-display text-lg font-semibold tracking-tight text-pine-950">Filz</span>
+            <span className="font-display text-lg font-semibold tracking-tight text-ink">Filz</span>
           </button>
           <nav className="hidden items-center gap-6 lg:flex">
-            <button onClick={onHome} className="focus-ring text-sm font-semibold text-ink-soft transition-colors hover:text-pine-950">La solution</button>
-            <button onClick={() => document.getElementById("tarifs")?.scrollIntoView({ behavior: "smooth" })} className="focus-ring text-sm font-semibold text-pine-950">Tarifs</button>
-            <button onClick={onPartner} className="focus-ring text-sm font-semibold text-ink-soft transition-colors hover:text-pine-950">Devenir partenaire</button>
+            <button onClick={onHome} className="focus-ring text-sm font-semibold text-ink-soft transition-colors hover:text-ink">La solution</button>
+            <button onClick={() => document.getElementById("tarifs")?.scrollIntoView({ behavior: "smooth" })} className="focus-ring text-sm font-semibold text-ink">Tarifs</button>
+            <button onClick={onPartner} className="focus-ring text-sm font-semibold text-ink-soft transition-colors hover:text-ink">Devenir partenaire</button>
           </nav>
           <div className="flex items-center gap-3">
+            <ThemeToggle />
             <button onClick={onLogin} className="focus-ring hidden rounded-xl px-4 py-2 text-sm font-semibold text-ink-soft hover:bg-sand sm:block">Se connecter</button>
             <button
               onClick={onSignup}
-              className="focus-ring inline-flex touch-target items-center gap-2 rounded-xl bg-pine-900 px-4 text-sm font-semibold text-paper shadow-[0_8px_18px_rgba(18,51,45,0.20)] hover:bg-pine-950"
+              className="focus-ring inline-flex touch-target items-center gap-2 rounded-xl bg-pine-900 px-4 text-sm font-semibold text-white shadow-primary hover:bg-pine-700"
             >
               Créer un compte
               <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
@@ -94,7 +96,7 @@ export function PricingPage({
         </div>
       </header>
 
-      <section id="tarifs" className="relative overflow-hidden bg-pine-950 text-paper">
+      <section id="tarifs" className="relative overflow-hidden bg-pine-950 text-white">
         <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-gold-500/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-pine-500/20 blur-3xl" />
         <div className="relative mx-auto max-w-5xl px-4 py-16 text-center sm:px-6 sm:py-24">
@@ -145,7 +147,7 @@ export function PricingPage({
                     <div className="p-7 pb-0">
                       <h2 className="font-display text-xl font-semibold tracking-tight text-ink">{plan.name}</h2>
                       <p className="mt-4 flex items-baseline gap-1.5">
-                        <span className="font-mono text-4xl font-semibold tracking-[-0.04em] text-pine-950">{fmtPrice(plan.price_monthly)}</span>
+                        <span className="font-mono text-4xl font-semibold tracking-[-0.04em] text-ink">{fmtPrice(plan.price_monthly)}</span>
                         <span className="text-sm text-ink-faint">/ mois</span>
                       </p>
                     </div>
@@ -160,8 +162,8 @@ export function PricingPage({
                     <div className="mt-auto p-7">
                       <button
                         onClick={onSignup}
-                        className={`focus-ring inline-flex touch-target w-full items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-bold shadow-[0_8px_18px_rgba(18,51,45,0.20)] ${
-                          featured ? "bg-gold-500 text-pine-950 hover:bg-gold-400" : "bg-pine-900 text-paper hover:bg-pine-950"
+                        className={`focus-ring inline-flex touch-target w-full items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-bold shadow-primary ${
+                          featured ? "bg-gold-500 text-pine-950 hover:bg-gold-400" : "bg-pine-900 text-white hover:bg-pine-700"
                         }`}
                       >
                         Commencer
@@ -206,12 +208,12 @@ export function PricingPage({
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-4 py-8 sm:flex-row sm:justify-between sm:text-left">
           <button onClick={onHome} className="focus-ring flex items-center gap-2.5 rounded-xl">
             <img src={filzIcon} alt="Filz" className="h-7 w-7 rounded-lg" />
-            <span className="font-display text-base font-semibold tracking-tight text-pine-950">Filz</span>
+            <span className="font-display text-base font-semibold tracking-tight text-ink">Filz</span>
           </button>
           <nav className="flex items-center gap-6 text-sm font-semibold text-ink-soft">
-            <button onClick={onHome} className="focus-ring hover:text-pine-950">Accueil</button>
-            <button onClick={onPartner} className="focus-ring hover:text-pine-950">Programme partenaire</button>
-            <button onClick={onSignup} className="focus-ring hover:text-pine-950">Créer un compte</button>
+            <button onClick={onHome} className="focus-ring hover:text-ink">Accueil</button>
+            <button onClick={onPartner} className="focus-ring hover:text-ink">Programme partenaire</button>
+            <button onClick={onSignup} className="focus-ring hover:text-ink">Créer un compte</button>
           </nav>
           <p className="text-xs text-ink-faint">© 2026 Filz · Gestion de file d’attente</p>
         </div>

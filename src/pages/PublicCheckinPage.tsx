@@ -218,7 +218,7 @@ export function PublicCheckinPage({ onComplete, onBack }: {onComplete: () => voi
       <div className="bg-pine-950 px-5 pb-11 pt-7 sm:px-7">
         <div className="flex items-center gap-2 text-xs font-semibold text-gold-300"><HugeiconsIcon icon={Location01Icon} size={15} />Accueil principal</div>
         <p className="mt-6 font-mono text-[10px] font-semibold uppercase tracking-[0.22em] text-gold-300">Bienvenue</p>
-        <h1 className="mt-2 font-display text-[30px] font-semibold leading-[1.08] tracking-[-0.01em] text-paper">Rejoignez la file en quelques secondes.</h1>
+        <h1 className="mt-2 font-display text-[30px] font-semibold leading-[1.08] tracking-[-0.01em] text-white">Rejoignez la file en quelques secondes.</h1>
         <p className="mt-3 text-sm leading-6 text-pine-100/80">Nous vous préviendrons quand votre tour approchera. Pas d'application à télécharger.</p>
 
         {activeService && (
@@ -277,7 +277,7 @@ export function PublicCheckinPage({ onComplete, onBack }: {onComplete: () => voi
 
         <label className="flex cursor-pointer items-start gap-3 rounded-xl bg-paper p-3 text-xs leading-5 text-ink-soft"><input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} className="mt-0.5 h-4 w-4 accent-gold-500" /><span>J’accepte de recevoir les notifications liées à mon passage dans cette file.</span></label>
 
-        <LoadingButton type="submit" disabled={serviceClosed} isLoading={isSubmitting} loadingText="Inscription…" className="mt-2 w-full bg-pine-900 text-paper hover:bg-pine-950 shadow-[0_8px_18px_rgba(18,51,45,0.20)]" icon={!isSubmitting && <HugeiconsIcon icon={ArrowRight01Icon} size={18} />}>{serviceClosed ? "Service fermé" : "Rejoindre la file"}</LoadingButton>
+        <LoadingButton type="submit" disabled={serviceClosed} isLoading={isSubmitting} loadingText="Inscription…" className="mt-2 w-full bg-pine-900 text-white hover:bg-pine-700 shadow-primary" icon={!isSubmitting && <HugeiconsIcon icon={ArrowRight01Icon} size={18} />}>{serviceClosed ? "Service fermé" : "Rejoindre la file"}</LoadingButton>
       </form>
     </section>
 

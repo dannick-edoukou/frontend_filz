@@ -150,22 +150,22 @@ export function TicketDetailPage({ ticketId, onBack }: { ticketId?: string | nul
         action={<Button onClick={onBack} variant="secondary" icon={<HugeiconsIcon icon={ArrowLeft01Icon} size={17} />}>Retour aux files</Button>} 
       />
       <div className="grid gap-5 xl:grid-cols-[.95fr_1.05fr]">
-        <section className="rounded-2xl border border-[#e5e5df] bg-white p-5 sm:p-6">
+        <section className="rounded-2xl border border-line bg-white p-5 sm:p-6">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[.14em] text-[#c45b1a]">Visiteur</p>
+              <p className="text-xs font-bold uppercase tracking-[.14em] text-pine-500">Visiteur</p>
               <h2 className="mt-2 text-2xl font-bold tracking-[-.04em]">{ticket.customer_name}</h2>
-              <p className="mt-1 text-sm text-[#687385]">{ticket.customer_phone || "Pas de téléphone fourni"}</p>
+              <p className="mt-1 text-sm text-ink-soft">{ticket.customer_phone || "Pas de téléphone fourni"}</p>
             </div>
             <StatusBadge state={ticket.status} />
           </div>
-          <dl className="mt-7 grid grid-cols-2 gap-4 border-y border-[#efefea] py-5">
+          <dl className="mt-7 grid grid-cols-2 gap-4 border-y border-line py-5">
             <div>
-              <dt className="flex items-center gap-2 text-xs font-semibold text-[#788292]"><HugeiconsIcon icon={UserGroupIcon} size={16} />Priorité</dt>
+              <dt className="flex items-center gap-2 text-xs font-semibold text-ink-faint"><HugeiconsIcon icon={UserGroupIcon} size={16} />Priorité</dt>
               <dd className="mt-2 text-xl font-bold">{ticket.is_priority ? "Prioritaire" : "Normale"}</dd>
             </div>
             <div>
-              <dt className="flex items-center gap-2 text-xs font-semibold text-[#788292]"><HugeiconsIcon icon={Clock01Icon} size={16} />Arrivée</dt>
+              <dt className="flex items-center gap-2 text-xs font-semibold text-ink-faint"><HugeiconsIcon icon={Clock01Icon} size={16} />Arrivée</dt>
               <dd className="mt-2 text-xl font-bold">
                 {new Date(ticket.created_at).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}
               </dd>
@@ -173,14 +173,14 @@ export function TicketDetailPage({ ticketId, onBack }: { ticketId?: string | nul
           </dl>
           <div className="mt-6">
             <h3 className="text-sm font-bold">Informations d’entrée</h3>
-            <dl className="mt-3 divide-y divide-[#efefea] text-sm">
+            <dl className="mt-3 divide-y divide-line text-sm">
               {ticket.form_data && Object.keys(ticket.form_data).length > 0 ? (
                 Object.entries(ticket.form_data)
                   .map(([key, value]) => (
                     <Info key={key} label={key} value={String(value)} />
                   ))
               ) : (
-                <p className="py-3 text-[#788292]">Aucune information supplémentaire fournie.</p>
+                <p className="py-3 text-ink-faint">Aucune information supplémentaire fournie.</p>
               )}
             </dl>
           </div>
@@ -210,28 +210,28 @@ export function TicketDetailPage({ ticketId, onBack }: { ticketId?: string | nul
           </div>
         </section>
 
-        <section className="flex min-h-[430px] flex-col rounded-2xl border border-[#e5e5df] bg-white">
-          <div className="flex items-center gap-3 border-b border-[#ecece7] p-5">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-[#fff1e5] text-[#d6641b]">
+        <section className="flex min-h-[430px] flex-col rounded-2xl border border-line bg-white">
+          <div className="flex items-center gap-3 border-b border-line p-5">
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-pine-50 text-pine-600">
               <HugeiconsIcon icon={Note01Icon} size={19} />
             </span>
             <div>
               <h2 className="font-bold">Notes internes</h2>
-              <p className="text-xs text-[#788292]">Non visibles par le visiteur.</p>
+              <p className="text-xs text-ink-faint">Non visibles par le visiteur.</p>
             </div>
           </div>
           <div className="flex-1 space-y-3 p-5">
             {notes.map((item, index) => (
-              <article key={`${item}-${index}`} className="rounded-xl bg-[#fafaf8] p-4">
-                <p className="text-sm leading-6 text-[#4d5768]">{item}</p>
-                <p className="mt-2 text-[11px] font-semibold text-[#929aa7]">Équipe · à l’instant</p>
+              <article key={`${item}-${index}`} className="rounded-xl bg-sand p-4">
+                <p className="text-sm leading-6 text-ink-soft">{item}</p>
+                <p className="mt-2 text-[11px] font-semibold text-ink-faint">Équipe · à l’instant</p>
               </article>
             ))}
             {notes.length === 0 && (
-              <p className="text-sm text-[#788292] text-center pt-10">Aucune note pour le moment.</p>
+              <p className="text-sm text-ink-faint text-center pt-10">Aucune note pour le moment.</p>
             )}
           </div>
-          <form onSubmit={addNote} className="border-t border-[#ecece7] p-4">
+          <form onSubmit={addNote} className="border-t border-line p-4">
             <label className="sr-only" htmlFor="ticket-note">Ajouter une note</label>
             <div className="flex gap-3">
               <input id="ticket-note" value={note} onChange={(e) => setNote(e.target.value)} placeholder="Ajouter une note interne…" className="input flex-1" />
@@ -303,7 +303,7 @@ export function TicketDetailPage({ ticketId, onBack }: { ticketId?: string | nul
 function Info({ label, value }: {label: string;value: string;}) {
   return (
     <div className="flex justify-between gap-4 py-3">
-      <dt className="text-[#788292] capitalize">{label.replace(/_/g, " ")}</dt>
+      <dt className="text-ink-faint capitalize">{label.replace(/_/g, " ")}</dt>
       <dd className="font-semibold text-right">{value}</dd>
     </div>
   );

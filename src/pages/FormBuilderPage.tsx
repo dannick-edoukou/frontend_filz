@@ -173,35 +173,35 @@ export function FormBuilderPage() {
 
       <div className="grid gap-5 xl:grid-cols-[260px_minmax(0,1fr)_310px]">
         {/* SIDEBAR: TEMPLATES LIST */}
-        <aside className="rounded-2xl border border-[#e5e5df] bg-white p-4">
+        <aside className="rounded-2xl border border-line bg-white p-4">
           <div className="flex items-center justify-between mb-3 px-2">
-            <p className="text-[10px] font-bold uppercase tracking-[.13em] text-[#929aa7]">Vos Modèles</p>
-            <button onClick={handleCreateNew} className="text-[#e87325] hover:bg-[#fff1e5] p-1 rounded-md">
+            <p className="text-[10px] font-bold uppercase tracking-[.13em] text-ink-faint">Vos Modèles</p>
+            <button onClick={handleCreateNew} className="text-pine-600 hover:bg-pine-50 p-1 rounded-md">
               <HugeiconsIcon icon={Add01Icon} size={16} />
             </button>
           </div>
           
           <div className="space-y-1">
-            {loading && <p className="text-xs text-[#778091] px-2">Chargement...</p>}
+            {loading && <p className="text-xs text-ink-soft px-2">Chargement...</p>}
             {templates.map((template) => (
               <button 
                 onClick={() => selectTemplate(template)} 
                 key={template.id} 
-                className={`focus-ring w-full rounded-xl px-3 py-2.5 text-left text-sm font-semibold ${activeTemplate?.id === template.id ? "bg-[#fff1e5] text-[#b94d10]" : "text-[#596477] hover:bg-[#f5f5f2]"}`}
+                className={`focus-ring w-full rounded-xl px-3 py-2.5 text-left text-sm font-semibold ${activeTemplate?.id === template.id ? "bg-pine-50 text-pine-700" : "text-ink-soft hover:bg-sand"}`}
               >
                 {template.name}
               </button>
             ))}
             {activeTemplate?.id === "new" && (
-              <button className="focus-ring w-full rounded-xl px-3 py-2.5 text-left text-sm font-semibold bg-[#fff1e5] text-[#b94d10]">
+              <button className="focus-ring w-full rounded-xl px-3 py-2.5 text-left text-sm font-semibold bg-pine-50 text-pine-700">
                 {templateName || "Nouveau Modèle"}
               </button>
             )}
           </div>
           
           {activeTemplate && (
-            <div className="mt-6 border-t border-[#efefea] px-2 pt-5">
-              <p className="text-xs font-bold text-[#344054]">
+            <div className="mt-6 border-t border-line px-2 pt-5">
+              <p className="text-xs font-bold text-ink-soft">
                 Modèle sélectionné
               </p>
               <input 
@@ -215,21 +215,21 @@ export function FormBuilderPage() {
         </aside>
 
         {/* MAIN EDITOR */}
-        <section className="rounded-2xl border border-[#e5e5df] bg-white p-4 sm:p-6">
+        <section className="rounded-2xl border border-line bg-white p-4 sm:p-6">
           <div className="flex items-start justify-between">
             <div>
               <h2 className="font-bold">Champs du formulaire</h2>
-              <p className="mt-1 text-xs text-[#7a8492]">Modifiez le libellé, le type, et réordonnez les champs.</p>
+              <p className="mt-1 text-xs text-ink-faint">Modifiez le libellé, le type, et réordonnez les champs.</p>
             </div>
-            <span className="rounded-lg bg-[#f4f4f1] px-2 py-1 text-xs font-bold text-[#667085]">{fields.length} champs</span>
+            <span className="rounded-lg bg-sand px-2 py-1 text-xs font-bold text-ink-soft">{fields.length} champs</span>
           </div>
           
           <div className="mt-6 space-y-2">
-            {!activeTemplate && <p className="text-sm text-[#778091] text-center py-10">Sélectionnez ou créez un modèle pour commencer.</p>}
+            {!activeTemplate && <p className="text-sm text-ink-soft text-center py-10">Sélectionnez ou créez un modèle pour commencer.</p>}
             
             {activeTemplate && fields.map((field, index) => (
-              <div key={index} className="flex flex-wrap items-center gap-3 rounded-xl border border-[#e8e8e2] bg-[#fff] p-3">
-                <HugeiconsIcon icon={DragDropIcon} size={18} className="text-[#afb5be]" />
+              <div key={index} className="flex flex-wrap items-center gap-3 rounded-xl border border-line bg-[#fff] p-3">
+                <HugeiconsIcon icon={DragDropIcon} size={18} className="text-ink-faint" />
                 <div className="min-w-[150px] flex-1">
                   <input 
                     aria-label="Libellé du champ" 
@@ -243,7 +243,7 @@ export function FormBuilderPage() {
                   aria-label="Type de champ" 
                   value={field.field_type} 
                   onChange={(e) => updateField(index, { field_type: e.target.value as FormField["field_type"] })} 
-                  className="focus-ring rounded-lg border border-[#deded8] bg-white px-2 py-1.5 text-xs text-[#596477]"
+                  className="focus-ring rounded-lg border border-line bg-white px-2 py-1.5 text-xs text-ink-soft"
                 >
                   <option value="text">Texte court</option>
                   <option value="phone">Téléphone</option>
@@ -251,29 +251,29 @@ export function FormBuilderPage() {
                   <option value="textarea">Texte long</option>
                   <option value="number">Nombre</option>
                 </select>
-                <label className="flex items-center gap-2 text-xs font-semibold text-[#596477]">
+                <label className="flex items-center gap-2 text-xs font-semibold text-ink-soft">
                   <input 
                     checked={field.is_required} 
                     onChange={(e) => updateField(index, { is_required: e.target.checked })} 
                     type="checkbox" 
-                    className="accent-[#e87325]" 
+                    className="accent-pine-500" 
                   />
                   Requis
                 </label>
                 <div className="flex items-center">
-                  <button aria-label="Monter le champ" onClick={() => moveField(index, -1)} className="focus-ring rounded-md p-1 text-[#7a8492] hover:bg-[#f2f2ee]">
+                  <button aria-label="Monter le champ" onClick={() => moveField(index, -1)} className="focus-ring rounded-md p-1 text-ink-faint hover:bg-sand">
                     <HugeiconsIcon icon={ArrowUp01Icon} size={15} />
                   </button>
-                  <button aria-label="Descendre le champ" onClick={() => moveField(index, 1)} className="focus-ring rounded-md p-1 text-[#7a8492] hover:bg-[#f2f2ee]">
+                  <button aria-label="Descendre le champ" onClick={() => moveField(index, 1)} className="focus-ring rounded-md p-1 text-ink-faint hover:bg-sand">
                     <HugeiconsIcon icon={ArrowDown01Icon} size={15} />
                   </button>
-                  <button aria-label="Supprimer le champ" onClick={() => removeField(index)} className="focus-ring ml-1 rounded-md p-1 text-[#a86a64] hover:bg-[#fff0ed]">
+                  <button aria-label="Supprimer le champ" onClick={() => removeField(index)} className="focus-ring ml-1 rounded-md p-1 text-clay-700 hover:bg-clay-100">
                     <HugeiconsIcon icon={Delete02Icon} size={16} />
                   </button>
                 </div>
                 
                 {field.field_type === "select" && (
-                  <div className="w-full mt-2 pt-2 border-t border-[#f4f4f1]">
+                  <div className="w-full mt-2 pt-2 border-t border-line">
                     <input 
                       placeholder="Options (séparées par une virgule)"
                       value={field.options?.join(", ") || ""}
@@ -287,7 +287,7 @@ export function FormBuilderPage() {
           </div>
           
           {activeTemplate && (
-            <button onClick={addField} className="focus-ring mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-[#d6d6cf] py-3 text-sm font-bold text-[#b94d10] hover:bg-[#fffaf5]">
+            <button onClick={addField} className="focus-ring mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-line py-3 text-sm font-bold text-pine-700 hover:bg-pine-50">
               <HugeiconsIcon icon={Add01Icon} size={17} />
               Ajouter un champ
             </button>
@@ -295,31 +295,31 @@ export function FormBuilderPage() {
         </section>
 
         {/* PREVIEW */}
-        <aside className="rounded-2xl border border-[#e5e5df] bg-white p-5 hidden xl:block">
-          <p className="text-[10px] font-bold uppercase tracking-[.13em] text-[#929aa7]">Aperçu mobile</p>
-          <div className="mt-4 rounded-[24px] border-[6px] border-[#172033] bg-[#fafaf8] p-4 shadow-lg min-h-[400px]">
-            <span className="block text-[10px] font-bold text-[#c45b1a]">{templateName || "VOTRE ENTREPRISE"}</span>
+        <aside className="rounded-2xl border border-line bg-white p-5 hidden xl:block">
+          <p className="text-[10px] font-bold uppercase tracking-[.13em] text-ink-faint">Aperçu mobile</p>
+          <div className="mt-4 rounded-[24px] border-[6px] border-ink bg-sand p-4 shadow-lg min-h-[400px]">
+            <span className="block text-[10px] font-bold text-pine-500">{templateName || "VOTRE ENTREPRISE"}</span>
             <p className="mt-2 text-sm font-bold">Bienvenue, rejoignez la file</p>
-            <p className="mt-1 text-[10px] leading-4 text-[#778091]">Veuillez remplir ces informations.</p>
+            <p className="mt-1 text-[10px] leading-4 text-ink-soft">Veuillez remplir ces informations.</p>
             <div className="mt-4 space-y-3">
               {fields.slice(0, 5).map((field, i) => (
                 <div key={i}>
-                  <span className="text-[9px] font-bold text-[#4d5768]">{field.label}{field.is_required && " *"}</span>
+                  <span className="text-[9px] font-bold text-ink-soft">{field.label}{field.is_required && " *"}</span>
                   {field.field_type === "textarea" ? (
-                    <span className="mt-1 block h-10 rounded-md border border-[#deded8] bg-white" />
+                    <span className="mt-1 block h-10 rounded-md border border-line bg-white" />
                   ) : field.field_type === "select" ? (
-                    <span className="mt-1 flex items-center justify-between h-6 rounded-md border border-[#deded8] bg-white px-2">
-                      <span className="text-[8px] text-[#a0a5b1]">Sélectionner...</span>
-                      <HugeiconsIcon icon={ArrowDown01Icon} size={10} className="text-[#a0a5b1]" />
+                    <span className="mt-1 flex items-center justify-between h-6 rounded-md border border-line bg-white px-2">
+                      <span className="text-[8px] text-ink-faint">Sélectionner...</span>
+                      <HugeiconsIcon icon={ArrowDown01Icon} size={10} className="text-ink-faint" />
                     </span>
                   ) : (
-                    <span className="mt-1 block h-6 rounded-md border border-[#deded8] bg-white" />
+                    <span className="mt-1 block h-6 rounded-md border border-line bg-white" />
                   )}
                 </div>
               ))}
-              {fields.length > 5 && <p className="text-[9px] text-center text-[#a0a5b1] italic">... {fields.length - 5} autres champs</p>}
+              {fields.length > 5 && <p className="text-[9px] text-center text-ink-faint italic">... {fields.length - 5} autres champs</p>}
             </div>
-            <span className="mt-5 block rounded-lg bg-[#e87325] py-2 text-center text-[10px] font-bold text-white shadow-sm">
+            <span className="mt-5 block rounded-lg bg-pine-500 py-2 text-center text-[10px] font-bold text-white shadow-sm">
               Rejoindre la file
             </span>
           </div>

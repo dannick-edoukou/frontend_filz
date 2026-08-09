@@ -121,24 +121,24 @@ export function SubscriptionPage() {
       description="Votre abonnement est géré au niveau de votre organisation, jamais par vos visiteurs."
     />
     {error && (
-      <div className="mb-4 rounded-xl border border-[#f0d8bd] bg-[#fffbf6] p-3 text-xs font-bold text-[#b94d10]">
+      <div className="mb-4 rounded-xl border border-pine-200 bg-pine-50 p-3 text-xs font-bold text-pine-700">
         {error}
       </div>
     )}
     <div className="grid gap-5 xl:grid-cols-[1.1fr_.9fr]">
-      <section className="overflow-hidden rounded-2xl border border-[#e5e5df] bg-white">
-        <div className="border-b border-[#ecece7] bg-[#173f3a] p-6 text-white">
-          <p className="text-xs font-bold uppercase tracking-[.14em] text-[#f0b27e]">Plan actuel</p>
+      <section className="overflow-hidden rounded-2xl border border-line bg-white">
+        <div className="border-b border-line bg-pine-950 p-6 text-white">
+          <p className="text-xs font-bold uppercase tracking-[.14em] text-gold-300">Plan actuel</p>
           <div className="mt-3 flex flex-wrap items-baseline justify-between gap-2">
             <h2 className="text-3xl font-bold tracking-[-.05em]">
               {loading ? "Chargement…" : plan ? plan.name : "Aucun abonnement"}
             </h2>
-            <p className="text-sm text-[#d2dfdb]">
+            <p className="text-sm text-pine-100">
               <strong className="text-xl text-white">{loading ? "…" : formatPrice(plan?.price_monthly ?? 0)}</strong>
               {" "} / mois
             </p>
           </div>
-          <p className="mt-3 text-sm text-[#c8ddd8]">
+          <p className="mt-3 text-sm text-pine-100">
             {loading
               ? "Récupération du statut…"
               : subscription
@@ -162,8 +162,8 @@ export function SubscriptionPage() {
           )}
           <ul className="space-y-4">
             {buildFeatures(plan).map((feature) => (
-              <li key={feature} className="flex items-center gap-3 text-sm text-[#4d5768]">
-                <HugeiconsIcon icon={CheckmarkCircle02Icon} size={18} className="text-[#2b8050]" />
+              <li key={feature} className="flex items-center gap-3 text-sm text-ink-soft">
+                <HugeiconsIcon icon={CheckmarkCircle02Icon} size={18} className="text-teal-700" />
                 {feature}
               </li>
             ))}
@@ -178,13 +178,13 @@ export function SubscriptionPage() {
         </div>
       </section>
       <aside className="space-y-5">
-        <section className="rounded-2xl border border-[#e5e5df] bg-white p-5">
+        <section className="rounded-2xl border border-line bg-white p-5">
           <div className="flex items-center gap-3">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-[#fff3e7] text-[#d6641b]">
+            <span className="grid h-9 w-9 place-items-center rounded-xl bg-pine-50 text-pine-600">
               <HugeiconsIcon icon={CreditCardIcon} size={19} />
             </span>
             <div>
-              <p className="text-xs text-[#788292]">Moyen de paiement</p>
+              <p className="text-xs text-ink-faint">Moyen de paiement</p>
               <p className="mt-1 text-sm font-bold">
                 {loading ? "Chargement…" : plan?.price_monthly === 0 ? "Essai gratuit · Aucun moyen enregistré" : "À configurer (Orange Money, Wave, Carte)"}
               </p>
@@ -192,12 +192,12 @@ export function SubscriptionPage() {
           </div>
           <Button onClick={requestBillingHelp} variant="secondary" className="mt-5 w-full">Demander une activation</Button>
         </section>
-        <section className="rounded-2xl border border-[#f0d8bd] bg-[#fffbf6] p-5">
+        <section className="rounded-2xl border border-pine-200 bg-pine-50 p-5">
           <div className="flex gap-3">
-            <HugeiconsIcon icon={InformationCircleIcon} size={19} className="shrink-0 text-[#c45b1a]" />
+            <HugeiconsIcon icon={InformationCircleIcon} size={19} className="shrink-0 text-pine-700" />
             <div>
-              <h3 className="text-sm font-bold text-[#70320b]">Gestion du renouvellement</h3>
-              <p className="mt-2 text-xs leading-5 text-[#86572f]">
+              <h3 className="text-sm font-bold text-pine-800">Gestion du renouvellement</h3>
+              <p className="mt-2 text-xs leading-5 text-ink-soft">
                 En cas d’échec de paiement, vos données restent protégées. Nous vous prévenons avant toute interruption de service.
                 {data?.current_period_end && (
                   <> <br />Échéance actuelle : <strong>{formatDateISO(data.current_period_end)}</strong>.</>

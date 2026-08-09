@@ -82,7 +82,7 @@ export function DashboardPage({ onNavigate }: {onNavigate: (screen: Screen) => v
           <select 
             value={days} 
             onChange={(e) => setDays(Number(e.target.value))}
-            className="px-3 py-2 text-sm border border-[#e5e5df] rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-[#c45b1a]"
+            className="px-3 py-2 text-sm border border-line rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-pine-700"
           >
             <option value={7}>7 jours</option>
             <option value={30}>30 jours</option>
@@ -95,19 +95,19 @@ export function DashboardPage({ onNavigate }: {onNavigate: (screen: Screen) => v
       </div>
       
       {showQr && (
-        <div role="dialog" aria-modal="true" className="fixed inset-0 z-50 grid place-items-center bg-[#172033]/30 p-4">
+        <div role="dialog" aria-modal="true" className="fixed inset-0 z-50 grid place-items-center bg-pine-950/30 p-4">
           <div className="w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl">
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[.13em] text-[#c45b1a]">QR public</p>
+                <p className="text-xs font-bold uppercase tracking-[.13em] text-pine-500">QR public</p>
                 <h2 className="mt-2 text-xl font-bold">Code QR Général</h2>
               </div>
-              <button onClick={() => setShowQr(false)} className="focus-ring text-sm font-bold text-[#667085]">Fermer</button>
+              <button onClick={() => setShowQr(false)} className="focus-ring text-sm font-bold text-ink-soft">Fermer</button>
             </div>
             
-            <div className="mx-auto mt-6 flex justify-center bg-white p-3 border border-[#e5e5df] rounded-xl">
+            <div className="mx-auto mt-6 flex justify-center bg-white p-3 border border-line rounded-xl">
               {qrLoading ? (
-                <div className="w-64 h-64 flex items-center justify-center text-sm text-[#667085]">
+                <div className="w-64 h-64 flex items-center justify-center text-sm text-ink-soft">
                   Génération du QR...
                 </div>
               ) : (
@@ -115,7 +115,7 @@ export function DashboardPage({ onNavigate }: {onNavigate: (screen: Screen) => v
               )}
             </div>
             
-            <p className="mt-5 text-center text-xs leading-5 text-[#667085]">
+            <p className="mt-5 text-center text-xs leading-5 text-ink-soft">
               Imprimez et affichez ce code QR général à l'entrée. Les clients le scannent et pourront choisir eux-mêmes le service qu'ils désirent.
             </p>
             <a href={qrDataUrl || ''} download={`General-QR-${orgSlug}.png`} target="_blank" rel="noopener noreferrer">
@@ -140,10 +140,10 @@ export function DashboardPage({ onNavigate }: {onNavigate: (screen: Screen) => v
           </section>
 
           <section className="mt-5 grid gap-5 xl:grid-cols-[1.42fr_.78fr]">
-            <article className="rounded-2xl border border-[#e6e6e0] bg-[#173f3a] p-5 text-white sm:p-6">
-              <p className="text-xs font-bold uppercase tracking-[.14em] text-[#eab17f]">Point d’attention</p>
+            <article className="rounded-2xl border border-line bg-pine-950 p-5 text-white sm:p-6">
+              <p className="text-xs font-bold uppercase tracking-[.14em] text-gold-300">Point d’attention</p>
               <h2 className="mt-4 text-xl font-bold leading-7 tracking-[-.04em]">Le dashboard est connecté à votre base de données.</h2>
-              <p className="mt-3 text-sm leading-6 text-[#cae0db]">
+              <p className="mt-3 text-sm leading-6 text-pine-100">
                 Les chiffres ci-dessus reflètent les passages réels en file d'attente. Vos équipes peuvent gérer les clients depuis la console staff.
               </p>
               <Button onClick={() => onNavigate("staff")} variant="secondary" className="mt-6 !border-white/25 !bg-white/10 !text-white hover:!bg-white/20">
@@ -151,22 +151,22 @@ export function DashboardPage({ onNavigate }: {onNavigate: (screen: Screen) => v
               </Button>
             </article>
 
-            <article className="rounded-2xl border border-[#e6e6e0] bg-white p-5 sm:p-6">
+            <article className="rounded-2xl border border-line bg-white p-5 sm:p-6">
               <div className="flex items-center justify-between">
                 <h2 className="text-base font-bold">Services actifs</h2>
                 <button onClick={() => onNavigate("services")}><SmallLink>Gérer</SmallLink></button>
               </div>
               <div className="mt-4 space-y-2">
                 {stats?.by_service?.map((service: any) => (
-                  <div key={service.service_id} className="flex items-center justify-between rounded-xl px-2 py-3 bg-[#fafaf8]">
+                  <div key={service.service_id} className="flex items-center justify-between rounded-xl px-2 py-3 bg-sand">
                     <div>
                       <p className="text-sm font-semibold">{service.service_name}</p>
-                      <p className="mt-1 text-xs text-[#788292]">{service.total_entries} visites au total</p>
+                      <p className="mt-1 text-xs text-ink-faint">{service.total_entries} visites au total</p>
                     </div>
                   </div>
                 ))}
                 {(!stats?.by_service || stats.by_service.length === 0) && (
-                  <p className="text-xs text-[#8e96a3] text-center py-4">Aucune donnée par service.</p>
+                  <p className="text-xs text-ink-faint text-center py-4">Aucune donnée par service.</p>
                 )}
               </div>
             </article>

@@ -259,7 +259,7 @@ export function StaffPage() {
 
       <section className="grid gap-5 xl:grid-cols-[.9fr_1.1fr]">
         {/* Left panel: Active serving ticket */}
-        <article className="flex min-h-[300px] flex-col justify-between rounded-2xl bg-pine-950 p-6 text-paper sm:p-8">
+        <article className="flex min-h-[300px] flex-col justify-between rounded-2xl bg-pine-950 p-6 text-white sm:p-8">
           <div>
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-gold-300">Au guichet maintenant</p>
             {currentServing ? (
@@ -278,7 +278,7 @@ export function StaffPage() {
           {currentServing && (
             <div className="mt-8">
               <div className="grid grid-cols-2 gap-3">
-                <Button onClick={() => handleRecall(currentServing.id)} variant="secondary" className="!border-white/25 !bg-white/10 !text-paper hover:!bg-white/20" icon={<HugeiconsIcon icon={Call02Icon} size={18} />}>
+                <Button onClick={() => handleRecall(currentServing.id)} variant="secondary" className="!border-white/25 !bg-white/10 !text-white hover:!bg-white/20" icon={<HugeiconsIcon icon={Call02Icon} size={18} />}>
                   Rappeler
                 </Button>
                 <Button onClick={() => handleServe(currentServing.id)} className="!bg-gold-500 !text-pine-950 hover:!bg-gold-400" icon={<HugeiconsIcon icon={CheckmarkCircle02Icon} size={18} />}>

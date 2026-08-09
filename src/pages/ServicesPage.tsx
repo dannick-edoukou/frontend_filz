@@ -208,16 +208,16 @@ export function ServicesPage() {
 
   return (
     <>
-      <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:items-center sm:justify-between bg-white p-4 rounded-xl border border-[#e6e6e0]">
+      <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:items-center sm:justify-between bg-white p-4 rounded-xl border border-line">
         <div className="flex items-center gap-3">
-          <label className="text-sm font-bold text-[#687385]">Agence :</label>
+          <label className="text-sm font-bold text-ink-soft">Agence :</label>
           <select 
             value={selectedBranchId} 
             onChange={(e) => {
               localStorage.setItem("filz_selected_branch_id", e.target.value);
               setSelectedBranchId(e.target.value);
             }}
-            className="input bg-[#f8f8f6] py-1.5 min-w-[200px]"
+            className="input bg-sand py-1.5 min-w-[200px]"
           >
             {branches.map(b => (
               <option key={b.id} value={b.id}>{b.name}</option>
@@ -240,33 +240,33 @@ export function ServicesPage() {
       {loading ? (
         <p className="text-center text-sm py-10">Chargement des services...</p>
       ) : services.length === 0 ? (
-        <div className="text-center py-10 bg-white rounded-xl border border-[#e5e5df]">
-          <p className="text-sm text-[#788292]">Aucun service pour cette agence.</p>
+        <div className="text-center py-10 bg-white rounded-xl border border-line">
+          <p className="text-sm text-ink-faint">Aucun service pour cette agence.</p>
         </div>
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
-            <article key={service.id} className="rounded-2xl border border-[#e5e5df] bg-white p-5 flex flex-col justify-between">
+            <article key={service.id} className="rounded-2xl border border-line bg-white p-5 flex flex-col justify-between">
               <div>
                 <div className="flex items-start justify-between">
                   <div>
                     <h2 className="font-bold tracking-[-.02em]">{service.name}</h2>
-                    <p className="mt-1 text-xs text-[#778091]">Attente moy. : {service.average_service_minutes} min</p>
-                    <p className="mt-1 text-xs text-[#778091]">{service.opening_time && service.closing_time ? `${service.opening_time} - ${service.closing_time}` : "Horaires libres"}</p>
+                    <p className="mt-1 text-xs text-ink-soft">Attente moy. : {service.average_service_minutes} min</p>
+                    <p className="mt-1 text-xs text-ink-soft">{service.opening_time && service.closing_time ? `${service.opening_time} - ${service.closing_time}` : "Horaires libres"}</p>
                   </div>
-                  <span className="grid h-9 w-9 place-items-center rounded-xl bg-[#fff1e5] text-[#d6641b]"><HugeiconsIcon icon={QrCodeIcon} size={18} /></span>
+                  <span className="grid h-9 w-9 place-items-center rounded-xl bg-pine-50 text-pine-600"><HugeiconsIcon icon={QrCodeIcon} size={18} /></span>
                 </div>
                 
-                <div className="mt-4 border-t border-[#efefea] pt-4 flex justify-between items-center">
+                <div className="mt-4 border-t border-line pt-4 flex justify-between items-center">
                   <StatusBadge state={service.is_active ? "active" : "inactive"} />
-                  <span className="text-[10px] uppercase font-bold text-[#8a93a1]">
+                  <span className="text-[10px] uppercase font-bold text-ink-faint">
                     {service.form_template_id ? "Formulaire lié" : "Sans form."}
                   </span>
                 </div>
               </div>
 
               <div>
-                <div className="mt-4 flex gap-2 pt-4 border-t border-[#efefea]">
+                <div className="mt-4 flex gap-2 pt-4 border-t border-line">
                   <Button onClick={() => handleOpenQr(service)} variant="secondary" className="flex-1">Code QR</Button>
                   <Button onClick={() => openEditService(service)} variant="ghost" className="flex-1">Modifier</Button>
                   <Button onClick={() => handleDeleteService(service)} variant="danger" className="flex-1">Supprimer</Button>
@@ -279,11 +279,11 @@ export function ServicesPage() {
 
       {/* CREATE MODAL */}
       {showCreate && (
-        <div role="dialog" aria-modal="true" className="fixed inset-0 z-50 grid place-items-center bg-[#172033]/30 p-4">
+        <div role="dialog" aria-modal="true" className="fixed inset-0 z-50 grid place-items-center bg-pine-950/30 p-4">
           <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
             <div className="flex items-start justify-between mb-4">
               <h2 className="text-xl font-bold">Créer un service</h2>
-              <button onClick={() => setShowCreate(false)} className="focus-ring text-sm font-bold text-[#667085]">Fermer</button>
+              <button onClick={() => setShowCreate(false)} className="focus-ring text-sm font-bold text-ink-soft">Fermer</button>
             </div>
             
             <form onSubmit={handleCreateService} className="flex flex-col gap-4">
@@ -323,11 +323,11 @@ export function ServicesPage() {
 
       {/* EDIT MODAL */}
       {editingService && (
-        <div role="dialog" aria-modal="true" className="fixed inset-0 z-50 grid place-items-center bg-[#172033]/30 p-4">
+        <div role="dialog" aria-modal="true" className="fixed inset-0 z-50 grid place-items-center bg-pine-950/30 p-4">
           <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
             <div className="flex items-start justify-between mb-4">
               <h2 className="text-xl font-bold">Modifier le service</h2>
-              <button onClick={closeEditService} className="focus-ring text-sm font-bold text-[#667085]">Fermer</button>
+              <button onClick={closeEditService} className="focus-ring text-sm font-bold text-ink-soft">Fermer</button>
             </div>
 
             <form onSubmit={handleUpdateService} className="flex flex-col gap-4">
@@ -356,7 +356,7 @@ export function ServicesPage() {
                   <input type="time" value={editClosingTime} onChange={e => setEditClosingTime(e.target.value)} className="input mt-1" />
                 </label>
               </div>
-              <label className="flex items-center justify-between rounded-xl border border-[#e5e5df] p-3 text-sm font-semibold">
+              <label className="flex items-center justify-between rounded-xl border border-line p-3 text-sm font-semibold">
                 Service actif
                 <input type="checkbox" checked={editIsActive} onChange={e => setEditIsActive(e.target.checked)} className="h-4 w-4" />
               </label>
@@ -371,24 +371,24 @@ export function ServicesPage() {
 
       {/* QR MODAL */}
       {showQr && (
-        <div role="dialog" aria-modal="true" className="fixed inset-0 z-50 grid place-items-center bg-[#172033]/30 p-4">
+        <div role="dialog" aria-modal="true" className="fixed inset-0 z-50 grid place-items-center bg-pine-950/30 p-4">
           <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
             <div className="no-print flex items-start justify-between">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[.13em] text-[#c45b1a]">QR public</p>
+                <p className="text-xs font-bold uppercase tracking-[.13em] text-pine-500">QR public</p>
                 <h2 className="mt-2 text-xl font-bold">{activeQrName}</h2>
               </div>
-              <button onClick={() => setShowQr(false)} className="focus-ring text-sm font-bold text-[#667085]">Fermer</button>
+              <button onClick={() => setShowQr(false)} className="focus-ring text-sm font-bold text-ink-soft">Fermer</button>
             </div>
             
-            <div className="print-poster mx-auto mt-6 rounded-2xl border border-[#e5e5df] bg-white p-6 text-center">
+            <div className="print-poster mx-auto mt-6 rounded-2xl border border-line bg-white p-6 text-center">
               <div className="flex justify-center mb-3"><img src={filzIcon} alt="Filz" className="h-8 w-8" /></div>
-              <h1 className="mt-3 text-2xl font-extrabold tracking-[-.04em] text-[#172033]">Scannez pour rejoindre la file</h1>
-              <p className="mt-2 text-sm font-semibold text-[#596477]">{activeBranchName} · {activeQrName}</p>
+              <h1 className="mt-3 text-2xl font-extrabold tracking-[-.04em] text-ink">Scannez pour rejoindre la file</h1>
+              <p className="mt-2 text-sm font-semibold text-ink-soft">{activeBranchName} · {activeQrName}</p>
               <div className="mx-auto mt-6 flex h-56 w-56 items-center justify-center bg-white p-3">
                 <QRCode value={activePublicUrl} size={200} />
               </div>
-              <p className="mx-auto mt-5 max-w-xs text-xs leading-5 text-[#667085]">
+              <p className="mx-auto mt-5 max-w-xs text-xs leading-5 text-ink-soft">
                 Aucun téléchargement d’application. Scannez, remplissez le formulaire, puis suivez votre position en temps réel.
               </p>
             </div>

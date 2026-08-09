@@ -116,7 +116,7 @@ export function StaffInvitePage({ onComplete, onDecline }: { onComplete: () => v
     <section className="w-full max-w-md overflow-hidden rounded-[28px] border border-line bg-white shadow-ticket">
       <div className="relative bg-pine-950 px-7 pb-10 pt-8 text-center">
         <img src={filzIcon} alt="Filz" className="mx-auto h-12 w-12 rounded-2xl" />
-        <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight text-paper">Filz</h1>
+        <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight text-white">Filz</h1>
         <p className="mt-1.5 text-sm text-pine-100/70">Vous êtes invité(e) à rejoindre l’équipe.</p>
       </div>
       <div className="relative">

@@ -59,7 +59,7 @@ export function AnalyticsPage() {
     .map((value, index) => `${index === 0 ? 0 : (index / Math.max(1, chartData.length - 1)) * 100},${100 - (value / maxChart) * 100}`)
     .join(" ");
 
-  const serviceColors = ["bg-[#e87325]", "bg-[#4f8bb7]", "bg-[#3e8b60]", "bg-[#7a5ad6]", "bg-[#c24545]"];
+  const serviceColors = ["bg-pine-500", "bg-teal-500", "bg-gold-500", "bg-clay-500", "bg-pine-300"];
   const byService = data?.by_service_perf ?? [];
 
   return <>
@@ -70,7 +70,7 @@ export function AnalyticsPage() {
       action={<select
         value={period}
         onChange={(e) => setPeriod(e.target.value)}
-        className="focus-ring h-10 rounded-xl border border-[#deded8] bg-white px-3 text-sm font-semibold"
+        className="focus-ring h-10 rounded-xl border border-line bg-white px-3 text-sm font-semibold"
       >
         <option>7 derniers jours</option>
         <option>30 derniers jours</option>
@@ -109,26 +109,26 @@ export function AnalyticsPage() {
     </section>
 
     <section className="mt-5 grid gap-5 xl:grid-cols-[1.35fr_.65fr]">
-      <article className="rounded-2xl border border-[#e5e5df] bg-white p-5 sm:p-6">
+      <article className="rounded-2xl border border-line bg-white p-5 sm:p-6">
         <div>
           <h2 className="font-bold">Visiteurs servis</h2>
-          <p className="mt-1 text-xs text-[#788292]">Évolution quotidienne · {period.toLowerCase()}</p>
+          <p className="mt-1 text-xs text-ink-faint">Évolution quotidienne · {period.toLowerCase()}</p>
         </div>
         <div className="mt-7 h-56">
           {error ? (
-            <p className="text-xs text-[#b94d10]">{error}</p>
+            <p className="text-xs text-pine-500">{error}</p>
           ) : loading ? (
-            <div className="grid h-full place-items-center text-xs text-[#788292]">Chargement des statistiques…</div>
+            <div className="grid h-full place-items-center text-xs text-ink-faint">Chargement des statistiques…</div>
           ) : (
             <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="h-full w-full">
-              <line x1="0" y1="25" x2="100" y2="25" stroke="#ecece7" strokeWidth=".5" />
-              <line x1="0" y1="50" x2="100" y2="50" stroke="#ecece7" strokeWidth=".5" />
-              <line x1="0" y1="75" x2="100" y2="75" stroke="#ecece7" strokeWidth=".5" />
-              <polyline fill="none" points={points} stroke="#e87325" strokeWidth="2" vectorEffect="non-scaling-stroke" strokeLinecap="round" strokeLinejoin="round" />
+              <line x1="0" y1="25" x2="100" y2="25" stroke="rgb(var(--color-line) / 1)" strokeWidth=".5" />
+              <line x1="0" y1="50" x2="100" y2="50" stroke="rgb(var(--color-line) / 1)" strokeWidth=".5" />
+              <line x1="0" y1="75" x2="100" y2="75" stroke="rgb(var(--color-line) / 1)" strokeWidth=".5" />
+              <polyline fill="none" points={points} stroke="#4D72E8" strokeWidth="2" vectorEffect="non-scaling-stroke" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           )}
         </div>
-        <div className="mt-2 flex justify-between text-[10px] font-medium text-[#8e96a3]">
+        <div className="mt-2 flex justify-between text-[10px] font-medium text-ink-faint">
           {(data?.labels ?? []).length > 0
             ? data!.labels.map((d, i) => {
                 const step = Math.ceil(data!.labels.length / 7);
@@ -138,28 +138,28 @@ export function AnalyticsPage() {
             : ["Lun.", "Mar.", "Mer.", "Jeu.", "Ven.", "Sam.", "Dim."].map((d) => <span key={d}>{d}</span>)}
         </div>
       </article>
-      <article className="rounded-2xl border border-[#e5e5df] bg-white p-5 sm:p-6">
+      <article className="rounded-2xl border border-line bg-white p-5 sm:p-6">
         <h2 className="font-bold">Performance par service</h2>
         <div className="mt-5 space-y-5">
           {loading ? (
-            <p className="text-xs text-[#788292]">Chargement…</p>
+            <p className="text-xs text-ink-faint">Chargement…</p>
           ) : byService.length === 0 ? (
-            <p className="text-xs text-[#788292]">Aucune donnée disponible sur la période.</p>
+            <p className="text-xs text-ink-faint">Aucune donnée disponible sur la période.</p>
           ) : (
             byService.map((item, i) => (
               <div key={item.service_id}>
                 <div className="flex justify-between text-sm">
                   <span className="font-semibold">{item.service_name}</span>
-                  <span className="text-[#788292]">{item.performance_pct}% servis</span>
+                  <span className="text-ink-faint">{item.performance_pct}% servis</span>
                 </div>
-                <div className="mt-2 h-2 overflow-hidden rounded-full bg-[#efefea]">
+                <div className="mt-2 h-2 overflow-hidden rounded-full bg-sand">
                   <span className={`block h-full rounded-full ${serviceColors[i % serviceColors.length]}`} style={{ width: `${Math.min(100, item.performance_pct)}%` }} />
                 </div>
               </div>
             ))
           )}
         </div>
-        <p className="mt-8 border-t border-[#efefea] pt-4 text-xs leading-5 text-[#788292]">
+        <p className="mt-8 border-t border-line pt-4 text-xs leading-5 text-ink-faint">
           {data
             ? data.absent_entries > 0
               ? `${data.absent_entries} visiteur(s) absent(s) sur la période — pensez à relancer les notifications.`

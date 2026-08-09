@@ -73,13 +73,13 @@ export function BranchServiceSelector({
   }, [selectedBranchId]);
 
   return (
-    <div className={`flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between bg-white p-4 rounded-xl border border-[#e6e6e0] ${className}`}>
+    <div className={`flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between bg-card p-4 rounded-xl border border-line ${className}`}>
       <div className="flex items-center gap-3">
-        <label className="text-xs font-bold text-[#687385] uppercase">Agence</label>
+        <label className="text-xs font-bold text-ink-soft uppercase">Agence</label>
         <select 
           value={selectedBranchId} 
           onChange={(e) => onBranchChange(e.target.value)} 
-          className="bg-white border border-[#deded8] px-3 py-1.5 rounded-lg text-xs font-semibold"
+          className="bg-card border border-line px-3 py-1.5 rounded-lg text-xs font-semibold text-ink"
           disabled={loading}
         >
           {loading ? (
@@ -92,11 +92,11 @@ export function BranchServiceSelector({
         </select>
       </div>
       <div className="flex items-center gap-3">
-        <label className="text-xs font-bold text-[#687385] uppercase">Service</label>
+        <label className="text-xs font-bold text-ink-soft uppercase">Service</label>
         <select 
           value={selectedServiceId} 
           onChange={(e) => onServiceChange(e.target.value)} 
-          className="bg-white border border-[#deded8] px-3 py-1.5 rounded-lg text-xs font-semibold"
+          className="bg-card border border-line px-3 py-1.5 rounded-lg text-xs font-semibold text-ink"
           disabled={loading}
         >
           {allowAllServices && <option value="">Tous les services</option>}

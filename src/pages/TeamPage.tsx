@@ -133,21 +133,21 @@ export function TeamPage() {
       
       {error && <div className="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-xl border border-red-100">{error}</div>}
 
-      <section className="overflow-hidden rounded-2xl border border-[#e5e5df] bg-white">
-        <div className="flex items-center gap-3 border-b border-[#ecece7] p-5">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-[#edf5fb] text-[#2871a2]">
+      <section className="overflow-hidden rounded-2xl border border-line bg-white">
+        <div className="flex items-center gap-3 border-b border-line p-5">
+          <span className="grid h-9 w-9 place-items-center rounded-xl bg-pine-50 text-pine-600">
             <HugeiconsIcon icon={UserGroupIcon} size={19} />
           </span>
           <div>
             <h2 className="font-bold">{members.length} membres actifs</h2>
-            <p className="text-xs text-[#788292]">Les administrateurs peuvent gérer les invitations et les rôles.</p>
+            <p className="text-xs text-ink-faint">Les administrateurs peuvent gérer les invitations et les rôles.</p>
           </div>
         </div>
         
         <div className="overflow-x-auto">
           <table className="w-full min-w-[700px] text-left">
-            <thead className="bg-[#fafaf8]">
-              <tr className="text-[10px] font-bold uppercase tracking-[.12em] text-[#929aa7]">
+            <thead className="bg-sand">
+              <tr className="text-[10px] font-bold uppercase tracking-[.12em] text-ink-faint">
                 <th className="px-5 py-3">Membre</th>
                 <th className="px-4 py-3">Rôle</th>
                 <th className="px-4 py-3">Accès</th>
@@ -157,18 +157,18 @@ export function TeamPage() {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={4} className="p-5 text-center text-sm text-[#788292]">Chargement...</td>
+                  <td colSpan={4} className="p-5 text-center text-sm text-ink-faint">Chargement...</td>
                 </tr>
               ) : members.map((member) => (
-                <tr key={member.id} className="border-t border-[#f0f0eb]">
+                <tr key={member.id} className="border-t border-line">
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
-                      <span className="grid h-9 w-9 place-items-center rounded-full bg-[#173f3a] text-xs font-bold text-white">
+                      <span className="grid h-9 w-9 place-items-center rounded-full bg-pine-950 text-xs font-bold text-white">
                         {member.full_name.substring(0, 2).toUpperCase()}
                       </span>
                       <div>
                         <p className="text-sm font-bold">{member.full_name}</p>
-                        <p className="text-xs text-[#788292]">{member.email}</p>
+                        <p className="text-xs text-ink-faint">{member.email}</p>
                       </div>
                     </div>
                   </td>
@@ -177,12 +177,12 @@ export function TeamPage() {
                   <td className="px-5 py-4 text-right relative">
                     <button 
                       onClick={() => toggleMenu(member.id)}
-                      className="focus-ring rounded-lg p-2 text-[#7a8492] hover:bg-[#f5f5f2]"
+                      className="focus-ring rounded-lg p-2 text-ink-faint hover:bg-sand"
                     >
                       <HugeiconsIcon icon={MoreHorizontalIcon} size={19} />
                     </button>
                     {activeMenuId === member.id && (
-                      <div className="absolute right-0 top-full z-10 mt-1 w-48 rounded-lg border border-[#e5e5df] bg-white shadow-lg">
+                      <div className="absolute right-0 top-full z-10 mt-1 w-48 rounded-lg border border-line bg-white shadow-lg">
                         <div className="py-1">
                           {member.is_active ? (
                             <button
@@ -216,7 +216,7 @@ export function TeamPage() {
                           )}
                           <button
                             onClick={() => handleDeleteMember(member)}
-                            className="w-full px-4 py-2 text-left text-sm font-semibold text-[#c13d2e] hover:bg-[#fff1ef]"
+                            className="w-full px-4 py-2 text-left text-sm font-semibold text-clay-500 hover:bg-clay-100"
                           >
                             Supprimer
                           </button>
@@ -232,7 +232,7 @@ export function TeamPage() {
       </section>
       
       {invite && (
-        <section className="mt-5 rounded-2xl border border-[#e5e5df] bg-white p-5">
+        <section className="mt-5 rounded-2xl border border-line bg-white p-5">
           <h2 className="font-bold">Inviter un collaborateur</h2>
           <form onSubmit={handleInvite} className="mt-4 flex flex-col gap-3 sm:flex-row">
             <label className="relative flex-1">
@@ -245,7 +245,7 @@ export function TeamPage() {
               />
             </label>
             <label className="relative flex-1">
-              <HugeiconsIcon icon={Mail01Icon} className="absolute left-3 top-3 text-[#8a93a1]" size={17} />
+              <HugeiconsIcon icon={Mail01Icon} className="absolute left-3 top-3 text-ink-faint" size={17} />
               <input 
                 required 
                 type="email"
@@ -265,7 +265,7 @@ export function TeamPage() {
             </div>
           </form>
           {inviteLink && (
-            <p className="mt-3 rounded-xl bg-[#f7f7f5] p-3 text-xs leading-5 text-[#596477]">
+            <p className="mt-3 rounded-xl bg-sand p-3 text-xs leading-5 text-ink-soft">
               Mode développement : lien d’invitation <strong>{inviteLink}</strong>
             </p>
           )}
@@ -274,10 +274,10 @@ export function TeamPage() {
 
       <Modal isOpen={inviteSent} onClose={() => setInviteSent(false)} title="Invitation envoyée" size="sm">
         <div className="flex flex-col items-center gap-4 pb-2 text-center">
-          <span className="grid h-16 w-16 place-items-center rounded-full bg-[#ebf6ee]">
-            <HugeiconsIcon icon={CheckmarkCircle01Icon} size={34} className="text-[#287044]" />
+          <span className="grid h-16 w-16 place-items-center rounded-full bg-teal-50">
+            <HugeiconsIcon icon={CheckmarkCircle01Icon} size={34} className="text-teal-700" />
           </span>
-          <p className="text-sm leading-6 text-[#596477]">
+          <p className="text-sm leading-6 text-ink-soft">
             Un e-mail d’invitation a été envoyé à <strong>{sentEmail}</strong>. Le collaborateur
             pourra rejoindre l’organisation dès qu’il aura créé son compte.
           </p>

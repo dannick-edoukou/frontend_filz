@@ -58,20 +58,20 @@ export function NotificationsPage() {
       description="Définissez les messages et canaux utilisés pour tenir les visiteurs informés."
     />
     <div className="grid gap-5 xl:grid-cols-[1.05fr_.95fr]">
-      <section className="rounded-2xl border border-[#e5e5df] bg-white p-5 sm:p-6">
+      <section className="rounded-2xl border border-line bg-white p-5 sm:p-6">
         <div className="flex items-center gap-3">
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#fff1e5] text-[#d6641b]">
+          <span className="grid h-10 w-10 place-items-center rounded-xl bg-pine-50 text-pine-600">
             <HugeiconsIcon icon={Notification01Icon} size={20} />
           </span>
           <div>
             <h2 className="font-bold">Canaux activés</h2>
-            <p className="mt-1 text-xs text-[#788292]">
+            <p className="mt-1 text-xs text-ink-faint">
               Le visiteur choisit et accepte les alertes à l’inscription.
-              {orgName && <> Organisateur : <strong className="text-[#253144]">{orgName}</strong>.</>}
+              {orgName && <> Organisateur : <strong className="text-ink">{orgName}</strong>.</>}
             </p>
           </div>
         </div>
-        <div className="mt-6 divide-y divide-[#efefea] border-y border-[#efefea]">
+        <div className="mt-6 divide-y divide-line border-y border-line">
           {(
             [
               { key: "browser_push", name: "Notification navigateur", sub: "Rapide, sans coût et adapté au QR web" },
@@ -82,13 +82,13 @@ export function NotificationsPage() {
             <label key={channel.key} className="flex cursor-pointer items-center justify-between gap-4 py-4">
               <div>
                 <p className="text-sm font-bold">{channel.name}</p>
-                <p className="mt-1 text-xs text-[#788292]">{channel.sub}</p>
+                <p className="mt-1 text-xs text-ink-faint">{channel.sub}</p>
               </div>
               <input
                 type="checkbox"
                 checked={channels[channel.key]}
                 onChange={(e) => setChannels((prev) => ({ ...prev, [channel.key]: e.target.checked }))}
-                className="h-4 w-4 accent-[#e87325]"
+                className="h-4 w-4 accent-pine-500"
               />
             </label>
           ))}
@@ -97,19 +97,19 @@ export function NotificationsPage() {
           Enregistrer les canaux
         </Button>
         {saved && (
-          <p aria-live="polite" className="mt-3 text-xs font-bold text-[#287044]">
+          <p aria-live="polite" className="mt-3 text-xs font-bold text-teal-700">
             Préférences enregistrées.
           </p>
         )}
       </section>
-      <section className="rounded-2xl border border-[#e5e5df] bg-white p-5 sm:p-6">
+      <section className="rounded-2xl border border-line bg-white p-5 sm:p-6">
         <div className="flex items-center gap-3">
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#edf5fb] text-[#2871a2]">
+          <span className="grid h-10 w-10 place-items-center rounded-xl bg-pine-50 text-pine-600">
             <HugeiconsIcon icon={SmsCodeIcon} size={20} />
           </span>
           <div>
             <h2 className="font-bold">Message d’appel</h2>
-            <p className="mt-1 text-xs text-[#788292]">Envoyé quand le passage approche.</p>
+            <p className="mt-1 text-xs text-ink-faint">Envoyé quand le passage approche.</p>
           </div>
         </div>
         <label className="mt-6 block text-sm font-semibold">
@@ -117,15 +117,15 @@ export function NotificationsPage() {
           <textarea
             value={callTemplate}
             onChange={(e) => setCallTemplate(e.target.value)}
-            className="focus-ring mt-2 min-h-32 w-full rounded-xl border border-[#deded8] p-3 text-sm leading-6"
+            className="focus-ring mt-2 min-h-32 w-full rounded-xl border border-line p-3 text-sm leading-6"
           />
         </label>
-        <div className="mt-5 rounded-xl bg-[#f7f7f5] p-4">
-          <div className="flex gap-2 text-xs font-bold text-[#596477]">
+        <div className="mt-5 rounded-xl bg-sand p-4">
+          <div className="flex gap-2 text-xs font-bold text-ink-soft">
             <HugeiconsIcon icon={Shield01Icon} size={16} />
             Consentement enregistré
           </div>
-          <p className="mt-2 text-xs leading-5 text-[#788292]">
+          <p className="mt-2 text-xs leading-5 text-ink-faint">
             Les notifications sont proposées explicitement au visiteur avant son entrée en file.
           </p>
         </div>

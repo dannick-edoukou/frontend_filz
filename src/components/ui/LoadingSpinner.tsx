@@ -20,7 +20,7 @@ export function LoadingSpinner({ size = "md", className = "" }: LoadingSpinnerPr
         icon={Loading01Icon} 
         size={size === "sm" ? 16 : size === "md" ? 24 : 32} 
         strokeWidth={2}
-        className={`animate-spin text-gold-500 ${sizes[size]}`}
+        className={`animate-spin text-gold-400 ${sizes[size]}`}
       />
     </div>
   );
@@ -74,16 +74,15 @@ export function LoadingOverlay({ isLoading, text = "Chargement..." }: LoadingOve
   if (!isLoading) return null;
 
   return (
-    <div 
-      className="fixed inset-0 z-[9998] flex items-center justify-center bg-white/80 backdrop-blur-sm"
+      <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-card/80 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-busy="true"
       aria-label="Chargement en cours"
     >
-      <div className="flex flex-col items-center gap-4 rounded-2xl bg-white p-8 shadow-xl">
+      <div className="flex flex-col items-center gap-4 rounded-2xl bg-card p-8 shadow-xl">
         <LoadingSpinner size="lg" />
-        <p className="text-sm font-medium text-[#667085]">{text}</p>
+        <p className="text-sm font-medium text-ink-soft">{text}</p>
       </div>
     </div>
   );

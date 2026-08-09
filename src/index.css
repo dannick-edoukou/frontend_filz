@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..900&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap');
 
 /* CRITICAL: THE FOLLOWING TAILWIND IMPORTS MUST NEVER BE DELETED OR REORDERED — DO NOT DELETE THIS COMMENT */
 @import 'tailwindcss/base';
@@ -8,25 +8,36 @@
 /* END TAILWIND IMPORTS — ALL OTHER CSS MUST GO BELOW THIS LINE */
 
 :root {
-  font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-  color: #1b231f;
-  background: #f6f3eb;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
   font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 
-  /* Design tokens — "le guichet" */
-  --color-pine: #12332d;
-  --color-paper: #f6f3eb;
-  --color-sand: #eee9dc;
-  --color-line: #e2dccc;
-  --color-gold: #d09a33;
-  --color-text-primary: #1b231f;
-  --color-text-secondary: #5f6b64;
-  --color-text-muted: #90998f;
-  --color-border: #e2dccc;
+  /* Design tokens — DurXen (light theme) */
+  --color-paper: 248 249 252;
+  --color-card: 255 255 255;
+  --color-sand: 238 241 246;
+  --color-line: 236 238 243;
+  --color-ink: 46 48 75;
+  --color-ink-soft: 95 101 122;
+  --color-ink-faint: 138 143 163;
+  --color-gold: #E8C93A;
+
+  /* Neutral grays kept for the legacy "le guichet" heritage touches */
   --color-success: #287044;
   --color-error: #c05337;
-  --color-warning: #9a6e1d;
   --color-info: #216a9b;
+}
+
+/* DurXen dark theme — toggled via data-theme on <html> */
+[data-theme="dark"] {
+  --color-paper: 26 34 45;
+  --color-card: 30 37 48;
+  --color-sand: 35 44 58;
+  --color-line: 56 65 83;
+  --color-ink: 245 246 250;
+  --color-ink-soft: 138 147 166;
+  --color-ink-faint: 95 101 112;
 }
 
 @media print {
@@ -55,14 +66,21 @@
     display: none !important;
   }
 }
+
 * { box-sizing: border-box; }
-html { background: #f6f3eb; }
-body { margin: 0; min-width: 320px; background: #f6f3eb; -webkit-font-smoothing: antialiased; }
+html {
+  background: rgb(var(--color-paper) / 1);
+  color-scheme: light;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  scroll-behavior: smooth;
+}
+html[data-theme="dark"] { color-scheme: dark; }
+body { margin: 0; min-width: 320px; background: rgb(var(--color-paper) / 1); }
 button, input, select, textarea { font: inherit; }
 button { -webkit-tap-highlight-color: transparent; }
-::selection { color: #0b2420; background: #e9c172; }
+::selection { color: #ffffff; background: var(--color-gold); }
 
-/* Ticket perforation — signature du produit */
+/* Ticket perforation — signature du produit (theme-aware) */
 .ticket-notch {
   position: relative;
 }
@@ -73,8 +91,8 @@ button { -webkit-tap-highlight-color: transparent; }
   top: 0;
   width: 22px;
   height: 22px;
-  background: #f6f3eb;
-  border: 2px solid #e2dccc;
+  background: rgb(var(--color-paper) / 1);
+  border: 2px solid rgb(var(--color-line) / 1);
   border-radius: 9999px;
   transform: translateY(-50%);
   z-index: 1;
@@ -82,11 +100,72 @@ button { -webkit-tap-highlight-color: transparent; }
 .ticket-notch::before { left: -13px; border-right: 0; }
 .ticket-notch::after { right: -13px; border-left: 0; }
 
+/* Dark-mode surface fallback: cards/inputs that used bg-white stay legible */
+[data-theme="dark"] .bg-white:not([class*="/"]) {
+  background-color: rgb(var(--color-card) / 1);
+}
+[data-theme="dark"] .bg-white\/5 { background-color: rgba(255, 255, 255, 0.04); }
+[data-theme="dark"] .border-white\/5 { border-color: rgba(255, 255, 255, 0.04); }
+[data-theme="dark"] .border-white\/10 { border-color: rgba(255, 255, 255, 0.08); }
+[data-theme="dark"] .border-white\/15 { border-color: rgba(255, 255, 255, 0.11); }
+
+/* Amber (gold) tints are fixed-light surfaces → dark-mode overrides keep text legible */
+[data-theme="dark"] .bg-gold-100 { background-color: rgba(232, 201, 58, 0.14); }
+[data-theme="dark"] .bg-gold-100\/50 { background-color: rgba(232, 201, 58, 0.08); }
+[data-theme="dark"] .bg-gold-100\/60 { background-color: rgba(232, 201, 58, 0.10); }
+[data-theme="dark"] .bg-gold-200 { background-color: rgba(232, 201, 58, 0.22); }
+[data-theme="dark"] .hover\:bg-gold-100:hover { background-color: rgba(232, 201, 58, 0.14); }
+[data-theme="dark"] .hover\:bg-gold-100\/50:hover { background-color: rgba(232, 201, 58, 0.08); }
+[data-theme="dark"] .hover\:bg-gold-100\/60:hover { background-color: rgba(232, 201, 58, 0.10); }
+[data-theme="dark"] .hover\:bg-gold-200:hover { background-color: rgba(232, 201, 58, 0.22); }
+[data-theme="dark"] .border-gold-300 { border-color: rgba(232, 201, 58, 0.45); }
+[data-theme="dark"] .border-gold-300\/40 { border-color: rgba(232, 201, 58, 0.30); }
+[data-theme="dark"] .border-gold-300\/60 { border-color: rgba(232, 201, 58, 0.40); }
+[data-theme="dark"] .hover\:border-gold-300:hover { border-color: rgba(232, 201, 58, 0.45); }
+[data-theme="dark"] .border-gold-400 { border-color: rgba(232, 201, 58, 0.60); }
+[data-theme="dark"] .ring-gold-400\/40 { --tw-ring-color: rgba(232, 201, 58, 0.40); }
+[data-theme="dark"] .text-gold-600 { color: #D9B82E; }
+[data-theme="dark"] .text-gold-700 { color: #E8C93A; }
+
+/* Pine/clay/teal tints are fixed-light surfaces → dark translucent tints keep the theme coherent */
+[data-theme="dark"] .bg-pine-50 { background-color: rgba(77, 114, 232, 0.12); }
+[data-theme="dark"] .bg-pine-100 { background-color: rgba(77, 114, 232, 0.18); }
+[data-theme="dark"] .bg-clay-100 { background-color: rgba(229, 72, 77, 0.16); }
+[data-theme="dark"] .bg-clay-200 { background-color: rgba(229, 72, 77, 0.22); }
+[data-theme="dark"] .bg-teal-50 { background-color: rgba(47, 212, 196, 0.12); }
+[data-theme="dark"] .hover\:bg-pine-50:hover { background-color: rgba(77, 114, 232, 0.12); }
+[data-theme="dark"] .hover\:bg-clay-100:hover { background-color: rgba(229, 72, 77, 0.16); }
+[data-theme="dark"] .hover\:bg-clay-200:hover { background-color: rgba(229, 72, 77, 0.22); }
+[data-theme="dark"] .\!bg-clay-100 { background-color: rgba(229, 72, 77, 0.16) !important; }
+[data-theme="dark"] .hover\:\!bg-clay-100:hover { background-color: rgba(229, 72, 77, 0.16) !important; }
+[data-theme="dark"] .border-pine-200 { border-color: rgba(77, 114, 232, 0.35); }
+[data-theme="dark"] .border-clay-200 { border-color: rgba(229, 72, 77, 0.35); }
+[data-theme="dark"] .border-clay-300 { border-color: rgba(229, 72, 77, 0.45); }
+[data-theme="dark"] .border-clay-300\/60 { border-color: rgba(229, 72, 77, 0.40); }
+
+/* Dark text paired with those tints (and adaptive surfaces) → bright accents */
+[data-theme="dark"] .text-pine-500 { color: #8CA8F4; }
+[data-theme="dark"] .text-pine-600,
+[data-theme="dark"] .text-pine-700,
+[data-theme="dark"] .text-pine-800,
+[data-theme="dark"] .text-pine-900 { color: #A9C1F8; }
+[data-theme="dark"] .text-clay-500,
+[data-theme="dark"] .text-clay-600,
+[data-theme="dark"] .text-clay-700 { color: #F5A3A5; }
+[data-theme="dark"] .text-teal-700 { color: #7EE5DB; }
+
 @layer utilities {
-  .focus-ring { @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2; }
-  .input { @apply focus-ring h-11 w-full rounded-xl border border-line bg-white px-3 text-sm text-ink placeholder:text-ink-faint; }
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-pine-500 focus-visible:ring-offset-2;
+  }
+  .focus-ring-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-pine-500 focus-visible:ring-offset-2 focus-visible:ring-offset-card;
+  }
+  .input {
+    @apply focus-ring h-11 w-full rounded-xl border border-line bg-card px-3 text-sm text-ink placeholder:text-ink-faint;
+  }
   .app-scrollbar::-webkit-scrollbar { width: 7px; height: 7px; }
-  .app-scrollbar::-webkit-scrollbar-thumb { background: #d8d1c0; border-radius: 999px; }
+  .app-scrollbar::-webkit-scrollbar-thumb { background: rgb(var(--color-ink-faint) / 0.18); border-radius: 999px; }
 
   /* Mobile accessibility - minimum touch target 44x44px */
   .touch-target { @apply min-h-[44px] min-w-[44px]; }
@@ -94,5 +173,13 @@ button { -webkit-tap-highlight-color: transparent; }
 
   /* Focus management for accessibility */
   .focus-visible-only { @apply focus:outline-none focus-visible:outline-none; }
-  .focus-visible-ring { @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2; }
+  .focus-visible-ring { @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-pine-500 focus-visible:ring-offset-2 focus-visible:ring-offset-card; }
+
+  /* Theme toggle */
+  .theme-toggle {
+    @apply focus-ring grid h-10 w-10 place-items-center rounded-xl border border-line bg-card text-ink-soft hover:bg-sand;
+  }
+  .theme-toggle-on-dark {
+    @apply focus-ring grid h-10 w-10 place-items-center rounded-xl border border-white/15 bg-white/5 text-pine-100/80 hover:bg-white/10 hover:text-paper;
+  }
 }

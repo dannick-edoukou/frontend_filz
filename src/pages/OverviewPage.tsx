@@ -192,14 +192,14 @@ export function OverviewPage({ onNavigate }: { onNavigate: (screen: Screen) => v
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="flex rounded-xl border border-[#e5e5df] bg-white p-1">
+          <div className="flex rounded-xl border border-line bg-white p-1">
             {PERIOD_OPTIONS.map((opt, idx) => (
               <button
                 key={opt.label}
                 onClick={() => setPeriodIdx(idx)}
                 className={`rounded-lg px-3.5 py-1.5 text-xs font-bold transition-colors ${
                   idx === periodIdx
-                    ? "bg-pine-900 text-paper shadow-sm"
+                    ? "bg-pine-900 text-white shadow-sm"
                     : "text-ink-soft hover:text-ink"
                 }`}
               >
@@ -308,7 +308,7 @@ export function OverviewPage({ onNavigate }: { onNavigate: (screen: Screen) => v
 
           <div className="mt-7 h-64">
             {error && !loading ? (
-              <div className="grid h-full place-items-center text-xs text-[#b94d10]">
+              <div className="grid h-full place-items-center text-xs text-pine-500">
                 Données indisponibles pour le moment.
               </div>
             ) : loading ? (
@@ -324,18 +324,18 @@ export function OverviewPage({ onNavigate }: { onNavigate: (screen: Screen) => v
                 <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="h-full w-full">
                   <defs>
                     <linearGradient id="areaGrad" x1="0" x2="0" y1="0" y2="1">
-                      <stop offset="0%" stopColor="#1B463E" stopOpacity="0.22" />
-                      <stop offset="100%" stopColor="#1B463E" stopOpacity="0" />
+                      <stop offset="0%" stopColor="#4D72E8" stopOpacity="0.22" />
+                      <stop offset="100%" stopColor="#4D72E8" stopOpacity="0" />
                     </linearGradient>
                   </defs>
-                  <line x1="0" y1="25" x2="100" y2="25" stroke="#E2DCCC" strokeWidth="0.5" strokeDasharray="2 3" />
-                  <line x1="0" y1="50" x2="100" y2="50" stroke="#E2DCCC" strokeWidth="0.5" strokeDasharray="2 3" />
-                  <line x1="0" y1="75" x2="100" y2="75" stroke="#E2DCCC" strokeWidth="0.5" strokeDasharray="2 3" />
+                  <line x1="0" y1="25" x2="100" y2="25" stroke="rgb(var(--color-line) / 1)" strokeWidth="0.5" strokeDasharray="2 3" />
+                  <line x1="0" y1="50" x2="100" y2="50" stroke="rgb(var(--color-line) / 1)" strokeWidth="0.5" strokeDasharray="2 3" />
+                  <line x1="0" y1="75" x2="100" y2="75" stroke="rgb(var(--color-line) / 1)" strokeWidth="0.5" strokeDasharray="2 3" />
                   <polygon fill="url(#areaGrad)" points={`0,100 ${chartPoints} 100,100`} />
                   <polyline
                     fill="none"
                     points={chartPoints}
-                    stroke="#1B463E"
+                    stroke="#4D72E8"
                     strokeWidth="2.4"
                     vectorEffect="non-scaling-stroke"
                     strokeLinecap="round"
@@ -403,7 +403,7 @@ export function OverviewPage({ onNavigate }: { onNavigate: (screen: Screen) => v
                       <span className="text-sm font-semibold text-ink">{item.service_name}</span>
                       <span className="font-mono text-[11px] font-semibold text-ink-faint">
                         {item.served_entries} / {totalOverview || item.total_entries} ·{" "}
-                        <span className="text-pine-800">{item.performance_pct}%</span>
+                        <span className="text-pine-500">{item.performance_pct}%</span>
                       </span>
                     </div>
                     <div className="mt-2 h-2 overflow-hidden rounded-full bg-sand">
@@ -619,7 +619,7 @@ export function OverviewPage({ onNavigate }: { onNavigate: (screen: Screen) => v
 
             <div className="p-5">
               <div className="mx-auto flex w-[260px] items-center justify-center rounded-2xl border border-line bg-white p-3">
-                <QRCode value={checkinUrl} size={240} fgColor="#12332D" />
+                <QRCode value={checkinUrl} size={240} fgColor="#16213A" />
               </div>
 
               <p className="mt-5 text-center text-xs leading-5 text-ink-soft">

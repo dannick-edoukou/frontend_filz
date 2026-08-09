@@ -179,16 +179,16 @@ export function HistoryPage() {
 
   return (
     <>
-      <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:items-center sm:justify-between bg-white p-4 rounded-xl border border-[#e6e6e0]">
+      <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:items-center sm:justify-between bg-white p-4 rounded-xl border border-line">
         <div className="flex items-center gap-3">
-          <label className="text-xs font-bold text-[#687385] uppercase">Agence</label>
-          <select value={selectedBranchId} onChange={(e) => setSelectedBranchId(e.target.value)} className="bg-white border border-[#deded8] px-3 py-1.5 rounded-lg text-xs font-semibold">
+          <label className="text-xs font-bold text-ink-soft uppercase">Agence</label>
+          <select value={selectedBranchId} onChange={(e) => setSelectedBranchId(e.target.value)} className="bg-white border border-line px-3 py-1.5 rounded-lg text-xs font-semibold">
             {branches.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
           </select>
         </div>
         <div className="flex items-center gap-3">
-          <label className="text-xs font-bold text-[#687385] uppercase">Service</label>
-          <select value={selectedServiceId} onChange={(e) => setSelectedServiceId(e.target.value)} className="bg-white border border-[#deded8] px-3 py-1.5 rounded-lg text-xs font-semibold">
+          <label className="text-xs font-bold text-ink-soft uppercase">Service</label>
+          <select value={selectedServiceId} onChange={(e) => setSelectedServiceId(e.target.value)} className="bg-white border border-line px-3 py-1.5 rounded-lg text-xs font-semibold">
             <option value="">Tous les services</option>
             {services.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
           </select>
@@ -204,14 +204,14 @@ export function HistoryPage() {
 
       {error && <div className="p-4 mb-4 bg-red-50 text-red-700 text-xs rounded-xl border border-red-100">{error}</div>}
 
-      <section className="rounded-2xl border border-[#e6e6e0] bg-white">
-        <div className="flex flex-col gap-3 border-b border-[#ecece7] p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
+      <section className="rounded-2xl border border-line bg-white">
+        <div className="flex flex-col gap-3 border-b border-line p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
           <div className="flex gap-2 overflow-x-auto">
-            <button className="rounded-lg bg-[#173f3a] px-3 py-2 text-xs font-bold text-white">Total <span className="ml-1 opacity-70">{historyMeta.total}</span></button>
+            <button className="rounded-lg bg-pine-950 px-3 py-2 text-xs font-bold text-white">Total <span className="ml-1 opacity-70">{historyMeta.total}</span></button>
           </div>
           <label className="relative block">
-            <HugeiconsIcon icon={Search01Icon} size={17} className="absolute left-3 top-2.5 text-[#8992a0]" />
-            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Rechercher un ticket" className="focus-ring h-9 w-full rounded-lg border border-[#deded8] pl-9 pr-3 text-xs sm:w-52" />
+            <HugeiconsIcon icon={Search01Icon} size={17} className="absolute left-3 top-2.5 text-ink-faint" />
+            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Rechercher un ticket" className="focus-ring h-9 w-full rounded-lg border border-line pl-9 pr-3 text-xs sm:w-52" />
           </label>
         </div>
 
@@ -222,8 +222,8 @@ export function HistoryPage() {
         ) : (
           <div className="overflow-x-auto app-scrollbar">
             <table className="w-full min-w-[900px] text-left">
-              <thead className="bg-[#fafaf8]">
-                <tr className="text-[10px] font-bold uppercase tracking-[.12em] text-[#929aa7]">
+              <thead className="bg-sand">
+                <tr className="text-[10px] font-bold uppercase tracking-[.12em] text-ink-faint">
                   <th className="px-5 py-3">Ticket</th>
                   <th className="px-4 py-3">Code</th>
                   <th className="px-4 py-3">Visiteur</th>
@@ -238,21 +238,21 @@ export function HistoryPage() {
               </thead>
               <tbody>
                 {entries.map((entry) => (
-                  <tr key={entry.id} className="border-t border-[#f0f0eb] text-sm">
+                  <tr key={entry.id} className="border-t border-line text-sm">
                     <td className="px-5 py-4 font-bold">N°{entry.ticket_number}</td>
                     <td className="px-4 py-4 font-mono text-xs">{entry.entry_code}</td>
                     <td className="px-4 py-4">
                       <p className="font-semibold">{entry.customer_name}</p>
-                      <p className="mt-0.5 text-xs text-[#7b8493]">{entry.customer_phone || "Pas de téléphone"}</p>
+                      <p className="mt-0.5 text-xs text-ink-faint">{entry.customer_phone || "Pas de téléphone"}</p>
                     </td>
-                    <td className="px-4 py-4 text-xs text-[#596477]">
+                    <td className="px-4 py-4 text-xs text-ink-soft">
                       {services.find(s => s.id === selectedServiceId)?.name || "Service"}
                     </td>
-                    <td className="px-4 py-4 text-xs text-[#596477]">{formatDate(entry.created_at)}</td>
-                    <td className="px-4 py-4 text-xs text-[#596477]">{entry.called_at ? formatDate(entry.called_at) : "—"}</td>
-                    <td className="px-4 py-4 text-xs text-[#596477]">{entry.served_at ? formatDate(entry.served_at) : "—"}</td>
-                    <td className="px-4 py-4 text-xs text-[#596477]">{entry.actual_wait_seconds ? Math.round(entry.actual_wait_seconds / 60) : "—"}</td>
-                    <td className="px-4 py-4 text-xs text-[#596477]">{entry.actual_service_seconds ? Math.round(entry.actual_service_seconds / 60) : "—"}</td>
+                    <td className="px-4 py-4 text-xs text-ink-soft">{formatDate(entry.created_at)}</td>
+                    <td className="px-4 py-4 text-xs text-ink-soft">{entry.called_at ? formatDate(entry.called_at) : "—"}</td>
+                    <td className="px-4 py-4 text-xs text-ink-soft">{entry.served_at ? formatDate(entry.served_at) : "—"}</td>
+                    <td className="px-4 py-4 text-xs text-ink-soft">{entry.actual_wait_seconds ? Math.round(entry.actual_wait_seconds / 60) : "—"}</td>
+                    <td className="px-4 py-4 text-xs text-ink-soft">{entry.actual_service_seconds ? Math.round(entry.actual_service_seconds / 60) : "—"}</td>
                     <td className="px-4 py-4">
                       <StatusBadge state={entry.status} />
                     </td>

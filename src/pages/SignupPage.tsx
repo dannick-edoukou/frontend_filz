@@ -72,10 +72,10 @@ export function SignupPage({ onComplete, onLogin, onHome }: {onComplete: () => v
   return <main className="grid min-h-screen place-items-center bg-paper px-4 py-10"><section className="w-full max-w-2xl overflow-hidden rounded-[28px] border border-line bg-white shadow-ticket">
     <div className="relative bg-pine-950 px-7 pb-10 pt-8 text-center">
       {onHome && (
-        <button type="button" onClick={onHome} className="focus-ring absolute left-4 top-4 flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold text-pine-100/70 hover:bg-white/10 hover:text-paper">← Accueil</button>
+        <button type="button" onClick={onHome} className="focus-ring absolute left-4 top-4 flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold text-pine-100/70 hover:bg-white/10 hover:text-white">← Accueil</button>
       )}
       <img src={filzIcon} alt="Filz" className="mx-auto h-12 w-12 rounded-2xl" />
-      <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight text-paper">Créer votre espace</h1>
+      <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight text-white">Créer votre espace</h1>
       <p className="mt-1.5 text-sm text-pine-100/70">Gérez vos files d'attente par QR code.</p>
     </div>
     <div className="relative">
@@ -127,7 +127,7 @@ export function SignupPage({ onComplete, onLogin, onHome }: {onComplete: () => v
                 >
                   <span className="flex items-baseline justify-between gap-2">
                     <span className="font-display text-base font-semibold tracking-tight text-ink">{plan.name}</span>
-                    <span className="font-mono text-sm font-semibold tracking-tight text-pine-950">{fmtPrice(plan.price_monthly)}</span>
+                    <span className="font-mono text-sm font-semibold tracking-tight text-ink">{fmtPrice(plan.price_monthly)}</span>
                   </span>
                   <span className="mt-2.5 space-y-1 text-[11px] leading-5 text-ink-soft">
                     {planFeatures(plan).map(f => <span key={f} className="flex items-start gap-1.5"><HugeiconsIcon icon={Ticket01Icon} size={13} className="mt-0.5 shrink-0 text-gold-600" />{f}</span>)}
@@ -144,7 +144,7 @@ export function SignupPage({ onComplete, onLogin, onHome }: {onComplete: () => v
       </div>
       <label className="sm:col-span-2 flex items-start gap-3 text-xs leading-5 text-ink-soft"><input {...register("terms")} type="checkbox" className="mt-0.5 accent-gold-500" />J'accepte les conditions d'utilisation et la politique de confidentialité.</label>
       {errors.terms && <p className="sm:col-span-2 -mt-2 text-xs font-medium text-clay-600">{errors.terms.message}</p>}
-      <LoadingButton type="submit" isLoading={isSubmitting} loadingText="Création…" className="sm:col-span-2 mt-1 w-full bg-pine-900 text-paper hover:bg-pine-950 shadow-[0_8px_18px_rgba(18,51,45,0.20)]" icon={!isSubmitting && <HugeiconsIcon icon={ArrowRight01Icon} size={17} />}>Créer mon espace</LoadingButton>
+      <LoadingButton type="submit" isLoading={isSubmitting} loadingText="Création…" className="sm:col-span-2 mt-1 w-full bg-pine-900 text-white hover:bg-pine-700 shadow-primary" icon={!isSubmitting && <HugeiconsIcon icon={ArrowRight01Icon} size={17} />}>Créer mon espace</LoadingButton>
     </form>
     <div className="border-t border-line px-7 py-5 text-center">
       <p className="text-xs leading-5 text-ink-soft">Vous avez déjà un compte ? <button type="button" onClick={onLogin} className="focus-ring rounded font-bold text-gold-700">Se connecter</button></p>

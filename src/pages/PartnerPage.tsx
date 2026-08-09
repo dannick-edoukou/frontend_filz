@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { ThemeToggle } from "../theme/ThemeProvider";
 import {
   ArrowRight01Icon,
   BankIcon,
@@ -159,26 +160,29 @@ export function PartnerPage({ onHome, onPartnerLogin }: { onHome: () => void; on
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
           <button onClick={onHome} className="focus-ring flex items-center gap-2.5 rounded-xl text-left">
             <img src={filzIcon} alt="Filz" className="h-8 w-8 rounded-lg" />
-            <span className="font-display text-lg font-semibold tracking-tight text-pine-950">Filz</span>
+            <span className="font-display text-lg font-semibold tracking-tight text-ink">Filz</span>
           </button>
           <nav className="hidden items-center gap-6 lg:flex">
-            <button onClick={() => scrollTo("how")} className="focus-ring text-sm font-semibold text-ink-soft transition-colors hover:text-pine-950">Comment ça marche</button>
-            <button onClick={() => scrollTo("example")} className="focus-ring text-sm font-semibold text-ink-soft transition-colors hover:text-pine-950">Simulateur</button>
-            <button onClick={() => scrollTo("faq")} className="focus-ring text-sm font-semibold text-ink-soft transition-colors hover:text-pine-950">FAQ</button>
-            <button onClick={onPartnerLogin} className="focus-ring text-sm font-semibold text-ink-soft transition-colors hover:text-pine-950">Espace partenaire</button>
+            <button onClick={() => scrollTo("how")} className="focus-ring text-sm font-semibold text-ink-soft transition-colors hover:text-ink">Comment ça marche</button>
+            <button onClick={() => scrollTo("example")} className="focus-ring text-sm font-semibold text-ink-soft transition-colors hover:text-ink">Simulateur</button>
+            <button onClick={() => scrollTo("faq")} className="focus-ring text-sm font-semibold text-ink-soft transition-colors hover:text-ink">FAQ</button>
+            <button onClick={onPartnerLogin} className="focus-ring text-sm font-semibold text-ink-soft transition-colors hover:text-ink">Espace partenaire</button>
             <span className="rounded-full border border-gold-300 bg-gold-100 px-4 py-2 text-sm font-semibold text-gold-700">Devenir partenaire</span>
           </nav>
-          <button
-            onClick={() => scrollTo("join")}
-            className="focus-ring inline-flex touch-target items-center gap-2 rounded-xl bg-pine-900 px-4 text-sm font-semibold text-paper shadow-[0_8px_18px_rgba(18,51,45,0.20)] hover:bg-pine-950"
-          >
-            Rejoindre
-            <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
-          </button>
+          <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <button
+              onClick={() => scrollTo("join")}
+              className="focus-ring inline-flex touch-target items-center gap-2 rounded-xl bg-pine-900 px-4 text-sm font-semibold text-white shadow-primary hover:bg-pine-700"
+            >
+              Rejoindre
+              <HugeiconsIcon icon={ArrowRight01Icon} size={16} />
+            </button>
+          </div>
         </div>
       </header>
 
-      <section className="relative overflow-hidden bg-pine-950 text-paper">
+      <section className="relative overflow-hidden bg-pine-950 text-white">
         <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-gold-500/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-pine-500/20 blur-3xl" />
         <div className="relative mx-auto grid max-w-5xl gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-[1.1fr_.9fr] lg:items-center">
@@ -199,14 +203,14 @@ export function PartnerPage({ onHome, onPartnerLogin }: { onHome: () => void; on
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <button
                 onClick={() => scrollTo("join")}
-                className="focus-ring inline-flex touch-target items-center justify-center gap-2 rounded-xl bg-gold-500 px-6 text-sm font-bold text-pine-950 shadow-[0_12px_28px_rgba(208,154,51,0.35)] hover:bg-gold-400"
+                className="focus-ring inline-flex touch-target items-center justify-center gap-2 rounded-xl bg-pine-500 px-6 text-sm font-bold text-white shadow-primary hover:bg-pine-700"
               >
                 Rejoindre le programme
                 <HugeiconsIcon icon={ArrowRight01Icon} size={17} />
               </button>
               <button
                 onClick={() => scrollTo("how")}
-                className="focus-ring inline-flex touch-target items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 text-sm font-semibold text-paper hover:bg-white/10"
+                className="focus-ring inline-flex touch-target items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 text-sm font-semibold text-white hover:bg-white/10"
               >
                 Comment ça marche
               </button>
@@ -286,7 +290,7 @@ export function PartnerPage({ onHome, onPartnerLogin }: { onHome: () => void; on
         </div>
       </section>
 
-      <section id="example" className="bg-pine-950 text-paper">
+      <section id="example" className="bg-pine-950 text-white">
         <div className="mx-auto grid max-w-5xl gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2 lg:items-center">
           <div>
             <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-gold-300">
@@ -300,7 +304,7 @@ export function PartnerPage({ onHome, onPartnerLogin }: { onHome: () => void; on
               Glissez le montant de l'abonnement mensuel d'une entreprise parrainée. Filz calcule votre commission
               de 30 % et son total sur 5 mois.
             </p>            <div className="mt-8 space-y-4">
-              <label className="block text-sm font-semibold text-paper">
+              <label className="block text-sm font-semibold text-white">
                 Abonnement mensuel du client (FCFA) · montant d’exemple
                 <input
                   type="number"
@@ -308,7 +312,7 @@ export function PartnerPage({ onHome, onPartnerLogin }: { onHome: () => void; on
                   step={1000}
                   value={price}
                   onChange={(e) => setPrice(Math.max(0, Number(e.target.value) || 0))}
-                  className="input mt-2 !border-white/20 !bg-white/10 !text-paper placeholder:!text-pine-100/40"
+                  className="input mt-2 !border-white/20 !bg-white/10 !text-white placeholder:!text-pine-100/40"
                 />
               </label>
               <div className="grid grid-cols-2 gap-4">
@@ -318,7 +322,7 @@ export function PartnerPage({ onHome, onPartnerLogin }: { onHome: () => void; on
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-pine-100/60">Total sur 5 mois</p>
-                  <p className="mt-2 font-mono text-3xl font-semibold tracking-[-0.04em] text-paper">{fmt(total)} FCFA</p>
+                  <p className="mt-2 font-mono text-3xl font-semibold tracking-[-0.04em] text-white">{fmt(total)} FCFA</p>
                 </div>
               </div>
               <p className="text-[11px] leading-5 text-pine-100/50">
@@ -429,7 +433,7 @@ export function PartnerPage({ onHome, onPartnerLogin }: { onHome: () => void; on
         </div>
       </section>
 
-      <section id="join" className="bg-pine-950 text-paper">
+      <section id="join" className="bg-pine-950 text-white">
         <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
           <div className="mx-auto max-w-2xl text-center">
             <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-gold-500/15 text-gold-400">
@@ -488,7 +492,7 @@ export function PartnerPage({ onHome, onPartnerLogin }: { onHome: () => void; on
                 <button
                   type="submit"
                   disabled={sending}
-                  className="focus-ring inline-flex touch-target w-full items-center justify-center gap-2 rounded-xl bg-pine-900 px-6 py-3 text-sm font-bold text-paper shadow-[0_8px_18px_rgba(18,51,45,0.20)] hover:bg-pine-950 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="focus-ring inline-flex touch-target w-full items-center justify-center gap-2 rounded-xl bg-pine-900 px-6 py-3 text-sm font-bold text-white shadow-primary hover:bg-pine-700 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {sending ? "Envoi en cours…" : "Envoyer ma candidature"}
                   <HugeiconsIcon icon={ArrowRight01Icon} size={17} />
@@ -510,12 +514,12 @@ export function PartnerPage({ onHome, onPartnerLogin }: { onHome: () => void; on
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 px-4 py-8 sm:flex-row sm:justify-between sm:text-left">
           <button onClick={onHome} className="focus-ring flex items-center gap-2.5 rounded-xl">
             <img src={filzIcon} alt="Filz" className="h-7 w-7 rounded-lg" />
-            <span className="font-display text-base font-semibold tracking-tight text-pine-950">Filz</span>
+            <span className="font-display text-base font-semibold tracking-tight text-ink">Filz</span>
           </button>
           <nav className="flex items-center gap-6 text-sm font-semibold text-ink-soft">
-            <button onClick={onHome} className="focus-ring hover:text-pine-950">Accueil</button>
-            <button onClick={() => scrollTo("faq")} className="focus-ring hover:text-pine-950">FAQ</button>
-            <button onClick={() => scrollTo("join")} className="focus-ring hover:text-pine-950">Devenir partenaire</button>
+            <button onClick={onHome} className="focus-ring hover:text-ink">Accueil</button>
+            <button onClick={() => scrollTo("faq")} className="focus-ring hover:text-ink">FAQ</button>
+            <button onClick={() => scrollTo("join")} className="focus-ring hover:text-ink">Devenir partenaire</button>
           </nav>
           <p className="text-xs text-ink-faint">© 2026 Filz · Programme Partenaire</p>
         </div>

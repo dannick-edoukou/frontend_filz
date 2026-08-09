@@ -76,12 +76,12 @@ function priorityLabel(prio?: string): string {
 
 function priorityColor(prio?: string): string {
   const map: Record<string, string> = {
-    low: "bg-[#f3f4f2] text-[#788292]",
-    medium: "bg-[#fff1e5] text-[#b94d10]",
-    high: "bg-[#fff7f0] text-[#e87325]",
-    urgent: "bg-[#ffe3df] text-[#c13d2e]",
+    low: "bg-sand text-ink-faint",
+    medium: "bg-pine-50 text-pine-700",
+    high: "bg-pine-50 text-pine-600",
+    urgent: "bg-clay-100 text-clay-500",
   };
-  return map[prio || ""] || "bg-[#fff1e5] text-[#b94d10]";
+  return map[prio || ""] || "bg-pine-50 text-pine-700";
 }
 
 function normalizeStatus(s: string): "open" | "in_progress" | "resolved" {
@@ -214,13 +214,13 @@ export function AdminSupportPage() {
       action={<Button icon={<HugeiconsIcon icon={Message02Icon} size={18} />}>Nouveau ticket</Button>}
     />
     {error && (
-      <div className="mb-4 rounded-xl border border-[#f0d8bd] bg-[#fffbf6] p-3 text-xs font-bold text-[#b94d10]">{error}</div>
+      <div className="mb-4 rounded-xl border border-pine-200 bg-pine-50 p-3 text-xs font-bold text-pine-700">{error}</div>
     )}
     <div className="grid min-h-[570px] gap-5 xl:grid-cols-[300px_minmax(0,1fr)_245px]">
-      <aside className="rounded-2xl border border-[#e5e5df] bg-white p-3">
+      <aside className="rounded-2xl border border-line bg-white p-3">
         <div className="flex items-center justify-between px-2 py-2">
-          <p className="text-[10px] font-bold uppercase tracking-[.13em] text-[#929aa7]">Demandes ouvertes</p>
-          <span className="rounded-md bg-[#fff1e5] px-1.5 py-0.5 text-[10px] font-bold text-[#b94d10]">
+          <p className="text-[10px] font-bold uppercase tracking-[.13em] text-ink-faint">Demandes ouvertes</p>
+          <span className="rounded-md bg-pine-50 px-1.5 py-0.5 text-[10px] font-bold text-pine-700">
             {loading ? "…" : filteredTickets.filter((t) => t.status !== "resolved" && t.status !== "closed").length}
           </span>
         </div>
@@ -228,7 +228,7 @@ export function AdminSupportPage() {
         {/* Search Input */}
         <div className="mt-3 px-2">
           <div className="relative">
-            <HugeiconsIcon icon={Search01Icon} size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9aa1ad]" />
+            <HugeiconsIcon icon={Search01Icon} size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-faint" />
             <input
               type="text"
               value={searchQuery}
@@ -252,8 +252,8 @@ export function AdminSupportPage() {
               onClick={() => setStatusFilter(filter.value as any)}
               className={`whitespace-nowrap rounded-full px-3 py-1 text-[10px] font-bold transition-colors ${
                 statusFilter === filter.value
-                  ? "bg-[#e87325] text-white"
-                  : "bg-[#f7f7f5] text-[#687385] hover:bg-[#efefea]"
+                  ? "bg-pine-500 text-white"
+                  : "bg-sand text-ink-soft hover:bg-sand"
               }`}
             >
               {filter.label}
@@ -262,43 +262,43 @@ export function AdminSupportPage() {
         </div>
 
         {loading ? (
-          <div className="p-4 text-xs text-[#788292]">Chargement des tickets…</div>
+          <div className="p-4 text-xs text-ink-faint">Chargement des tickets…</div>
         ) : filteredTickets.length === 0 ? (
-          <div className="p-4 text-xs text-[#788292]">Aucun ticket trouvé.</div>
+          <div className="p-4 text-xs text-ink-faint">Aucun ticket trouvé.</div>
         ) : (
           filteredTickets.map((ticket) => (
             <button
               key={ticket.id}
               onClick={() => setSelectedId(ticket.id)}
-              className={`focus-ring mt-1 w-full rounded-xl p-3 text-left ${selected?.id === ticket.id ? "bg-[#fff1e5]" : "hover:bg-[#f7f7f5]"}`}
+              className={`focus-ring mt-1 w-full rounded-xl p-3 text-left ${selected?.id === ticket.id ? "bg-pine-50" : "hover:bg-sand"}`}
             >
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
-                  <p className="text-xs font-bold text-[#4d5768]">{formatTicketId(ticket.id)}</p>
+                  <p className="text-xs font-bold text-ink-soft">{formatTicketId(ticket.id)}</p>
                   <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${priorityColor(ticket.priority)}`}>
                     {priorityLabel(ticket.priority)}
                   </span>
                 </div>
                 <StatusBadge state={normalizeStatus(ticket.status)} />
               </div>
-              <p className="mt-2 text-sm font-bold text-[#253144]">{ticket.subject}</p>
-              <p className="mt-1 text-xs text-[#788292]">
+              <p className="mt-2 text-sm font-bold text-ink">{ticket.subject}</p>
+              <p className="mt-1 text-xs text-ink-faint">
                 {ticket.organization_name || "Entreprise"} · {categoryLabel(ticket.category)}
               </p>
             </button>
           ))
         )}
       </aside>
-      <section className="flex min-h-[520px] flex-col rounded-2xl border border-[#e5e5df] bg-white">
+      <section className="flex min-h-[520px] flex-col rounded-2xl border border-line bg-white">
         {selected ? (
           <>
-            <div className="flex items-start justify-between border-b border-[#ecece7] p-5">
+            <div className="flex items-start justify-between border-b border-line p-5">
               <div>
                 <div className="flex flex-wrap items-center gap-2">
                   <h2 className="font-bold">{selected.subject}</h2>
                   <StatusBadge state={normalizeStatus(selected.status)} />
                 </div>
-                <p className="mt-1 text-xs text-[#788292]">
+                <p className="mt-1 text-xs text-ink-faint">
                   {formatTicketId(selected.id)} · {selected.organization_name || "Entreprise"} · {categoryLabel(selected.category)}
                 </p>
               </div>
@@ -320,20 +320,20 @@ export function AdminSupportPage() {
                       key={`${item.at}-${index}-${item.content.slice(0, 10)}`}
                       className={`max-w-[78%] ${isSupport ? "ml-auto" : ""}`}
                     >
-                      <p className="mb-1.5 text-[11px] font-bold text-[#788292]">
+                      <p className="mb-1.5 text-[11px] font-bold text-ink-faint">
                         {item.author || (isSupport ? "Plateforme" : "Client")} · {formatTime(item.at ?? selected.created_at)}
                       </p>
-                      <div className={`rounded-2xl p-4 text-sm leading-6 ${isSupport ? "rounded-tr-sm bg-[#fff1e5] text-[#593418]" : "rounded-tl-sm bg-[#f3f4f2] text-[#4d5768]"}`}>
+                      <div className={`rounded-2xl p-4 text-sm leading-6 ${isSupport ? "rounded-tr-sm bg-pine-50 text-pine-800" : "rounded-tl-sm bg-sand text-ink-soft"}`}>
                         {item.content}
                       </div>
                     </article>
                   );
                 })
               ) : (
-                <p className="text-sm text-[#788292]">Aucun message dans cet échange.</p>
+                <p className="text-sm text-ink-faint">Aucun message dans cet échange.</p>
               )}
             </div>
-            <form onSubmit={send} className="flex gap-3 border-t border-[#ecece7] p-4">
+            <form onSubmit={send} className="flex gap-3 border-t border-line p-4">
               <input
                 value={message}
                 onChange={(event) => setMessage(event.target.value)}
@@ -352,34 +352,34 @@ export function AdminSupportPage() {
             </form>
           </>
         ) : (
-          <div className="grid flex-1 place-items-center p-6 text-sm text-[#788292]">
+          <div className="grid flex-1 place-items-center p-6 text-sm text-ink-faint">
             {loading ? "Chargement des tickets…" : "Sélectionnez un ticket à droite."}
           </div>
         )}
       </section>
-      <aside className="rounded-2xl border border-[#e5e5df] bg-white p-5">
-        <p className="text-[10px] font-bold uppercase tracking-[.13em] text-[#929aa7]">Traitement</p>
+      <aside className="rounded-2xl border border-line bg-white p-5">
+        <p className="text-[10px] font-bold uppercase tracking-[.13em] text-ink-faint">Traitement</p>
         {selected ? (
           <div className="mt-5 space-y-5">
             <div className="relative">
-              <p className="text-xs font-semibold text-[#788292]">Attribué à</p>
+              <p className="text-xs font-semibold text-ink-faint">Attribué à</p>
               <div className="mt-1">
                 <button
                   onClick={() => setShowAssignDropdown(!showAssignDropdown)}
-                  className="focus-ring flex w-full items-center justify-between rounded-xl border border-[#e5e5df] bg-[#fafaf8] px-3 py-2 text-left text-sm font-bold hover:border-[#e87325]/40"
+                  className="focus-ring flex w-full items-center justify-between rounded-xl border border-line bg-sand px-3 py-2 text-left text-sm font-bold hover:border-pine-500/40"
                 >
                   <span>{selected.assigned_to || "Non attribué"}</span>
-                  <HugeiconsIcon icon={UserAdd01Icon} size={16} className="text-[#9aa1ad]" />
+                  <HugeiconsIcon icon={UserAdd01Icon} size={16} className="text-ink-faint" />
                 </button>
                 {showAssignDropdown && (
-                  <div className="absolute left-0 right-0 top-full z-10 mt-2 rounded-xl border border-[#e5e5df] bg-white p-2 shadow-lg">
+                  <div className="absolute left-0 right-0 top-full z-10 mt-2 rounded-xl border border-line bg-white p-2 shadow-lg">
                     {admins.map((admin) => (
                       <button
                         key={admin.id}
                         onClick={() => assignTo(admin.id, admin.name)}
-                        className="focus-ring flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm font-semibold hover:bg-[#f7f7f5]"
+                        className="focus-ring flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm font-semibold hover:bg-sand"
                       >
-                        <span className={`h-2 w-2 rounded-full ${admin.online ? "bg-[#287044]" : "bg-[#c13d2e]"}`} />
+                        <span className={`h-2 w-2 rounded-full ${admin.online ? "bg-teal-500" : "bg-clay-500"}`} />
                         {admin.name}
                       </button>
                     ))}
@@ -387,20 +387,20 @@ export function AdminSupportPage() {
                 )}
               </div>
             </div>
-            <div className="border-t border-[#efefea] pt-4">
-              <p className="text-xs font-semibold text-[#788292]">Objectif de réponse</p>
+            <div className="border-t border-line pt-4">
+              <p className="text-xs font-semibold text-ink-faint">Objectif de réponse</p>
               <p className="mt-1 text-sm font-bold">Aujourd'hui, 15:00</p>
             </div>
-            <div className="border-t border-[#efefea] pt-4">
-              <p className="text-xs font-semibold text-[#788292]">Entreprise</p>
+            <div className="border-t border-line pt-4">
+              <p className="text-xs font-semibold text-ink-faint">Entreprise</p>
               <p className="mt-1 text-sm font-bold">{selected.organization_name || "—"}</p>
-              <button className="focus-ring mt-2 rounded-md text-xs font-bold text-[#b94d10]">
+              <button className="focus-ring mt-2 rounded-md text-xs font-bold text-pine-500">
                 Ouvrir sa fiche
               </button>
             </div>
           </div>
         ) : (
-          <div className="mt-5 text-xs text-[#788292]">Chargement…</div>
+          <div className="mt-5 text-xs text-ink-faint">Chargement…</div>
         )}
       </aside>
     </div>

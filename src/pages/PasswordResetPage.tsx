@@ -28,9 +28,9 @@ export function PasswordResetPage({ onComplete, onBack }: {onComplete: () => voi
   if (!token) return <main className="grid min-h-screen place-items-center bg-paper px-4 py-10"><section className="w-full max-w-md overflow-hidden rounded-[28px] border border-line bg-white p-8 text-center shadow-ticket"><img src={filzIcon} alt="Filz" className="mx-auto h-12 w-12 rounded-2xl" /><h1 className="mt-5 font-display text-2xl font-semibold tracking-tight text-ink">Lien invalide ou expiré</h1><p className="mt-3 text-sm leading-6 text-ink-soft">Ce lien de réinitialisation n'est plus valide. Demandez un nouveau lien depuis la page de connexion.</p><Button onClick={onBack} className="mt-7 w-full">Demander un nouveau lien</Button></section></main>;
   return <main className="grid min-h-screen place-items-center bg-paper px-4 py-10"><section className="w-full max-w-md overflow-hidden rounded-[28px] border border-line bg-white shadow-ticket">
     <div className="relative bg-pine-950 px-7 pb-10 pt-8 text-center">
-      <button type="button" onClick={onBack} className="focus-ring absolute left-4 top-4 flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold text-pine-100/70 hover:bg-white/10 hover:text-paper">← Annuler</button>
+      <button type="button" onClick={onBack} className="focus-ring absolute left-4 top-4 flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-semibold text-pine-100/70 hover:bg-white/10 hover:text-white">← Annuler</button>
       <img src={filzIcon} alt="Filz" className="mx-auto h-12 w-12 rounded-2xl" />
-      <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight text-paper">Filz</h1>
+      <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight text-white">Filz</h1>
       <p className="mt-1.5 text-sm text-pine-100/70">Sécurisez votre accès.</p>
     </div>
     <div className="relative">
@@ -42,7 +42,7 @@ export function PasswordResetPage({ onComplete, onBack }: {onComplete: () => voi
     <form onSubmit={submit} className="space-y-5 px-7 pb-7 pt-7">
       <label className="block text-sm font-semibold text-ink">Nouveau mot de passe<div className="relative mt-2"><HugeiconsIcon className="pointer-events-none absolute left-3 top-3 text-ink-faint" icon={LockPasswordIcon} size={18} /><input type="password" value={password} onChange={(event) => setPassword(event.target.value)} required minLength={8} placeholder="8 caractères minimum" className="input !pl-11" /></div></label>
       <label className="block text-sm font-semibold text-ink">Confirmer le mot de passe<div className="relative mt-2"><input type="password" value={confirmation} onChange={(event) => {setConfirmation(event.target.value);setMismatch(false);}} required minLength={8} placeholder="Répétez votre mot de passe" className="input" />{mismatch && <span className="mt-1.5 block text-xs font-medium text-clay-600">Les mots de passe ne correspondent pas.</span>}</div></label>
-      <Button type="submit" disabled={loading || !token || password.length < 8 || confirmation.length < 8} className="w-full bg-pine-900 text-paper hover:bg-pine-950 shadow-[0_8px_18px_rgba(18,51,45,0.20)]">{loading ? "Mise à jour…" : "Mettre à jour le mot de passe"}</Button>
+      <Button type="submit" disabled={loading || !token || password.length < 8 || confirmation.length < 8} className="w-full bg-pine-900 text-white hover:bg-pine-700 shadow-primary">{loading ? "Mise à jour…" : "Mettre à jour le mot de passe"}</Button>
     </form>
   </section></main>;
 }

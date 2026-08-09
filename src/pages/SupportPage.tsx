@@ -98,14 +98,14 @@ export function SupportPage() {
       />
 
       {isCreating ? (
-        <section className="max-w-xl mx-auto bg-white p-6 rounded-2xl border border-[#e5e5df]">
+        <section className="max-w-xl mx-auto bg-white p-6 rounded-2xl border border-line">
           <h2 className="text-lg font-bold mb-4">Créer une demande d'assistance</h2>
           <form onSubmit={handleCreateTicket} className="space-y-4">
-            <label className="block text-sm font-semibold text-[#394150]">
+            <label className="block text-sm font-semibold text-ink-soft">
               Sujet
               <input required type="text" value={subject} onChange={(e) => setSubject(e.target.value)} placeholder="Ex: Problème d'impression QR code" className="input mt-2" />
             </label>
-            <label className="block text-sm font-semibold text-[#394150]">
+            <label className="block text-sm font-semibold text-ink-soft">
               Catégorie
               <select value={category} onChange={(e) => setCategory(e.target.value)} className="input bg-white mt-2">
                 <option value="technical_support">Support technique</option>
@@ -115,7 +115,7 @@ export function SupportPage() {
                 <option value="partnership">Partenariat</option>
               </select>
             </label>
-            <label className="block text-sm font-semibold text-[#394150]">
+            <label className="block text-sm font-semibold text-ink-soft">
               Description de votre problème
               <textarea required value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Expliquez en détail..." className="input min-h-[120px] py-2 mt-2" />
             </label>
@@ -128,44 +128,44 @@ export function SupportPage() {
       ) : loading ? (
         <p className="text-center text-sm py-10">Chargement des conversations...</p>
       ) : tickets.length === 0 ? (
-        <p className="text-center text-sm py-10 bg-white border border-[#e5e5df] rounded-2xl">Vous n'avez aucun ticket de support en cours.</p>
+        <p className="text-center text-sm py-10 bg-white border border-line rounded-2xl">Vous n'avez aucun ticket de support en cours.</p>
       ) : (
         <div className="grid gap-5 xl:grid-cols-[315px_1fr]">
-          <aside className="rounded-2xl border border-[#e5e5df] bg-white p-3">
-            <p className="px-2 py-2 text-[10px] font-bold uppercase tracking-[.13em] text-[#929aa7]">Vos demandes</p>
+          <aside className="rounded-2xl border border-line bg-white p-3">
+            <p className="px-2 py-2 text-[10px] font-bold uppercase tracking-[.13em] text-ink-faint">Vos demandes</p>
             {tickets.map((item) => (
               <button
                 key={item.id}
                 onClick={() => setActiveTicketId(item.id)}
-                className={`focus-ring mt-1 w-full rounded-xl p-3 text-left ${item.id === activeTicketId ? "bg-[#fff1e5]" : "hover:bg-[#f7f7f5]"}`}
+                className={`focus-ring mt-1 w-full rounded-xl p-3 text-left ${item.id === activeTicketId ? "bg-pine-50" : "hover:bg-sand"}`}
               >
                 <div className="flex items-center justify-between gap-2">
-                  <p className="text-xs font-bold text-[#4d5768]">Réf: {item.id.slice(0, 8)}</p>
+                  <p className="text-xs font-bold text-ink-soft">Réf: {item.id.slice(0, 8)}</p>
                   <StatusBadge state={item.status} />
                 </div>
-                <p className="mt-2 text-sm font-bold text-[#253144] truncate">{item.subject}</p>
-                <p className="mt-2 text-xs text-[#788292]">{formatDate(item.updated_at)}</p>
+                <p className="mt-2 text-sm font-bold text-ink truncate">{item.subject}</p>
+                <p className="mt-2 text-xs text-ink-faint">{formatDate(item.updated_at)}</p>
               </button>
             ))}
           </aside>
 
           {activeTicket && (
-            <section className="flex min-h-[490px] flex-col rounded-2xl border border-[#e5e5df] bg-white">
-              <div className="flex items-start justify-between border-b border-[#ecece7] p-5">
+            <section className="flex min-h-[490px] flex-col rounded-2xl border border-line bg-white">
+              <div className="flex items-start justify-between border-b border-line p-5">
                 <div>
                   <div className="flex items-center gap-2">
                     <h2 className="font-bold">{activeTicket.subject}</h2>
                     <StatusBadge state={activeTicket.status} />
                   </div>
-                  <p className="mt-1 text-xs text-[#7b8493]">Réf: {activeTicket.id} · Catégorie: {activeTicket.category}</p>
+                  <p className="mt-1 text-xs text-ink-faint">Réf: {activeTicket.id} · Catégorie: {activeTicket.category}</p>
                 </div>
               </div>
 
               <div className="flex-1 space-y-5 p-5 sm:p-6 overflow-y-auto">
                 {/* Initial company ticket message */}
                 <article className="max-w-[78%] ml-auto">
-                  <p className="mb-1.5 text-[11px] font-bold text-[#788292]">Vous · {formatDate(activeTicket.created_at)}</p>
-                  <div className="rounded-2xl p-4 text-sm leading-6 rounded-tr-sm bg-[#fff1e5] text-[#593418]">
+                  <p className="mb-1.5 text-[11px] font-bold text-ink-faint">Vous · {formatDate(activeTicket.created_at)}</p>
+                  <div className="rounded-2xl p-4 text-sm leading-6 rounded-tr-sm bg-pine-50 text-pine-800">
                     {activeTicket.message}
                   </div>
                 </article>
@@ -173,21 +173,21 @@ export function SupportPage() {
                 {/* Reply if superadmin replied */}
                 {activeTicket.superadmin_reply && (
                   <article className="max-w-[78%]">
-                    <p className="mb-1.5 text-[11px] font-bold text-[#788292]">Support Filz · {formatDate(activeTicket.updated_at)}</p>
-                    <div className="rounded-2xl p-4 text-sm leading-6 rounded-tl-sm bg-[#f3f4f2] text-[#4d5768]">
+                    <p className="mb-1.5 text-[11px] font-bold text-ink-faint">Support Filz · {formatDate(activeTicket.updated_at)}</p>
+                    <div className="rounded-2xl p-4 text-sm leading-6 rounded-tl-sm bg-sand text-ink-soft">
                       {activeTicket.superadmin_reply}
                     </div>
                   </article>
                 )}
               </div>
 
-              <form onSubmit={(e) => e.preventDefault()} className="flex gap-3 border-t border-[#ecece7] p-4 bg-[#fafaf8] rounded-b-2xl">
+              <form onSubmit={(e) => e.preventDefault()} className="flex gap-3 border-t border-line p-4 bg-sand rounded-b-2xl">
                 <input
                   value={newMessage}
                   onChange={(e) => setNewMessage(e.target.value)}
                   disabled
                   placeholder="Les réponses se font au niveau de la création d'un nouveau ticket..."
-                  className="focus-ring h-11 flex-1 rounded-xl border border-[#deded8] px-3 text-sm bg-white cursor-not-allowed"
+                  className="focus-ring h-11 flex-1 rounded-xl border border-line px-3 text-sm bg-white cursor-not-allowed"
                 />
                 <Button type="button" disabled className="w-11 !px-0">
                   <HugeiconsIcon icon={SentIcon} size={19} />

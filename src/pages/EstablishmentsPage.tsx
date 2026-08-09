@@ -99,38 +99,38 @@ export function EstablishmentsPage({ onNavigate }: { onNavigate: (screen: Screen
 
       <div className="grid gap-4 lg:grid-cols-2">
         {loading ? (
-          <p className="text-sm text-[#788292]">Chargement...</p>
+          <p className="text-sm text-ink-faint">Chargement...</p>
         ) : branches.map((branch) => (
-          <article key={branch.id} className="rounded-2xl border border-[#e5e5df] bg-white p-5">
+          <article key={branch.id} className="rounded-2xl border border-line bg-white p-5">
             <div className="flex items-start justify-between">
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#fff1e5] text-[#d6641b]">
+              <span className="grid h-10 w-10 place-items-center rounded-xl bg-pine-50 text-pine-600">
                 <HugeiconsIcon icon={Building02Icon} size={20} />
               </span>
               <div className="relative">
               <button
                 onClick={() => setOpenMenuId(openMenuId === branch.id ? null : branch.id)}
-                className="focus-ring rounded-lg p-1.5 text-[#7a8492] hover:bg-[#f5f5f2]"
+                className="focus-ring rounded-lg p-1.5 text-ink-faint hover:bg-sand"
                 aria-label={`Actions pour ${branch.name}`}
               >
                 <HugeiconsIcon icon={MoreHorizontalIcon} size={20} />
               </button>
               {openMenuId === branch.id && (
-                <div className="absolute right-0 top-9 z-10 w-48 rounded-xl border border-[#e5e5df] bg-white p-1 shadow-lg">
+                <div className="absolute right-0 top-9 z-10 w-48 rounded-xl border border-line bg-white p-1 shadow-lg">
                   <button
                     onClick={() => handleManageServices(branch)}
-                    className="w-full rounded-lg px-3 py-2 text-left text-sm font-semibold text-[#253144] hover:bg-[#f7f7f5]"
+                    className="w-full rounded-lg px-3 py-2 text-left text-sm font-semibold text-ink hover:bg-sand"
                   >
                     Gérer les services
                   </button>
                   <button
                     onClick={() => handleToggleBranch(branch)}
-                    className="w-full rounded-lg px-3 py-2 text-left text-sm font-semibold text-[#253144] hover:bg-[#f7f7f5]"
+                    className="w-full rounded-lg px-3 py-2 text-left text-sm font-semibold text-ink hover:bg-sand"
                   >
                     {branch.is_active ? "Désactiver" : "Activer"}
                   </button>
                   <button
                     onClick={() => handleDeleteBranch(branch)}
-                    className="w-full rounded-lg px-3 py-2 text-left text-sm font-semibold text-[#c13d2e] hover:bg-[#fff1ef]"
+                    className="w-full rounded-lg px-3 py-2 text-left text-sm font-semibold text-clay-500 hover:bg-clay-100"
                   >
                     Supprimer
                   </button>
@@ -142,7 +142,7 @@ export function EstablishmentsPage({ onNavigate }: { onNavigate: (screen: Screen
             <div className="mt-6 flex justify-between gap-3">
               <div>
                 <h2 className="font-bold tracking-[-.02em]">{branch.name}</h2>
-                <p className="mt-1 text-sm text-[#778091] flex items-center gap-1">
+                <p className="mt-1 text-sm text-ink-soft flex items-center gap-1">
                   <HugeiconsIcon icon={Location01Icon} size={14} />
                   {branch.address}
                 </p>
@@ -150,10 +150,10 @@ export function EstablishmentsPage({ onNavigate }: { onNavigate: (screen: Screen
               <StatusBadge state={branch.is_active ? "active" : "inactive"} />
             </div>
             
-            <dl className="mt-6 grid grid-cols-2 border-y border-[#efefea] py-4">
+            <dl className="mt-6 grid grid-cols-2 border-y border-line py-4">
               <div>
-                <dt className="text-[10px] font-bold uppercase tracking-[.1em] text-[#929aa7]">ID Agence</dt>
-                <dd className="mt-1 text-xs font-mono text-[#596477] truncate pr-2">{branch.id}</dd>
+                <dt className="text-[10px] font-bold uppercase tracking-[.1em] text-ink-faint">ID Agence</dt>
+                <dd className="mt-1 text-xs font-mono text-ink-soft truncate pr-2">{branch.id}</dd>
               </div>
             </dl>
             
@@ -165,11 +165,11 @@ export function EstablishmentsPage({ onNavigate }: { onNavigate: (screen: Screen
       </div>
       
       {added && (
-        <section className="mt-5 rounded-2xl border border-[#e5e5df] bg-white p-5 shadow-lg">
+        <section className="mt-5 rounded-2xl border border-line bg-white p-5 shadow-lg">
           <div className="flex items-center justify-between gap-4 mb-4">
             <div>
-              <h2 className="font-bold text-[#172033]">Nouvelle agence (point d'accueil)</h2>
-              <p className="mt-1 text-sm text-[#687385]">Saisissez les informations de votre nouvel emplacement.</p>
+              <h2 className="font-bold text-ink">Nouvelle agence (point d'accueil)</h2>
+              <p className="mt-1 text-sm text-ink-soft">Saisissez les informations de votre nouvel emplacement.</p>
             </div>
           </div>
           

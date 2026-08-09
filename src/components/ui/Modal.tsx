@@ -95,18 +95,18 @@ export function Modal({ isOpen, onClose, title, children, size = "md" }: ModalPr
     >
       <div
         ref={modalRef}
-        className={`relative w-full rounded-2xl bg-white shadow-2xl ${sizes[size]}`}
-        tabIndex={-1}
-      >
-        <div className="flex items-center justify-between border-b border-[#deded8] px-6 py-4">
-          <h2 id="modal-title" className="text-lg font-bold text-[#172033]">
-            {title}
-          </h2>
-          <button
-            onClick={onClose}
-            className="focus-ring flex h-10 w-10 items-center justify-center rounded-lg text-[#667085] transition-colors hover:bg-[#f0f0ec]"
-            aria-label="Fermer la modale"
-          >
+         className={`relative w-full rounded-2xl bg-card shadow-2xl ${sizes[size]}`}
+         tabIndex={-1}
+       >
+         <div className="flex items-center justify-between border-b border-line px-6 py-4">
+           <h2 id="modal-title" className="text-lg font-bold text-ink">
+             {title}
+           </h2>
+           <button
+             onClick={onClose}
+             className="focus-ring flex h-10 w-10 items-center justify-center rounded-lg text-ink-soft transition-colors hover:bg-sand"
+             aria-label="Fermer la modale"
+           >
             <HugeiconsIcon icon={Cancel01Icon} size={20} strokeWidth={2} />
           </button>
         </div>

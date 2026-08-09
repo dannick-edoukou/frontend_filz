@@ -297,22 +297,22 @@ export function SuperadminPage({ onNavigate }: {onNavigate: (screen: "admin-supp
           </section>
 
           <section className="mt-5 grid gap-5 xl:grid-cols-[1.42fr_.58fr]">
-            <article className="overflow-hidden rounded-2xl border border-[#e5e5df] bg-white">
-              <div className="flex flex-col gap-3 border-b border-[#ecece7] p-5 sm:flex-row sm:items-center sm:justify-between">
+            <article className="overflow-hidden rounded-2xl border border-line bg-white">
+              <div className="flex flex-col gap-3 border-b border-line p-5 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <h2 className="font-bold">Entreprises (Tenants)</h2>
-                  <p className="mt-1 text-xs text-[#788292]">Gérez le statut et l’accès de chaque entreprise.</p>
+                  <p className="mt-1 text-xs text-ink-faint">Gérez le statut et l’accès de chaque entreprise.</p>
                 </div>
                 <label className="relative">
-                  <HugeiconsIcon icon={Search01Icon} size={16} className="absolute left-3 top-2.5 text-[#8a93a1]" />
-                  <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Rechercher" className="focus-ring h-9 rounded-lg border border-[#deded8] pl-8 pr-3 text-xs" />
+                  <HugeiconsIcon icon={Search01Icon} size={16} className="absolute left-3 top-2.5 text-ink-faint" />
+                  <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Rechercher" className="focus-ring h-9 rounded-lg border border-line pl-8 pr-3 text-xs" />
                 </label>
               </div>
               
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[980px] text-left">
-                  <thead className="bg-[#fafaf8]">
-                    <tr className="text-[10px] font-bold uppercase tracking-[.12em] text-[#929aa7]">
+                  <thead className="bg-sand">
+                    <tr className="text-[10px] font-bold uppercase tracking-[.12em] text-ink-faint">
                       <th className="px-5 py-3">Entreprise</th>
                       <th className="px-3 py-3">Partenaire</th>
                       <th className="px-3 py-3">Statut</th>
@@ -324,23 +324,23 @@ export function SuperadminPage({ onNavigate }: {onNavigate: (screen: "admin-supp
                   </thead>
                   <tbody>
                     {tenants.map((tenant) => (
-                      <tr key={tenant.id} className="border-t border-[#f0f0eb] text-sm">
+                      <tr key={tenant.id} className="border-t border-line text-sm">
                         <td className="px-5 py-4">
                           <p className="font-bold">{tenant.name}</p>
-                          <p className="mt-1 text-xs text-[#788292]">
+                          <p className="mt-1 text-xs text-ink-faint">
                             {tenant.business_type}
                             {tenant.city ? ` · ${tenant.city}` : ""}
                             {tenant.contact_email ? ` · ${tenant.contact_email}` : ""}
                           </p>
                           {tenant.deposit_phone && (
-                            <p className="mt-1 text-[11px] font-semibold text-[#b94d10]">Dépôt : {tenant.deposit_phone}</p>
+                            <p className="mt-1 text-[11px] font-semibold text-pine-500">Dépôt : {tenant.deposit_phone}</p>
                           )}
                         </td>
-                        <td className="px-3 py-4 text-xs text-[#596477]">
+                        <td className="px-3 py-4 text-xs text-ink-soft">
                           {tenant.referred_by ? (
                             <span>
-                              <p className="font-bold text-[#b94d10]">{tenant.referred_by.partner_name}</p>
-                              <p className="mt-0.5 text-[11px] text-[#788292]">via {tenant.referred_by.referral_code}</p>
+                              <p className="font-bold text-pine-500">{tenant.referred_by.partner_name}</p>
+                              <p className="mt-0.5 text-[11px] text-ink-faint">via {tenant.referred_by.referral_code}</p>
                             </span>
                           ) : (
                             "—"
@@ -355,18 +355,18 @@ export function SuperadminPage({ onNavigate }: {onNavigate: (screen: "admin-supp
                             <select
                               value={tenant.subscription?.plan_id || ""}
                               onChange={(e) => updateSubscription(tenant, tenant.subscription?.status || "trialing", e.target.value)}
-                              className="focus-ring h-8 w-full rounded-lg border border-[#deded8] bg-white px-2 text-xs"
+                              className="focus-ring h-8 w-full rounded-lg border border-line bg-white px-2 text-xs"
                             >
                               {plans.map((plan) => <option key={plan.id} value={plan.id}>{plan.name}</option>)}
                             </select>
                           </div>
                         </td>
-                        <td className="px-3 py-4 text-xs text-[#596477]">
+                        <td className="px-3 py-4 text-xs text-ink-soft">
                           {tenant.subscription
                             ? `${tenant.subscription.queue_entries_this_period.toLocaleString("fr-FR")} / ${tenant.subscription.plan?.max_queue_entries_per_month?.toLocaleString("fr-FR") || "—"}`
                             : "—"}
                         </td>
-                        <td className="px-3 py-4 text-xs text-[#788292]">{formatDate(tenant.subscription?.current_period_end || null)}</td>
+                        <td className="px-3 py-4 text-xs text-ink-faint">{formatDate(tenant.subscription?.current_period_end || null)}</td>
                         <td className="px-5 py-4">
                           <div className="flex flex-wrap gap-2">
                             {!tenant.is_active ? (
@@ -396,7 +396,7 @@ export function SuperadminPage({ onNavigate }: {onNavigate: (screen: "admin-supp
                     ))}
                     {tenants.length === 0 && (
                       <tr>
-                        <td colSpan={7} className="text-center py-6 text-sm text-[#8e96a3]">Aucun tenant trouvé.</td>
+                        <td colSpan={7} className="text-center py-6 text-sm text-ink-faint">Aucun tenant trouvé.</td>
                       </tr>
                     )}
                   </tbody>
@@ -414,37 +414,37 @@ export function SuperadminPage({ onNavigate }: {onNavigate: (screen: "admin-supp
               )}
             </article>
 
-            <aside className="rounded-2xl border border-[#e5e5df] bg-white p-5">
-              <p className="text-[10px] font-bold uppercase tracking-[.13em] text-[#929aa7]">Derniers tickets ouverts</p>
+            <aside className="rounded-2xl border border-line bg-white p-5">
+              <p className="text-[10px] font-bold uppercase tracking-[.13em] text-ink-faint">Derniers tickets ouverts</p>
               <div className="mt-4 space-y-3">
                 {openTickets.slice(0, 3).map(ticket => (
-                  <div key={ticket.id} className="rounded-xl border border-[#ecece7] p-3">
+                  <div key={ticket.id} className="rounded-xl border border-line p-3">
                     <p className="text-sm font-bold truncate">{ticket.subject}</p>
-                    <p className="mt-1 text-xs leading-5 text-[#788292]">Catégorie: {ticket.category} · Reçu le {formatDate(ticket.created_at)}</p>
+                    <p className="mt-1 text-xs leading-5 text-ink-faint">Catégorie: {ticket.category} · Reçu le {formatDate(ticket.created_at)}</p>
                   </div>
                 ))}
                 {openTickets.length === 0 && (
-                  <p className="text-xs text-[#8e96a3] text-center py-4">Aucune demande en attente.</p>
+                  <p className="text-xs text-ink-faint text-center py-4">Aucune demande en attente.</p>
                 )}
               </div>
-              <button onClick={() => onNavigate("admin-support")} className="focus-ring mt-5 w-full rounded-xl bg-[#f7f7f5] py-2.5 text-sm font-bold text-[#b94d10]">
+              <button onClick={() => onNavigate("admin-support")} className="focus-ring mt-5 w-full rounded-xl bg-sand py-2.5 text-sm font-bold text-pine-500">
                 Ouvrir le centre de support
               </button>
             </aside>
           </section>
 
-          <section className="mt-5 overflow-hidden rounded-2xl border border-[#e5e5df] bg-white">
-            <div className="flex flex-col gap-3 border-b border-[#ecece7] p-5 sm:flex-row sm:items-center sm:justify-between">
+          <section className="mt-5 overflow-hidden rounded-2xl border border-line bg-white">
+            <div className="flex flex-col gap-3 border-b border-line p-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h2 className="font-bold">Partenaires (affiliés)</h2>
-                <p className="mt-1 text-xs text-[#788292]">Validez les candidatures, activez les liens de parrainage et lancez les versements de commissions.</p>
+                <p className="mt-1 text-xs text-ink-faint">Validez les candidatures, activez les liens de parrainage et lancez les versements de commissions.</p>
               </div>
             </div>
 
             <div className="overflow-x-auto">
               <table className="w-full min-w-[980px] text-left">
-                <thead className="bg-[#fafaf8]">
-                  <tr className="text-[10px] font-bold uppercase tracking-[.12em] text-[#929aa7]">
+                <thead className="bg-sand">
+                  <tr className="text-[10px] font-bold uppercase tracking-[.12em] text-ink-faint">
                     <th className="px-5 py-3">Partenaire</th>
                     <th className="px-3 py-3">Statut</th>
                     <th className="px-3 py-3">Code de parrainage</th>
@@ -455,23 +455,23 @@ export function SuperadminPage({ onNavigate }: {onNavigate: (screen: "admin-supp
                 </thead>
                 <tbody>
                   {partners.map((partner) => (
-                    <tr key={partner.id} className="border-t border-[#f0f0eb] text-sm">
+                    <tr key={partner.id} className="border-t border-line text-sm">
                       <td className="px-5 py-4">
                         <p className="font-bold">{partner.full_name}</p>
-                        <p className="mt-1 text-xs text-[#788292]">{partner.email}{partner.channel ? ` · ${partner.channel}` : ""}</p>
+                        <p className="mt-1 text-xs text-ink-faint">{partner.email}{partner.channel ? ` · ${partner.channel}` : ""}</p>
                       </td>
                       <td className="px-3 py-4">
                         <StatusBadge state={partner.status} />
                       </td>
                       <td className="px-3 py-4">
                         {partner.referral_code ? (
-                          <code className="rounded-lg bg-[#f7f7f5] px-2 py-1 font-mono text-xs font-bold text-pine-900">{partner.referral_code}</code>
+                          <code className="rounded-lg bg-sand px-2 py-1 font-mono text-xs font-bold text-ink">{partner.referral_code}</code>
                         ) : (
-                          <span className="text-xs text-[#8e96a3]">—</span>
+                          <span className="text-xs text-ink-faint">—</span>
                         )}
                       </td>
-                      <td className="px-3 py-4 text-[#596477]">{partner.total_referrals}</td>
-                      <td className="px-3 py-4 font-mono font-semibold text-pine-950">{partner.total_earned.toLocaleString("fr-FR")} FCFA</td>
+                      <td className="px-3 py-4 text-ink-soft">{partner.total_referrals}</td>
+                      <td className="px-3 py-4 font-mono font-semibold text-ink">{partner.total_earned.toLocaleString("fr-FR")} FCFA</td>
                       <td className="px-5 py-4">
                         <div className="flex flex-wrap gap-2">
                           {partner.status === "pending" ? (
@@ -495,7 +495,7 @@ export function SuperadminPage({ onNavigate }: {onNavigate: (screen: "admin-supp
                               Chat
                             </Button>
                             {(partner.unread_count ?? 0) > 0 && (
-                              <span className="absolute -right-2 -top-2 grid h-5 min-w-5 place-items-center rounded-full bg-[#d9481c] px-1 text-[10px] font-bold text-white">
+                              <span className="absolute -right-2 -top-2 grid h-5 min-w-5 place-items-center rounded-full bg-gold-400 px-1 text-[10px] font-bold text-white">
                                 {partner.unread_count}
                               </span>
                             )}
@@ -506,7 +506,7 @@ export function SuperadminPage({ onNavigate }: {onNavigate: (screen: "admin-supp
                   ))}
                   {partners.length === 0 && (
                     <tr>
-                      <td colSpan={6} className="text-center py-6 text-sm text-[#8e96a3]">Aucune candidature partenaire pour le moment.</td>
+                      <td colSpan={6} className="text-center py-6 text-sm text-ink-faint">Aucune candidature partenaire pour le moment.</td>
                     </tr>
                   )}
                 </tbody>
@@ -525,19 +525,19 @@ export function SuperadminPage({ onNavigate }: {onNavigate: (screen: "admin-supp
           </section>
 
           {tenantDetails && (
-            <section className="mt-5 rounded-2xl border border-[#e5e5df] bg-white p-5 sm:p-6">
+            <section className="mt-5 rounded-2xl border border-line bg-white p-5 sm:p-6">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[.13em] text-[#c45b1a]">Détail tenant</p>
+                  <p className="text-xs font-bold uppercase tracking-[.13em] text-pine-500">Détail tenant</p>
                   <h2 className="mt-2 text-xl font-bold">{tenantDetails.organization.name}</h2>
-                  <p className="mt-1 text-xs text-[#788292]">{tenantDetails.organization.slug} · {tenantDetails.organization.business_type}</p>
+                  <p className="mt-1 text-xs text-ink-faint">{tenantDetails.organization.slug} · {tenantDetails.organization.business_type}</p>
                 </div>
                 <Button size="sm" variant="ghost" onClick={() => setTenantDetails(null)}>Fermer</Button>
               </div>
-              <div className="mt-4 grid gap-3 text-xs text-[#596477] sm:grid-cols-2">
-                {tenantDetails.organization.contact_email && <p><span className="font-bold text-[#929aa7]">Contact :</span> {tenantDetails.organization.contact_email}</p>}
-                {tenantDetails.organization.contact_phone && <p><span className="font-bold text-[#929aa7]">Téléphone :</span> {tenantDetails.organization.contact_phone}</p>}
-                {tenantDetails.organization.deposit_phone && <p><span className="font-bold text-[#929aa7]">Numéro de dépôt :</span> {tenantDetails.organization.deposit_phone}</p>}
+              <div className="mt-4 grid gap-3 text-xs text-ink-soft sm:grid-cols-2">
+                {tenantDetails.organization.contact_email && <p><span className="font-bold text-ink-faint">Contact :</span> {tenantDetails.organization.contact_email}</p>}
+                {tenantDetails.organization.contact_phone && <p><span className="font-bold text-ink-faint">Téléphone :</span> {tenantDetails.organization.contact_phone}</p>}
+                {tenantDetails.organization.deposit_phone && <p><span className="font-bold text-ink-faint">Numéro de dépôt :</span> {tenantDetails.organization.deposit_phone}</p>}
               </div>
               <div className="mt-5 grid gap-3 sm:grid-cols-5">
                 {[
@@ -547,29 +547,29 @@ export function SuperadminPage({ onNavigate }: {onNavigate: (screen: "admin-supp
                   ["Staff", tenantDetails.counts.staff],
                   ["Tickets support", tenantDetails.counts.support_tickets],
                 ].map(([label, value]) => (
-                  <div key={label} className="rounded-xl bg-[#fafaf8] p-3">
-                    <p className="text-[10px] font-bold uppercase tracking-[.12em] text-[#929aa7]">{label}</p>
+                  <div key={label} className="rounded-xl bg-sand p-3">
+                    <p className="text-[10px] font-bold uppercase tracking-[.12em] text-ink-faint">{label}</p>
                     <p className="mt-2 text-2xl font-extrabold">{value}</p>
                   </div>
                 ))}
               </div>
               {tenantDetails.subscription && (
-                <div className="mt-4 rounded-xl border border-[#efefea] p-4 text-sm">
+                <div className="mt-4 rounded-xl border border-line p-4 text-sm">
                   <p className="font-bold">Abonnement : {tenantDetails.subscription.plan_name || "—"}</p>
-                  <p className="mt-1 text-xs text-[#788292]">
+                  <p className="mt-1 text-xs text-ink-faint">
                     Statut {tenantDetails.subscription.status} · quota {tenantDetails.subscription.queue_entries_this_period} / {tenantDetails.subscription.max_queue_entries_per_month || "—"} · échéance {formatDate(tenantDetails.subscription.current_period_end)}
                   </p>
                 </div>
               )}
               <div className="mt-5">
                 <h3 className="text-sm font-bold">Activité récente</h3>
-                <div className="mt-3 divide-y divide-[#efefea] rounded-xl border border-[#efefea]">
+                <div className="mt-3 divide-y divide-line rounded-xl border border-line">
                   {tenantDetails.activity_logs.length === 0 ? (
-                    <p className="p-4 text-xs text-[#788292]">Aucune activité récente.</p>
+                    <p className="p-4 text-xs text-ink-faint">Aucune activité récente.</p>
                   ) : tenantDetails.activity_logs.map((log: any) => (
                     <div key={log.id} className="p-3">
                       <p className="text-sm font-bold">{log.action}</p>
-                      <p className="mt-1 text-xs text-[#788292]">{log.entity_type} · {formatDate(log.created_at)}</p>
+                      <p className="mt-1 text-xs text-ink-faint">{log.entity_type} · {formatDate(log.created_at)}</p>
                     </div>
                   ))}
                 </div>
@@ -577,19 +577,19 @@ export function SuperadminPage({ onNavigate }: {onNavigate: (screen: "admin-supp
             </section>
           )}
           <Modal isOpen={!!chatPartner} onClose={() => setChatPartner(null)} title={`Chat · ${chatPartner?.full_name || ""}`}>
-            <div className="flex max-h-96 min-h-64 flex-col gap-3 overflow-y-auto rounded-xl bg-[#fafaf8] p-4">
+            <div className="flex max-h-96 min-h-64 flex-col gap-3 overflow-y-auto rounded-xl bg-sand p-4">
               {chatMessages.length === 0 ? (
-                <p className="m-auto text-center text-sm text-[#8e96a3]">Aucun message. Répondez au partenaire pour démarrer la discussion.</p>
+                <p className="m-auto text-center text-sm text-ink-faint">Aucun message. Répondez au partenaire pour démarrer la discussion.</p>
               ) : (
                 chatMessages.map((m) => (
                   <div key={m.id} className={`flex ${m.sender === "superadmin" ? "justify-end" : "justify-start"}`}>
                     <div className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-6 ${
                       m.sender === "superadmin"
-                        ? "rounded-br-sm bg-pine-900 text-paper"
-                        : "rounded-bl-sm border border-[#e5e5df] bg-white text-[#172033]"
+                        ? "rounded-br-sm bg-pine-900 text-white"
+                        : "rounded-bl-sm border border-line bg-white text-ink"
                     }`}>
                       <p className="whitespace-pre-wrap">{m.body}</p>
-                      <p className={`mt-1 text-[10px] font-medium ${m.sender === "superadmin" ? "text-pine-200/70" : "text-[#929aa7]"}`}>
+                      <p className={`mt-1 text-[10px] font-medium ${m.sender === "superadmin" ? "text-pine-200/70" : "text-ink-faint"}`}>
                         {m.sender === "superadmin" ? "Vous" : chatPartner?.full_name || "Partenaire"} ·{" "}
                         {new Date(m.created_at).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}
                       </p>
@@ -610,7 +610,7 @@ export function SuperadminPage({ onNavigate }: {onNavigate: (screen: "admin-supp
                 }}
                 rows={2}
                 placeholder="Répondre au partenaire…"
-                className="focus-ring flex-1 resize-none rounded-xl border border-[#deded8] px-4 py-2.5 text-sm"
+                className="focus-ring flex-1 resize-none rounded-xl border border-line px-4 py-2.5 text-sm"
               />
               <Button size="sm" variant="primary" onClick={sendChatMessage} disabled={sendingMessage || !chatDraft.trim()}>
                 {sendingMessage ? "Envoi…" : "Envoyer"}
