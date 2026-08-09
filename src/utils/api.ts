@@ -299,5 +299,10 @@ export const api = {
   post: (path: string, body?: any) => request("POST", path, body),
   patch: (path: string, body?: any) => request("PATCH", path, body),
   delete: (path: string) => request("DELETE", path),
-  getWsUrl: (queueId: string) => `${WS_BASE}/ws/queue/${queueId}`,
+  getWsUrl: (queueId: string, params?: Record<string, string>) => {
+    const url = `${WS_BASE}/ws/queue/${queueId}`;
+    if (!params) return url;
+    const qs = new URLSearchParams(params).toString();
+    return qs ? `${url}?${qs}` : url;
+  },
 };

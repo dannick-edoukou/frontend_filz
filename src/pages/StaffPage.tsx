@@ -3,7 +3,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { Call02Icon, CheckmarkCircle02Icon, PauseCircleIcon, Search01Icon, UserRemove02Icon, VolumeHighIcon } from "@hugeicons/core-free-icons";
 import { Button, PageHeader, StatusBadge } from "../components/ui/Ui";
 import { BranchServiceSelector } from "../components/ui/BranchServiceSelector";
-import { api } from "../utils/api";
+import { api, getAuthToken } from "../utils/api";
 import { useToast } from "../components/ui/Toast";
 import { getErrorMessage } from "../utils/errorHandler";
 
@@ -88,7 +88,7 @@ export function StaffPage() {
   useEffect(() => {
     if (!entries || entries.length === 0) return;
     const queueId = entries[0].queue_id;
-    const wsUrl = api.getWsUrl(queueId);
+    const wsUrl = api.getWsUrl(queueId, { token: getAuthToken() ?? "" });
     const ws = new WebSocket(wsUrl);
 
     ws.onmessage = (event) => {

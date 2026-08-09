@@ -95,7 +95,7 @@ export function PublicStatusPage({ onBack }: {onBack: () => void;}) {
     if (!status?.queue_id) return;
 
     // Connect WebSocket for instant updates
-    const wsUrl = api.getWsUrl(status.queue_id);
+    const wsUrl = api.getWsUrl(status.queue_id, { entry_code: entryCode ?? "" });
     const ws = new WebSocket(wsUrl);
 
     ws.onmessage = (event) => {
