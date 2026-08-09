@@ -5,6 +5,7 @@ import { LoadingButton } from "../components/ui/LoadingSpinner";
 import { api, setAuthToken, setRefreshToken, setUserRole, setOrgId, setOrgSlug } from "../utils/api";
 import { useToast } from "../components/ui/Toast";
 import { getErrorMessage } from "../utils/errorHandler";
+import { ContactFilzModal } from "../components/ContactFilzModal";
 import filzIcon from "../assets/filz_icon.png";
 
 function decodeJwt(token: string) {
@@ -25,6 +26,7 @@ export function LoginPage({ onLogin, onSignup, onForgotPassword, onAdmin, onHome
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [contactOpen, setContactOpen] = useState(false);
   const { showSuccess, showError } = useToast();
 
   const submit = async (event: React.FormEvent) => {
@@ -80,7 +82,8 @@ export function LoginPage({ onLogin, onSignup, onForgotPassword, onAdmin, onHome
       <form onSubmit={submit} className="space-y-5 px-7 pb-7 pt-7"><label className="block text-sm font-semibold text-ink">Adresse e-mail<div className="relative mt-2"><HugeiconsIcon className="absolute left-3 top-3 text-ink-faint" icon={Mail01Icon} size={18} /><input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="vous@entreprise.ci" className="focus-ring h-11 w-full rounded-xl border border-line bg-white !pl-11 pr-3 text-sm placeholder:text-ink-faint" /></div></label><label className="block text-sm font-semibold text-ink">Mot de passe<div className="relative mt-2"><HugeiconsIcon className="absolute left-3 top-3 text-ink-faint" icon={LockPasswordIcon} size={18} /><input required minLength={6} type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" className="focus-ring h-11 w-full rounded-xl border border-line bg-white !pl-11 pr-3 text-sm" /></div></label><div className="flex items-center justify-between"><label className="flex cursor-pointer items-center gap-2 text-xs text-ink-soft"><input type="checkbox" className="accent-gold-500" />Se souvenir de moi</label><button type="button" onClick={onForgotPassword} className="focus-ring text-xs font-bold text-gold-700">Mot de passe oublié ?</button></div><LoadingButton isLoading={loading} loadingText="Connexion en cours…" className="w-full bg-pine-900 text-white hover:bg-pine-700 shadow-primary" type="submit" icon={!loading && <HugeiconsIcon icon={ArrowRight01Icon} size={17} />}>Se connecter</LoadingButton></form>
       <div className="border-t border-line px-7 py-5 text-center">
         <p className="text-xs leading-5 text-ink-soft">Vous découvrez Filz ? <button type="button" onClick={onSignup} className="focus-ring rounded font-bold text-gold-700">Créer votre espace entreprise</button></p>
-        <p className="mt-2 text-xs text-ink-soft">Besoin d’aide pour accéder à votre espace ? <button className="focus-ring rounded font-bold text-gold-700">Contacter Filz</button></p>
+        <p className="mt-2 text-xs text-ink-soft">Besoin d’aide pour accéder à votre espace ? <button type="button" onClick={() => setContactOpen(true)} className="focus-ring rounded font-bold text-gold-700">Contacter Filz</button></p>
       </div>
+      <ContactFilzModal isOpen={contactOpen} onClose={() => setContactOpen(false)} />
   </section></main>;
 }

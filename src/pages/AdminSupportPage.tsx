@@ -15,9 +15,11 @@ type TicketMessage = {
 
 type AdminTicket = {
   id: string;
-  organization_id: string;
+  organization_id: string | null;
   organization_name: string | null;
   created_by_name: string | null;
+  contact_name: string | null;
+  contact_email: string | null;
   category: string;
   subject: string;
   message: string;
@@ -62,6 +64,13 @@ function categoryLabel(cat: string): string {
     partnership: "Partenariat",
   };
   return map[cat] || cat || "Divers";
+}
+
+function ticketOwner(t: AdminTicket): string {
+  if (t.organization_name) return t.organization_name;
+  if (t.contact_name) return t.contact_name;
+  if (t.contact_email) return t.contact_email;
+  return "Entreprise";
 }
 
 function priorityLabel(prio?: string): string {
@@ -139,6 +148,8 @@ export function AdminSupportPage() {
       const matchesSearch = searchQuery === "" || 
         ticket.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
         (ticket.organization_name || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (ticket.contact_name || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (ticket.contact_email || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
         formatTicketId(ticket.id).toLowerCase().includes(searchQuery.toLowerCase());
       return matchesStatus && matchesSearch;
     });
@@ -283,7 +294,7 @@ export function AdminSupportPage() {
               </div>
               <p className="mt-2 text-sm font-bold text-ink">{ticket.subject}</p>
               <p className="mt-1 text-xs text-ink-faint">
-                {ticket.organization_name || "Entreprise"} · {categoryLabel(ticket.category)}
+                {ticketOwner(ticket)} · {categoryLabel(ticket.category)}
               </p>
             </button>
           ))
@@ -299,7 +310,9 @@ export function AdminSupportPage() {
                   <StatusBadge state={normalizeStatus(selected.status)} />
                 </div>
                 <p className="mt-1 text-xs text-ink-faint">
-                  {formatTicketId(selected.id)} · {selected.organization_name || "Entreprise"} · {categoryLabel(selected.category)}
+                  {formatTicketId(selected.id)} · {ticketOwner(selected)}
+                  {selected.contact_email && !selected.organization_name ? ` · ${selected.contact_email}` : ""}
+                  {" · "}{categoryLabel(selected.category)}
                 </p>
               </div>
               <Button
